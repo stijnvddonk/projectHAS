@@ -142,20 +142,20 @@ public class mainScreen extends JFrame {
 		lblSettings.setBounds(850, 152, 166, 55);
 		contentPane.add(lblSettings);
 		
-		JLabel label = new JLabel("Device 1");
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label.setBounds(601, 209, 277, 55);
-		contentPane.add(label);
+		JLabel lblTimer = new JLabel("Timer Status");
+		lblTimer.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblTimer.setBounds(601, 209, 277, 55);
+		contentPane.add(lblTimer);
 		
-		JLabel label_1 = new JLabel("Device 1");
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_1.setBounds(601, 300, 277, 55);
-		contentPane.add(label_1);
+		JLabel lblTimerOn = new JLabel("Timer on");
+		lblTimerOn.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblTimerOn.setBounds(601, 300, 277, 55);
+		contentPane.add(lblTimerOn);
 		
-		JLabel label_2 = new JLabel("Device 1");
-		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_2.setBounds(601, 393, 277, 55);
-		contentPane.add(label_2);
+		JLabel lblTimerOff = new JLabel("Timer Off");
+		lblTimerOff.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblTimerOff.setBounds(601, 393, 277, 55);
+		contentPane.add(lblTimerOff);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(579, 94, 363, 12);

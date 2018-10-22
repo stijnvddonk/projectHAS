@@ -12,6 +12,10 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class DeviceMenu extends JFrame {
 
@@ -20,8 +24,8 @@ public class DeviceMenu extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
+	private JTextField txtTimerOff;
+	private JTextField txtTimerOn;
 	private Color activeMenu = Color.decode("#43B7BA");
 	private Color hoverMenu = Color.decode("#ba8243");
 	private Color notActiveMenu = Color.decode("#cfa77a");
@@ -113,36 +117,18 @@ public class DeviceMenu extends JFrame {
 		btnNewDecicw.setBounds(6, 622, 190, 70);
 		panel_1.add(btnNewDecicw);
 		
-		JLabel label_3 = new JLabel("Device 1");
-		label_3.setForeground(Color.LIGHT_GRAY);
-		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_3.setBounds(6, 30, 190, 55);
-		panel_1.add(label_3);
-		
-		JLabel lblDevice = new JLabel("Device 2");
-		lblDevice.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice.setBounds(6, 90, 190, 55);
-		panel_1.add(lblDevice);
-		
-		JLabel lblDevice_1 = new JLabel("Device 3");
-		lblDevice_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_1.setBounds(6, 150, 190, 55);
-		panel_1.add(lblDevice_1);
-		
-		JLabel lblDevice_4 = new JLabel("Device 6");
-		lblDevice_4.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_4.setBounds(6, 325, 190, 55);
-		panel_1.add(lblDevice_4);
-		
-		JLabel lblDevice_2 = new JLabel("Device 4");
-		lblDevice_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_2.setBounds(6, 205, 190, 55);
-		panel_1.add(lblDevice_2);
-		
-		JLabel lblDevice_3 = new JLabel("Device 5");
-		lblDevice_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_3.setBounds(6, 265, 190, 55);
-		panel_1.add(lblDevice_3);
+		JList list = new JList();
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setBounds(6, 501, 190, -483);
+		panel_1.add(list);
 		
 		JButton btnRemoveDevice = new JButton("Remove Device");
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
@@ -157,14 +143,31 @@ public class DeviceMenu extends JFrame {
 		lblNewLabel.setBounds(601, 39, 277, 55);
 		contentPane.add(lblNewLabel);
 		
-		JToggleButton toggleButton = new JToggleButton("New toggle button");
-		toggleButton.setBounds(1020, 209, 161, 51);
-		contentPane.add(toggleButton);
+		JToggleButton deviceTimerStatus = new JToggleButton("On");
+		deviceTimerStatus.setSelected(true);
+		deviceTimerStatus.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				int state = e.getStateChange();
+		        if (state == ItemEvent.SELECTED) {
+		        	deviceTimerStatus.setText("On");
+		            System.out.println("Device Timer Status ON");
+		            txtTimerOn.setEnabled(true);
+		            txtTimerOff.setEnabled(true);
+		        } else {
+		        	deviceTimerStatus.setText("Off");
+		            System.out.println("Device Timer Status OFF");
+		            txtTimerOn.setEnabled(false);
+		            txtTimerOff.setEnabled(false);
+		        }
+			}
+		});
+		deviceTimerStatus.setBounds(1020, 209, 161, 51);
+		contentPane.add(deviceTimerStatus);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(1029, 393, 152, 48);
-		contentPane.add(textField_1);
+		txtTimerOff = new JTextField();
+		txtTimerOff.setColumns(10);
+		txtTimerOff.setBounds(1029, 393, 152, 48);
+		contentPane.add(txtTimerOff);
 		
 		JLabel lblSettings = new JLabel("Settings");
 		lblSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
@@ -202,13 +205,33 @@ public class DeviceMenu extends JFrame {
 		separator_4.setBounds(579, 436, 310, 12);
 		contentPane.add(separator_4);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(1029, 300, 152, 48);
-		contentPane.add(textField);
+		txtTimerOn = new JTextField();
+		txtTimerOn.setColumns(10);
+		txtTimerOn.setBounds(1029, 300, 152, 48);
+		contentPane.add(txtTimerOn);
 		
-		JToggleButton toggleButton_1 = new JToggleButton("New toggle button");
-		toggleButton_1.setBounds(1020, 50, 161, 51);
-		contentPane.add(toggleButton_1);
+		JToggleButton deviceEnableButton = new JToggleButton("On");
+		deviceEnableButton.setSelected(true);
+		deviceEnableButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				int state = e.getStateChange();
+		        if (state == ItemEvent.SELECTED) {
+		        	deviceEnableButton.setText("On");
+		            System.out.println("Device Status ON");
+		            deviceTimerStatus.setEnabled(true);
+		            txtTimerOn.setEnabled(true);
+		            txtTimerOff.setEnabled(true);
+		        } else {
+		        	deviceEnableButton.setText("Off");
+		            System.out.println("Device Status OFF");
+		            deviceTimerStatus.setSelected(false);
+		            deviceTimerStatus.setEnabled(false);
+		            txtTimerOn.setEnabled(false);
+		            txtTimerOff.setEnabled(false);
+		        }
+			}
+		});
+		deviceEnableButton.setBounds(1020, 50, 161, 51);
+		contentPane.add(deviceEnableButton);
 	}
 }

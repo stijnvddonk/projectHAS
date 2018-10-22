@@ -12,44 +12,36 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.border.LineBorder;
 
-public class mainScreen extends JFrame {
+public class DeviceMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
 	private JTextField textField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					mainScreen frame = new mainScreen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public mainScreen() {
-		setTitle("Main Screen");
+	public DeviceMenu() {
+		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
 		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setUndecorated(true);
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 350, 698);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 0, 350, 720);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -58,34 +50,68 @@ public class mainScreen extends JFrame {
 		panel.add(separator_5);
 		
 		JButton btnNewButton = new JButton("Log Out");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		btnNewButton.setBounds(77, 622, 190, 70);
 		panel.add(btnNewButton);
 		
 		JLabel lblDevices = new JLabel("Devices");
+		lblDevices.setForeground(Color.LIGHT_GRAY);
 		lblDevices.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblDevices.setBounds(6, 207, 190, 55);
 		panel.add(lblDevices);
 		
 		JLabel lblUsers = new JLabel("Users");
+		lblUsers.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				UserMenu um = new UserMenu();
+				um.setVisible(true);
+				dispose();
+			}
+		});
 		lblUsers.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblUsers.setBounds(6, 267, 190, 55);
 		panel.add(lblUsers);
 		
 		JLabel lblSystemSettings = new JLabel("System Settings");
+		lblSystemSettings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SystemSettings ss = new SystemSettings();
+				ss.setVisible(true);
+				dispose();
+			}
+		});
 		lblSystemSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblSystemSettings.setBounds(6, 327, 300, 55);
 		panel.add(lblSystemSettings);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(350, 0, 200, 698);
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(350, 0, 200, 720);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JButton btnNewDecicw = new JButton("New Device");
+		btnNewDecicw.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				NewDeviceMenu ndm = new NewDeviceMenu();
+				ndm.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewDecicw.setBounds(6, 622, 190, 70);
 		panel_1.add(btnNewDecicw);
 		
 		JLabel label_3 = new JLabel("Device 1");
+		label_3.setForeground(Color.LIGHT_GRAY);
 		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		label_3.setBounds(6, 30, 190, 55);
 		panel_1.add(label_3);

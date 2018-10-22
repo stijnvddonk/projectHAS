@@ -5,12 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import DataPackage.DatabaseManagement;
-import backEnd.Company;
-import backEnd.Engineer;
-import backEnd.ProjectManager;
-import backEnd.User;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -38,7 +32,6 @@ public class loginScreen {
 	private JFrame frame;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
-	static Company comp;
 
 	/**
 	 * Launch the application.
@@ -49,7 +42,7 @@ public class loginScreen {
 				try {
 					loginScreen window = new loginScreen();
 					window.frame.setVisible(true);
-					comp = new Company(window);
+					//comp = new Company(window);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -118,14 +111,6 @@ public class loginScreen {
 		panel_1.add(separator_1);
 
 		txtPassword = new JPasswordField();
-		txtPassword.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					login();
-				}
-			}
-		});
 		txtPassword.setColumns(10);
 		txtPassword.setToolTipText("");
 		txtPassword.setText("Patrijsweg1");
@@ -172,7 +157,9 @@ public class loginScreen {
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				login();
+				DeviceMenu dm = new DeviceMenu();
+				dm.setVisible(true);
+				frame.dispose();
 			}
 		});
 		panel_3.setLayout(null);
@@ -190,8 +177,6 @@ public class loginScreen {
 		lblWachtwoordVergeten.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ResetPassword rp = new ResetPassword();
-				rp.setVisible(true);
 			}
 		});
 		lblWachtwoordVergeten.setForeground(Color.WHITE);
@@ -199,30 +184,7 @@ public class loginScreen {
 		panel_1.add(lblWachtwoordVergeten);
 	}
 
-	public void login() {
-		String pwd = new String(txtPassword.getPassword());
-		String usr = txtUsername.getText();
-		comp.loginDatabase(usr, pwd);
-	}
 
-	public JTextField getTxtUsername() {
-		return txtUsername;
-	}
 
-	public void setTxtUsername(JTextField txtUsername) {
-		this.txtUsername = txtUsername;
-	}
-
-	public void projectManagerGUI(ProjectManager bepm) {
-		MainProjectManager mpm = new MainProjectManager(bepm);
-		mpm.setVisible(true);
-		frame.dispose();
-	}
-
-	public void engineerGUI(Engineer beeng) {
-		MainEngineer me = new MainEngineer(beeng);
-		me.setVisible(true);
-		frame.dispose();
-	}
 	
 }

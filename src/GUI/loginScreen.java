@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.SwingConstants;
 
 public class loginScreen {
 
@@ -147,11 +148,12 @@ public class loginScreen {
 		panel_2.setBounds(177, 336, 103, 36);
 		panel_1.add(panel_2);
 
-		JLabel label_1 = new JLabel("Close");
-		label_1.setForeground(new Color(90, 142, 200));
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_1.setBounds(25, 5, 58, 25);
-		panel_2.add(label_1);
+		JLabel lblExit = new JLabel("Exit");
+		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
+		lblExit.setForeground(new Color(90, 142, 200));
+		lblExit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblExit.setBounds(25, 5, 58, 25);
+		panel_2.add(lblExit);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.addMouseListener(new MouseAdapter() {
@@ -167,13 +169,15 @@ public class loginScreen {
 		panel_3.setBounds(24, 336, 103, 36);
 		panel_1.add(panel_3);
 
-		JLabel lblSubmit = new JLabel("Submit");
+		JLabel lblSubmit = new JLabel("Login");
+		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubmit.setForeground(new Color(90, 142, 200));
 		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblSubmit.setBounds(15, 5, 72, 25);
 		panel_3.add(lblSubmit);
 		
-		JLabel lblWachtwoordVergeten = new JLabel("Wachtwoord Vergeten?");
+		JLabel lblWachtwoordVergeten = new JLabel("Forgot password?");
+		lblWachtwoordVergeten.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWachtwoordVergeten.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

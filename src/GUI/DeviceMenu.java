@@ -1,11 +1,7 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
@@ -19,9 +15,16 @@ import javax.swing.border.LineBorder;
 
 public class DeviceMenu extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField_1;
 	private JTextField textField;
+	private Color activeMenu = Color.decode("#43B7BA");
+	private Color hoverMenu = Color.decode("#ba8243");
+	private Color notActiveMenu = Color.decode("#cfa77a");
 
 	/**
 	 * Create the frame.
@@ -60,7 +63,7 @@ public class DeviceMenu extends JFrame {
 		panel.add(btnNewButton);
 		
 		JLabel lblDevices = new JLabel("Devices");
-		lblDevices.setForeground(Color.LIGHT_GRAY);
+		lblDevices.setForeground(activeMenu);
 		lblDevices.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblDevices.setBounds(6, 207, 190, 55);
 		panel.add(lblDevices);

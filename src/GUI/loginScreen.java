@@ -5,12 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import DataPackage.DatabaseManagement;
-import backEnd.Company;
-import backEnd.Engineer;
-import backEnd.ProjectManager;
-import backEnd.User;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -30,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.SwingConstants;
 
 public class loginScreen {
 
@@ -38,7 +33,6 @@ public class loginScreen {
 	private JFrame frame;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
-	static Company comp;
 
 	/**
 	 * Launch the application.
@@ -50,7 +44,7 @@ public class loginScreen {
 				try {
 					loginScreen window = new loginScreen();
 					window.frame.setVisible(true);
-					comp = new Company(window);
+					//comp = new Company(window);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -119,14 +113,6 @@ public class loginScreen {
 		panel_1.add(separator_1);
 
 		txtPassword = new JPasswordField();
-		txtPassword.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					login();
-				}
-			}
-		});
 		txtPassword.setColumns(10);
 		txtPassword.setToolTipText("");
 		txtPassword.setText("Patrijsweg1");
@@ -163,17 +149,20 @@ public class loginScreen {
 		panel_2.setBounds(177, 336, 103, 36);
 		panel_1.add(panel_2);
 
-		JLabel label_1 = new JLabel("Close");
-		label_1.setForeground(new Color(90, 142, 200));
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_1.setBounds(25, 5, 58, 25);
-		panel_2.add(label_1);
+		JLabel lblExit = new JLabel("Exit");
+		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
+		lblExit.setForeground(new Color(90, 142, 200));
+		lblExit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblExit.setBounds(25, 5, 58, 25);
+		panel_2.add(lblExit);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				login();
+				DeviceMenu dm = new DeviceMenu();
+				dm.setVisible(true);
+				frame.dispose();
 			}
 		});
 		panel_3.setLayout(null);
@@ -181,18 +170,18 @@ public class loginScreen {
 		panel_3.setBounds(24, 336, 103, 36);
 		panel_1.add(panel_3);
 
-		JLabel lblSubmit = new JLabel("Submit");
+		JLabel lblSubmit = new JLabel("Login");
+		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubmit.setForeground(new Color(90, 142, 200));
 		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblSubmit.setBounds(15, 5, 72, 25);
 		panel_3.add(lblSubmit);
 		
-		JLabel lblWachtwoordVergeten = new JLabel("Wachtwoord Vergeten?");
+		JLabel lblWachtwoordVergeten = new JLabel("Forgot password?");
+		lblWachtwoordVergeten.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWachtwoordVergeten.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ResetPassword rp = new ResetPassword();
-				rp.setVisible(true);
 			}
 		});
 		lblWachtwoordVergeten.setForeground(Color.WHITE);
@@ -200,30 +189,7 @@ public class loginScreen {
 		panel_1.add(lblWachtwoordVergeten);
 	}
 
-	public void login() {
-		String pwd = new String(txtPassword.getPassword());
-		String usr = txtUsername.getText();
-		comp.loginDatabase(usr, pwd);
-	}
 
-	public JTextField getTxtUsername() {
-		return txtUsername;
-	}
 
-	public void setTxtUsername(JTextField txtUsername) {
-		this.txtUsername = txtUsername;
-	}
-
-	public void projectManagerGUI(ProjectManager bepm) {
-		MainProjectManager mpm = new MainProjectManager(bepm);
-		mpm.setVisible(true);
-		frame.dispose();
-	}
-
-	public void engineerGUI(Engineer beeng) {
-		MainEngineer me = new MainEngineer(beeng);
-		me.setVisible(true);
-		frame.dispose();
-	}
 	
 }

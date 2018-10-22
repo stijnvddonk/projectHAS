@@ -42,6 +42,10 @@ public class loginScreen {
 
 	/**
 	 * Launch the application.
+	 * 
+	 * ik voer een test uit
+	 * gr. Remy
+	 * 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

@@ -3,15 +3,38 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.border.LineBorder;
+
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
+import javax.swing.ComboBoxModel;
 
 public class DeviceMenu extends JFrame {
 
@@ -20,11 +43,10 @@ public class DeviceMenu extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
 	private Color activeMenu = Color.decode("#43B7BA");
 	private Color hoverMenu = Color.decode("#ba8243");
 	private Color notActiveMenu = Color.decode("#cfa77a");
+	DateFormat sdf = new SimpleDateFormat("hh:mm");
 
 	/**
 	 * Create the frame.
@@ -113,36 +135,18 @@ public class DeviceMenu extends JFrame {
 		btnNewDecicw.setBounds(6, 622, 190, 70);
 		panel_1.add(btnNewDecicw);
 		
-		JLabel label_3 = new JLabel("Device 1");
-		label_3.setForeground(Color.LIGHT_GRAY);
-		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_3.setBounds(6, 30, 190, 55);
-		panel_1.add(label_3);
-		
-		JLabel lblDevice = new JLabel("Device 2");
-		lblDevice.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice.setBounds(6, 90, 190, 55);
-		panel_1.add(lblDevice);
-		
-		JLabel lblDevice_1 = new JLabel("Device 3");
-		lblDevice_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_1.setBounds(6, 150, 190, 55);
-		panel_1.add(lblDevice_1);
-		
-		JLabel lblDevice_4 = new JLabel("Device 6");
-		lblDevice_4.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_4.setBounds(6, 325, 190, 55);
-		panel_1.add(lblDevice_4);
-		
-		JLabel lblDevice_2 = new JLabel("Device 4");
-		lblDevice_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_2.setBounds(6, 205, 190, 55);
-		panel_1.add(lblDevice_2);
-		
-		JLabel lblDevice_3 = new JLabel("Device 5");
-		lblDevice_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_3.setBounds(6, 265, 190, 55);
-		panel_1.add(lblDevice_3);
+		JList list = new JList();
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setBounds(6, 501, 190, -483);
+		panel_1.add(list);
 		
 		JButton btnRemoveDevice = new JButton("Remove Device");
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
@@ -157,15 +161,6 @@ public class DeviceMenu extends JFrame {
 		lblNewLabel.setBounds(601, 39, 277, 55);
 		contentPane.add(lblNewLabel);
 		
-		JToggleButton toggleButton = new JToggleButton("New toggle button");
-		toggleButton.setBounds(1020, 209, 161, 51);
-		contentPane.add(toggleButton);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(1029, 393, 152, 48);
-		contentPane.add(textField_1);
-		
 		JLabel lblSettings = new JLabel("Settings");
 		lblSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblSettings.setBounds(850, 152, 166, 55);
@@ -176,7 +171,7 @@ public class DeviceMenu extends JFrame {
 		lblTimer.setBounds(601, 209, 277, 55);
 		contentPane.add(lblTimer);
 		
-		JLabel lblTimerOn = new JLabel("Timer on");
+		JLabel lblTimerOn = new JLabel("Timer On");
 		lblTimerOn.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblTimerOn.setBounds(601, 300, 277, 55);
 		contentPane.add(lblTimerOn);
@@ -202,13 +197,110 @@ public class DeviceMenu extends JFrame {
 		separator_4.setBounds(579, 436, 310, 12);
 		contentPane.add(separator_4);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(1029, 300, 152, 48);
-		contentPane.add(textField);
+		Calendar startCalendar = Calendar.getInstance();
+		startCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		startCalendar.set(Calendar.MINUTE, 0);
+
+        Calendar startEnd = Calendar.getInstance();
+        startEnd.set(Calendar.HOUR_OF_DAY, 23);
+        startEnd.set(Calendar.MINUTE, 59);
+        DefaultComboBoxModel<Date> startTime = new DefaultComboBoxModel<>();
+        do {
+        	startTime.addElement(startCalendar.getTime());
+        	startCalendar.add(Calendar.MINUTE, 15);
+        } while (startCalendar.getTime().before(startEnd.getTime()));
 		
-		JToggleButton toggleButton_1 = new JToggleButton("New toggle button");
-		toggleButton_1.setBounds(1020, 50, 161, 51);
-		contentPane.add(toggleButton_1);
+		JComboBox<Date> comboBoxTimeOn = new JComboBox<>(startTime);
+		comboBoxTimeOn.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+        comboBoxTimeOn.setRenderer(new DateFormattedListCellRenderer(new SimpleDateFormat("HH:mm")));
+		comboBoxTimeOn.setBounds(1020, 300, 161, 55);
+		contentPane.add(comboBoxTimeOn);
+		
+		Calendar endCalendar = Calendar.getInstance();
+		endCalendar.set(Calendar.HOUR_OF_DAY, 0);
+		endCalendar.set(Calendar.MINUTE, 0);
+
+        Calendar endEnd = Calendar.getInstance();
+        endEnd.set(Calendar.HOUR_OF_DAY, 23);
+        endEnd.set(Calendar.MINUTE, 59);
+        DefaultComboBoxModel<Date> endTime = new DefaultComboBoxModel<>();
+        do {
+        	endTime.addElement(endCalendar.getTime());
+        	endCalendar.add(Calendar.MINUTE, 15);
+        } while (endCalendar.getTime().before(endEnd.getTime()));
+		
+		JComboBox<Date> comboBoxTimeOff = new JComboBox<>(endTime);
+		comboBoxTimeOff.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		comboBoxTimeOff.setRenderer(new DateFormattedListCellRenderer(new SimpleDateFormat("HH:mm")));
+		comboBoxTimeOff.setBounds(1020, 393, 161, 55);
+		contentPane.add(comboBoxTimeOff);
+		
+		JButton btnSaveSettings = new JButton("Save Settings");
+		btnSaveSettings.setBounds(601, 622, 190, 70);
+		contentPane.add(btnSaveSettings);
+		
+		JToggleButton deviceTimerStatus = new JToggleButton("On");
+		deviceTimerStatus.setSelected(true);
+		deviceTimerStatus.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				int state = e.getStateChange();
+		        if (state == ItemEvent.SELECTED) {
+		        	deviceTimerStatus.setText("On");
+		            System.out.println("Device Timer Status ON");
+		            comboBoxTimeOn.setEnabled(true);
+		            comboBoxTimeOff.setEnabled(true);
+		        } else {
+		        	deviceTimerStatus.setText("Off");
+		            System.out.println("Device Timer Status OFF");
+		            comboBoxTimeOn.setEnabled(false);
+		            comboBoxTimeOff.setEnabled(false);
+		        }
+			}
+		});
+		deviceTimerStatus.setBounds(1020, 209, 161, 51);
+		contentPane.add(deviceTimerStatus);
+		
+		JToggleButton deviceEnableButton = new JToggleButton("On");
+		deviceEnableButton.setSelected(true);
+		deviceEnableButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				int state = e.getStateChange();
+		        if (state == ItemEvent.SELECTED) {
+		        	deviceEnableButton.setText("On");
+		            System.out.println("Device Status ON");
+		            deviceTimerStatus.setEnabled(true);
+		            comboBoxTimeOn.setEnabled(true);
+		            comboBoxTimeOff.setEnabled(true);
+		        } else {
+		        	deviceEnableButton.setText("Off");
+		            System.out.println("Device Status OFF");
+		            deviceTimerStatus.setSelected(false);
+		            deviceTimerStatus.setEnabled(false);
+		            comboBoxTimeOn.setEnabled(false);
+		            comboBoxTimeOff.setEnabled(false);
+		        }
+			}
+		});
+		deviceEnableButton.setBounds(1020, 50, 161, 51);
+		contentPane.add(deviceEnableButton);
+		
 	}
+	
+	public class DateFormattedListCellRenderer extends DefaultListCellRenderer {
+
+        private DateFormat format;
+
+        public DateFormattedListCellRenderer(DateFormat format) {
+            this.format = format;
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Date) {
+                value = format.format((Date) value);
+            }
+            return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        }
+
+    }
 }

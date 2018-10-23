@@ -6,8 +6,9 @@ import data_tier.Config;
 public class DatabaseManager {
 
 	private Connection db;
-	private Boolean debug = Config.debug;
-	private String dbBuild = "jdbc:mysql://" + Config.dbHost + ":" + Config.dbPort + "/" + Config.dbName + "?" + Config.extra;
+	private Config cfg = new Config();
+	private Boolean debug = Boolean.parseBoolean(cfg.getProperty("debug"));
+	private String dbBuild = cfg.getProperty("dbType") + cfg.getProperty("dbHost") + ":" + cfg.getProperty("dbPort") + "/" + cfg.getProperty("dbName") + "?" + cfg.getProperty("dbExtra");
 
 	public DatabaseManager() {
 		setConnection();
@@ -15,7 +16,7 @@ public class DatabaseManager {
 	
 	private void setConnection() {
 		try {
-			db = DriverManager.getConnection(dbBuild, Config.dbUser, Config.dbPass);
+			db = DriverManager.getConnection(dbBuild, cfg.getProperty("dbUser"), cfg.getProperty("dbPass"));
 			if (this.debug) System.out.print("Connection successfully\n");
 		} catch (Exception e) {
 			e.printStackTrace();

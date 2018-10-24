@@ -1,3 +1,7 @@
+# Java #
+bin/
+config/
+
 # Compiled source #
 ###################
 *.com
@@ -35,7 +39,3 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Java #
-bin/
-config/

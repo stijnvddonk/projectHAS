@@ -104,10 +104,6 @@ public class SystemSettings extends JFrame {
 		lblUser.setBounds(6, 30, 190, 55);
 		panel_1.add(lblUser);
 		
-		JButton btnRemoveDevice = new JButton("Remove User");
-		btnRemoveDevice.setBounds(1084, 622, 190, 70);
-		contentPane.add(btnRemoveDevice);
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(549, 139, 725, 12);
 		contentPane.add(separator);

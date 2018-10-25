@@ -1,6 +1,8 @@
 # Java #
 bin/
-config/
+bin/*
+/bin/
+/bin/*
 
 # Compiled source #
 ###################

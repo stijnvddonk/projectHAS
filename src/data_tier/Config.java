@@ -6,12 +6,12 @@ public class Config {
 
 	Properties configFile;
 
-	public Config() {
+	public Config(String location) {
 
 		configFile = new java.util.Properties();
 		try {
 			configFile.load(this.getClass().getClassLoader().
-			getResourceAsStream("config/main.cfg"));
+			getResourceAsStream(location));
 		} catch(Exception eta) {
 			eta.printStackTrace();
 		}

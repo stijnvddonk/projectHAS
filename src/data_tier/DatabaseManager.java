@@ -6,7 +6,7 @@ import data_tier.Config;
 public class DatabaseManager {
 
 	private Connection db;
-	private Config cfg = new Config();
+	private Config cfg = new Config("config/main.cfg");
 	private Boolean debug = Boolean.parseBoolean(cfg.getProperty("debug"));
 	private String dbBuild = cfg.getProperty("dbType") + cfg.getProperty("dbHost") + ":" + cfg.getProperty("dbPort") + "/" + cfg.getProperty("dbName") + "?" + cfg.getProperty("dbExtra");
 
@@ -14,6 +14,7 @@ public class DatabaseManager {
 		setConnection();
 	}
 	
+	// SetConnection makes the connect to the database
 	private void setConnection() {
 		try {
 			db = DriverManager.getConnection(dbBuild, cfg.getProperty("dbUser"), cfg.getProperty("dbPass"));
@@ -23,10 +24,16 @@ public class DatabaseManager {
 		}
 	}
 	
+	// Get the live connection
 	public Connection getCon() {
 		return this.db;
 	}
 	
+	/* Execute
+	 * Type: Select query
+	 * Input: MySQL Database query in String format
+	 * Output: Result with data
+	 */
 	public ResultSet execute(String query) {
 		ResultSet output = null;
 		try {
@@ -39,6 +46,11 @@ public class DatabaseManager {
 		
 	}
 	
+	/* Update
+	 * Type: update query
+	 * Input: MySQL Database query in String format
+	 * Output: None
+	 */
 	public void update(String query) {
 		try {
 			Statement stmt = db.createStatement();
@@ -48,6 +60,11 @@ public class DatabaseManager {
 		}
 	}
 	
+	/* Insert
+	 * Type: Insert query
+	 * Input: MySQL Database query in String format
+	 * Output: None
+	 */
 	public void insert(String query) {
 		try {
 			Statement stmt = db.createStatement();
@@ -56,7 +73,12 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/* __insert
+	 * Type: Insert query
+	 * Input: MySQL Database query in String format
+	 * Output: Returns the id of the inserted item.
+	 */
 	public Integer __insert(String query) {
 		Integer output = null;
 		try {
@@ -72,6 +94,11 @@ public class DatabaseManager {
 		return output;
 	}
 
+	/* updateLogin
+	 * Type: Update query
+	 * Input: MySQL Database query in String format, UserId as Integer, The currentTimeStamp as Timestamp
+	 * Output: None
+	 */
 	public void updateLogin(String query, Integer userid, Timestamp currentTimeStamp) {		
 		try {
 			PreparedStatement ppstm = db.prepareStatement(query);

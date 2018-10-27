@@ -64,7 +64,6 @@ public class loginScreen {
 	private void initialize() {
 		frame = new JFrame();
 		// frame.setBounds(500, 250, 650, 500);
-		// verrekte koekwaus
 		frame.setSize(720, 480);
 		frame.getContentPane().setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

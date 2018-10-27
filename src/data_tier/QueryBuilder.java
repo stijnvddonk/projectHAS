@@ -5,47 +5,52 @@ import java.sql.*;
 public class QueryBuilder {
 
 	private DatabaseManager dbm;
+	private Config cfg = new Config("config/main.cfg");
+	private Boolean debug = Boolean.parseBoolean(cfg.getProperty("debug"));
 
+	// The call of the QueryBuilder
 	public QueryBuilder() {
+		if (this.debug) System.out.print("Query builder loaded\n");
 		dbm = new DatabaseManager();
 	}
 
-	// GET DEVICE DATA
+	// Get the device data
 	public String setDeviceData(int deviceID) {
-		// Query invoegen
+		// Creating a query @Stijn add more info please
 		String query = "" + deviceID;
-		System.out.println(query);
+		if (this.debug) System.out.print(query);
 		return query;
 	}
 
-	//List devices
+	// Get a list of devices
 	public ResultSet Devices() {
-		// Query invoegen
+		// @Stijn What do you want to do with this??
 		String query = "";
-		System.out.println(query);
+		if (this.debug) System.out.print(query);
 		return dbm.execute(query);
 	}
 
 	// Create new Device
 	public String insertNewDevice() {
-		// Query invoegen
+		// Creating a query to creat a new device
 		String query = "";
-		System.out.println(query);
+		if (this.debug) System.out.print(query);
 		return query;
 	}
 
 	// Disble Device
 	public String disableDevice(Integer deviceID) {
-		// Query invoegen
+		// Creating a query to disable a device
 		String query = "XXXXXXXXXXX WHERE DeviceID=" + deviceID;
-		System.out.println(query);
+		if (this.debug) System.out.print(query);
 		return query;
 	}
 
 	// Remove Device
 	public String deleteDevice(Integer deviceID) {
+		// Creating a query to remove a device
 		String query = "DELETE FROM Devices WHERE DeviceID=" + deviceID;
-		System.out.println(query);
+		if (this.debug) System.out.print(query);
 		return query;
 	}
 

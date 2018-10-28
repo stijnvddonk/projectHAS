@@ -1,10 +1,10 @@
 package GUI;
 
-import java.awt.EventQueue;
+import logic_tier.Login;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -26,6 +26,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 
+
 public class loginScreen {
 
 	Color DWPTColor = new Color(90, 142, 200);
@@ -34,6 +35,7 @@ public class loginScreen {
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JLabel lblSubmit;
+	private Login lgn = new Login();
 
 	/**
 	 * Launch the application.
@@ -113,7 +115,7 @@ public class loginScreen {
 		txtPassword = new JPasswordField();
 		txtPassword.setColumns(10);
 		txtPassword.setToolTipText("");
-		txtPassword.setText("Patrijsweg1");
+		txtPassword.setText("admin");
 		txtPassword.setForeground(Color.WHITE);
 		txtPassword.setBackground(new Color(90, 142, 200));
 		txtPassword.setBounds(24, 276, 256, 25);
@@ -122,7 +124,7 @@ public class loginScreen {
 
 		txtUsername = new JTextField();
 		txtUsername.setForeground(Color.WHITE);
-		txtUsername.setText("stijn.vandedonk");
+		txtUsername.setText("admin");
 		txtUsername.setBackground(new Color(90, 142, 200));
 		txtUsername.setBounds(24, 214, 256, 26);
 		txtUsername.setBorder(null);
@@ -166,9 +168,10 @@ public class loginScreen {
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				DeviceMenu dm = new DeviceMenu();
-				dm.setVisible(true);
-				frame.dispose();
+				lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
+//				DeviceMenu dm = new DeviceMenu();
+//				dm.setVisible(true);
+//				frame.dispose();
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);

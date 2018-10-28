@@ -6,13 +6,13 @@ public class Config {
 
 	Properties configFile;
 
-	public Config(String location) {
-
+	public Config() {
+		
 		configFile = new java.util.Properties();
 		try {
-			configFile.load(this.getClass().getClassLoader().
-			getResourceAsStream(location));
+			configFile.load(this.getClass().getClassLoader().getResourceAsStream("config/main.cfg"));
 		} catch(Exception eta) {
+			System.out.print("Config file won't load!\n");
 			eta.printStackTrace();
 		}
 	}

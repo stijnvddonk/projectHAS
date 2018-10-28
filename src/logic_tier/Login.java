@@ -15,17 +15,17 @@ public class Login {
 	
 	protected QueryBuilder qb 					= new QueryBuilder();
 	protected passwordAuthentication pswa 		= new passwordAuthentication();
-	private Config cfg 							= new Config("config/main.cfg");
+	private Config cfg 							= new Config();
 	private Boolean debug 						= Boolean.parseBoolean(cfg.getProperty("debug"));
-	protected loginScreen cls					= null;
 	protected Connection db						= null;
 
-	public Login(loginScreen cls) {
-		this.cls = cls;
+	public Login() {
+		if (debug) System.out.print("Login loaded\n");
 	}
 	
 	public void login(String user, String pass) {
 		ResultSet rs = null;
+		if (debug) System.out.print("The user is: " + user + "\nThe password is: " + pass + "\n");
 		String saltedPass = qb.selectSaltedPassword(user, pass);
 		try {
 			rs = qb.selectLogin(user, saltedPass);

@@ -6,7 +6,7 @@ import data_tier.Config;
 public class DatabaseManager {
 
 	private Connection db;
-	private Config cfg = new Config("config/main.cfg");
+	private Config cfg = new Config();
 	private Boolean debug = Boolean.parseBoolean(cfg.getProperty("debug"));
 	private String dbBuild = cfg.getProperty("dbType") + cfg.getProperty("dbHost") + ":" + cfg.getProperty("dbPort") + "/" + cfg.getProperty("dbName") + "?" + cfg.getProperty("dbExtra");
 

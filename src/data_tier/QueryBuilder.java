@@ -5,7 +5,7 @@ import java.sql.*;
 public class QueryBuilder {
 
 	private DatabaseManager dbm;
-	private Config cfg = new Config("config/main.cfg");
+	private Config cfg = new Config();
 	private Boolean debug = Boolean.parseBoolean(cfg.getProperty("debug"));
 
 	// The call of the QueryBuilder

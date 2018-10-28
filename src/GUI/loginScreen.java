@@ -33,6 +33,7 @@ public class loginScreen {
 	private JFrame frame;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
+	private JLabel lblSubmit;
 
 	/**
 	 * Launch the application.
@@ -43,7 +44,6 @@ public class loginScreen {
 				try {
 					loginScreen window = new loginScreen();
 					window.frame.setVisible(true);
-					//comp = new Company(window);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -153,8 +153,16 @@ public class loginScreen {
 		lblExit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblExit.setBounds(25, 5, 58, 25);
 		panel_2.add(lblExit);
+		
+		lblSubmit = new JLabel("Login");
+		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSubmit.setForeground(new Color(90, 142, 200));
+		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblSubmit.setBounds(15, 5, 72, 25);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setBackground(Color.WHITE);
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -163,16 +171,9 @@ public class loginScreen {
 				frame.dispose();
 			}
 		});
-		panel_3.setLayout(null);
-		panel_3.setBackground(Color.WHITE);
 		panel_3.setBounds(24, 336, 103, 36);
 		panel_1.add(panel_3);
 
-		JLabel lblSubmit = new JLabel("Login");
-		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSubmit.setForeground(new Color(90, 142, 200));
-		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblSubmit.setBounds(15, 5, 72, 25);
 		panel_3.add(lblSubmit);
 		
 		JLabel lblWachtwoordVergeten = new JLabel("Forgot password?");

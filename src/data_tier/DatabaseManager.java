@@ -94,6 +94,19 @@ public class DatabaseManager {
 		return output;
 	}
 
+	public String getPassPeper(String query) {
+		String peper = null;
+		ResultSet rs = execute(query);
+		try {
+			rs.first();
+			peper = rs.getString("salt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return peper;
+	}
+
 	/* updateLogin
 	 * Type: Update query
 	 * Input: MySQL Database query in String format, UserId as Integer, The currentTimeStamp as Timestamp

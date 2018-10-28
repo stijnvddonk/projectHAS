@@ -54,4 +54,14 @@ public class QueryBuilder {
 		return query;
 	}
 
+	public String selectSaltedPassword(String user, String pass) {
+		String query = "SELECT * FROM Peper WHERE peperId=(SELECT userId FROM users WHERE username='" + user + "' LIMIT 1) LIMIT 1";
+		return cfg.getProperty("salt") + pass + dbm.getPassPeper(query);
+	}
+	
+	public ResultSet selectLogin(String user, String peperredPass) {
+		String query = "SELECT * FROM users WHERE username='" + user + "' AND password='" + peperredPass + "' LIMIT 1";
+		return dbm.execute(query);
+	}
+
 }

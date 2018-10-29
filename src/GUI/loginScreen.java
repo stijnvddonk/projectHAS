@@ -155,7 +155,7 @@ public class loginScreen {
 		lblExit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblExit.setBounds(25, 5, 58, 25);
 		panel_2.add(lblExit);
-		
+
 		lblSubmit = new JLabel("Login");
 		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubmit.setForeground(new Color(90, 142, 200));
@@ -169,16 +169,16 @@ public class loginScreen {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
-//				DeviceMenu dm = new DeviceMenu();
-//				dm.setVisible(true);
-//				frame.dispose();
+				DeviceMenu dm = new DeviceMenu();
+				dm.setVisible(true);
+				frame.dispose();
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);
 		panel_1.add(panel_3);
 
 		panel_3.add(lblSubmit);
-		
+
 		JLabel lblWachtwoordVergeten = new JLabel("Forgot password?");
 		lblWachtwoordVergeten.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWachtwoordVergeten.addMouseListener(new MouseAdapter() {
@@ -193,5 +193,5 @@ public class loginScreen {
 
 
 
-	
+
 }

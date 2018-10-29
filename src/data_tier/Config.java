@@ -12,9 +12,6 @@ public class Config {
 
 		configFile = new java.util.Properties();
 		try {
-			//configFile.load(this.getClass().getClassLoader().getResourceAsStream("config/main.cfg"));
-
-			// Moet het niet zoiets Zijn??
 
 			InputStream is = new FileInputStream("config/main.properties");
 			configFile.load(is);

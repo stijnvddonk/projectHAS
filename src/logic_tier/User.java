@@ -28,6 +28,7 @@ public class User {
 	}
 
 	public String[][] Devices() {
+		System.out.println("Starting data retrieval");
 		ResultSet rs = null;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		try {

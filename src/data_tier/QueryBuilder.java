@@ -62,7 +62,9 @@ public class QueryBuilder {
 	}
 
 	public ResultSet selectLogin(String user, String peperredPass) {
+		System.out.println("Vat die deze code hier of wahh");
 		String query = "SELECT * FROM Users WHERE username='" + user + "' AND password='" + peperredPass + "' LIMIT 1";
+		System.out.println(query);
 		return dbm.execute(query);
 	}
 

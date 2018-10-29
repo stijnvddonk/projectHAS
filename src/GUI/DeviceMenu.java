@@ -61,6 +61,7 @@ public class DeviceMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public DeviceMenu() {
+		us = new User();
 		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -310,7 +311,8 @@ public class DeviceMenu extends JFrame {
 	if (model != null)
 		model.setRowCount(0);
 	String[] header = { "Device Name" };
-	String[][] data = us.projects();
+	System.out.println("Loading data");
+	String[][] data = us.Devices();
 	model = new DefaultTableModel(data, header);
 	table = new JTable(model) {
 		public boolean isCellEditable(int row, int column) {

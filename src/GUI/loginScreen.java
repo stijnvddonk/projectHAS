@@ -1,10 +1,10 @@
 package GUI;
 
-import java.awt.EventQueue;
+import logic_tier.Login;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -26,6 +26,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 
+
 public class loginScreen {
 
 	Color DWPTColor = new Color(90, 142, 200);
@@ -33,6 +34,8 @@ public class loginScreen {
 	private JFrame frame;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
+	private JLabel lblSubmit;
+	private Login lgn = new Login();
 
 	/**
 	 * Launch the application.
@@ -44,7 +47,6 @@ public class loginScreen {
 				try {
 					loginScreen window = new loginScreen();
 					window.frame.setVisible(true);
-					//comp = new Company(window);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,7 +116,7 @@ public class loginScreen {
 		txtPassword = new JPasswordField();
 		txtPassword.setColumns(10);
 		txtPassword.setToolTipText("");
-		txtPassword.setText("Patrijsweg1");
+		txtPassword.setText("admin");
 		txtPassword.setForeground(Color.WHITE);
 		txtPassword.setBackground(new Color(90, 142, 200));
 		txtPassword.setBounds(24, 276, 256, 25);
@@ -123,7 +125,7 @@ public class loginScreen {
 
 		txtUsername = new JTextField();
 		txtUsername.setForeground(Color.WHITE);
-		txtUsername.setText("stijn.vandedonk");
+		txtUsername.setText("admin");
 		txtUsername.setBackground(new Color(90, 142, 200));
 		txtUsername.setBounds(24, 214, 256, 26);
 		txtUsername.setBorder(null);
@@ -155,27 +157,29 @@ public class loginScreen {
 		lblExit.setBounds(25, 5, 58, 25);
 		panel_2.add(lblExit);
 
+		lblSubmit = new JLabel("Login");
+		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSubmit.setForeground(new Color(90, 142, 200));
+		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblSubmit.setBounds(15, 5, 72, 25);
+
 		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setBackground(Color.WHITE);
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
 				DeviceMenu dm = new DeviceMenu();
 				dm.setVisible(true);
 				frame.dispose();
 			}
 		});
-		panel_3.setLayout(null);
-		panel_3.setBackground(Color.WHITE);
 		panel_3.setBounds(24, 336, 103, 36);
 		panel_1.add(panel_3);
 
-		JLabel lblSubmit = new JLabel("Login");
-		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSubmit.setForeground(new Color(90, 142, 200));
-		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblSubmit.setBounds(15, 5, 72, 25);
 		panel_3.add(lblSubmit);
-		
+
 		JLabel lblWachtwoordVergeten = new JLabel("Forgot password?");
 		lblWachtwoordVergeten.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWachtwoordVergeten.addMouseListener(new MouseAdapter() {
@@ -190,5 +194,5 @@ public class loginScreen {
 
 
 
-	
+
 }

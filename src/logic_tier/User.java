@@ -27,7 +27,8 @@ public class User {
 		return array;
 	}
 
-	public String[][] projects() {
+	public String[][] Devices() {
+		System.out.println("Starting data retrieval");
 		ResultSet rs = null;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		try {
@@ -35,13 +36,7 @@ public class User {
 			rs = qb.Devices();
 			while (rs.next()) {
 				ArrayList<String> row = new ArrayList<String>();
-				row.add(Integer.toString(rs.getInt("projectID")).replaceAll("\\s", ""));
-				row.add(rs.getString("customerName").replaceAll("\\s", ""));
-				row.add(rs.getString("projectName").replaceAll("\\s", ""));
-				row.add(rs.getString("statusOmschrijving").replaceAll("\\s", ""));
-				row.add(rs.getString("startDate"));
-				row.add(rs.getString("endDate"));
-				row.add(rs.getString("userName").replaceAll("\\s", ""));
+				row.add(rs.getString("name"));
 				output.add(row);
 			}
 			System.out.println(output.toString());

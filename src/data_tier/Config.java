@@ -1,18 +1,24 @@
 package data_tier;
 
+import java.io.InputStream;
+import java.io.FileInputStream;
 import java.util.Properties;
 
 public class Config {
 
 	Properties configFile;
 
-	public Config(String location) {
+	public Config() {
 
 		configFile = new java.util.Properties();
 		try {
-			configFile.load(this.getClass().getClassLoader().
-			getResourceAsStream(location));
+
+			InputStream is = new FileInputStream("config/main.properties");
+			configFile.load(is);
+			configFile.list(System.out);
+
 		} catch(Exception eta) {
+			System.out.print("Config file won't load!\n");
 			eta.printStackTrace();
 		}
 	}

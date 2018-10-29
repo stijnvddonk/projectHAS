@@ -40,6 +40,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.ComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DeviceMenu extends JFrame {
 
@@ -79,6 +81,12 @@ public class DeviceMenu extends JFrame {
 		panel.setBounds(0, 0, 350, 720);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(349, 0, 203, 720);
+		contentPane.add(panel_1);
 
 		JSeparator separator_5 = new JSeparator();
 		separator_5.setBounds(0, 193, 349, 12);
@@ -126,13 +134,6 @@ public class DeviceMenu extends JFrame {
 		lblSystemSettings.setBounds(6, 327, 300, 55);
 		panel.add(lblSystemSettings);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(350, 0, 200, 720);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-
 		JButton btnNewDecicw = new JButton("New Device");
 		btnNewDecicw.addMouseListener(new MouseAdapter() {
 			@Override
@@ -142,13 +143,10 @@ public class DeviceMenu extends JFrame {
 				dispose();
 			}
 		});
+		panel_1.setLayout(null);
 		btnNewDecicw.setBounds(6, 622, 190, 70);
 		panel_1.add(btnNewDecicw);
-
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 615, 190, -597);
-		panel_1.add(scrollPane);
-
+		
 		JButton btnRemoveDevice = new JButton("Remove Device");
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
 		contentPane.add(btnRemoveDevice);
@@ -284,6 +282,10 @@ public class DeviceMenu extends JFrame {
 		});
 		deviceEnableButton.setBounds(1020, 50, 161, 51);
 		contentPane.add(deviceEnableButton);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 10, 190, 600);
+		panel_1.add(scrollPane);
 
 		createTable();
 
@@ -319,9 +321,12 @@ public class DeviceMenu extends JFrame {
 			return false;
 		}
 	};
+	table.getTableHeader().setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+	table.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+	table.setRowHeight(35);
 	table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
 	table.getColumnModel().getColumn(0).setResizable(false);
-	table.getColumnModel().getColumn(0).setPreferredWidth(190);
+	table.getColumnModel().getColumn(0).setPreferredWidth(186);
 	scrollPane.setViewportView(table);
 }
 }

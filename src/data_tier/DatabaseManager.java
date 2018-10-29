@@ -13,7 +13,7 @@ public class DatabaseManager {
 	public DatabaseManager() {
 		setConnection();
 	}
-	
+
 	// SetConnection makes the connect to the database
 	private void setConnection() {
 		try {
@@ -23,12 +23,12 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// Get the live connection
 	public Connection getCon() {
 		return this.db;
 	}
-	
+
 	/* Execute
 	 * Type: Select query
 	 * Input: MySQL Database query in String format
@@ -43,9 +43,9 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 		return output;
-		
+
 	}
-	
+
 	/* Update
 	 * Type: update query
 	 * Input: MySQL Database query in String format
@@ -59,7 +59,7 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/* Insert
 	 * Type: Insert query
 	 * Input: MySQL Database query in String format
@@ -99,11 +99,11 @@ public class DatabaseManager {
 		ResultSet rs = execute(query);
 		try {
 			rs.first();
-			peper = rs.getString("salt");
+			peper = rs.getString("peper");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return peper;
 	}
 
@@ -112,7 +112,7 @@ public class DatabaseManager {
 	 * Input: MySQL Database query in String format, UserId as Integer, The currentTimeStamp as Timestamp
 	 * Output: None
 	 */
-	public void updateLogin(String query, Integer userid, Timestamp currentTimeStamp) {		
+	public void updateLogin(String query, Integer userid, Timestamp currentTimeStamp) {
 		try {
 			PreparedStatement ppstm = db.prepareStatement(query);
 			ppstm.setTimestamp(1, currentTimeStamp);

@@ -310,7 +310,7 @@ public class DeviceMenu extends JFrame {
 	if (model != null)
 		model.setRowCount(0);
 	String[] header = { "Device Name" };
-	String[][] data = us.projects();
+	String[][] data = us.Devices();
 	model = new DefaultTableModel(data, header);
 	table = new JTable(model) {
 		public boolean isCellEditable(int row, int column) {

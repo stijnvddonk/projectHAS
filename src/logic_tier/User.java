@@ -4,6 +4,10 @@ import java.sql.Connection;
 import data_tier.QueryBuilder;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 import java.sql.ResultSet;
 
 public class User {
@@ -44,6 +48,24 @@ public class User {
 			System.out.println(e);
 		}
 		return convertArrayListToArray(output);
+	}
+
+	public void getDeviceTypes(JComboBox selectBox) {
+		System.out.println("Device Type Database Loaded");
+		ResultSet rs = null;
+		try {
+			rs = qb.getDeviceTypes();
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				selectBox.addItem(rs.getString("Omschrijving"));
+				System.out.println(rs.getString("Omschrijving"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		System.out.println(selectBox.getItemCount());
 	}
 
 }

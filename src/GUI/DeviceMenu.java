@@ -140,7 +140,7 @@ public class DeviceMenu extends JFrame {
 		btnNewDecicw.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				NewDeviceMenu ndm = new NewDeviceMenu();
+				NewDeviceMenu ndm = new NewDeviceMenu(us);
 				ndm.setVisible(true);
 				dispose();
 			}

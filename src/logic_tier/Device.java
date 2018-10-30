@@ -2,7 +2,12 @@ package logic_tier;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import data_tier.DatabaseManager;
@@ -18,8 +23,8 @@ public class Device {
 	private String name;
 	private String mac;
 	private String ip;
-	private Integer versionNumber;
-	private Integer type;
+	private String versionNumber;
+	private Integer typeID;
 	private boolean timerStatus;
 	private Integer timerOnID;
 	private Integer timerOffID;
@@ -32,7 +37,7 @@ public class Device {
 		this.mac = null;
 		this.ip = null;
 		this.versionNumber = null;
-		this.type = null;
+		this.typeID = null;
 		//this.timerStatus = null;
 		this.timerOnID = null;
 		this.timerOffID = null;
@@ -50,8 +55,8 @@ public class Device {
 				this.name = rs.getString("Name");
 				this.mac = rs.getString("MAC");
 				this.ip = rs.getString("IP");
-				this.versionNumber = rs.getInt("versionNumber");
-				this.type = rs.getInt("type");
+				this.versionNumber = rs.getString("versionNumber");
+				this.typeID = rs.getInt("typeID");
 				this.timerStatus = rs.getBoolean("timerStatus");
 				this.timerOnID = rs.getInt("timerOn");
 				this.timerOffID = rs.getInt("timerOff");
@@ -61,6 +66,38 @@ public class Device {
 			e.printStackTrace();
 		}
 	}
+	
+//	  public void newDevice(String deviceName, String deviceType) {
+//			System.out.println("new Device Method Called");
+//			try {
+//				System.out.println("Device Name: " + deviceName);
+//				//Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
+//				PreparedStatement pst;
+//				pst = db.prepareStatement(query);
+//				 pst.setInt(1, deviceID);
+//				 pst.setString(2, deviceName);
+//				 pst.setString(3, mac);
+//				 pst.setString(4, ip);
+//				 pst.setString(5, versionNumber);
+//					switch (deviceType) {
+//					case "Lamp":
+//						typeID = 1;
+//						break;
+//					case "Deur":
+//						typeID = 2;
+//						break;
+//					case "LuchtVochtigheids Lezer":
+//						typeID = 3;
+//						break;
+//					}
+//				 pst.setInt(6, typeID);
+//				 Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
+//				//pst.executeUpdate();
+//			} catch (Exception e) {
+//				System.out.println(e);
+//				JOptionPane.showMessageDialog(null, e);
+//			}
+//		}
 
 	public int getDeviceID() {
 		return this.deviceID;
@@ -78,12 +115,12 @@ public class Device {
 		return this.ip;
 	}
 
-	public int getVersionNumber() {
+	public String getVersionNumber() {
 		return this.versionNumber;
 	}
 
 	public int getType() {
-		return this.type;
+		return this.typeID;
 	}
 
 	public boolean getTimerStatus() {

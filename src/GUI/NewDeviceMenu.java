@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
@@ -18,15 +20,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
+import logic_tier.User;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class NewDeviceMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
-
+	private JComboBox combobox = new JComboBox();
+	private User us;
 	/**
 	 * Create the frame.
 	 */
-	public NewDeviceMenu() {
+	public NewDeviceMenu(User _us) {
+		us = _us;
+		us.getDeviceTypes(combobox);
 		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -98,37 +108,19 @@ public class NewDeviceMenu extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel label_3 = new JLabel("Device 1");
-		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_3.setBounds(6, 30, 190, 55);
-		panel_1.add(label_3);
-		
-		JLabel lblDevice = new JLabel("Device 2");
-		lblDevice.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice.setBounds(6, 90, 190, 55);
-		panel_1.add(lblDevice);
-		
-		JLabel lblDevice_1 = new JLabel("Device 3");
-		lblDevice_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_1.setBounds(6, 150, 190, 55);
-		panel_1.add(lblDevice_1);
-		
-		JLabel lblDevice_4 = new JLabel("Device 6");
-		lblDevice_4.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_4.setBounds(6, 325, 190, 55);
-		panel_1.add(lblDevice_4);
-		
-		JLabel lblDevice_2 = new JLabel("Device 4");
-		lblDevice_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_2.setBounds(6, 205, 190, 55);
-		panel_1.add(lblDevice_2);
-		
-		JLabel lblDevice_3 = new JLabel("Device 5");
-		lblDevice_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_3.setBounds(6, 265, 190, 55);
-		panel_1.add(lblDevice_3);
-		
 		JButton btnRemoveDevice = new JButton("Create Device");
+		btnRemoveDevice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textField_1.getText().equals("")) {
+					JOptionPane.showMessageDialog(textField_1, "Please enter a valid Device Name");
+				} else {
+					newDevice();
+//					MainProjectManager mpm = new MainProjectManager(bepm);
+//					mpm.setVisible(true);
+//					dispose();
+				}
+			}
+		});
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
 		contentPane.add(btnRemoveDevice);
 		
@@ -181,10 +173,10 @@ public class NewDeviceMenu extends JFrame {
 		textField_1.setColumns(10);
 		textField_1.setBounds(601, 480, 602, 48);
 		contentPane.add(textField_1);
+		combobox.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(601, 263, 602, 48);
-		contentPane.add(comboBox);
+		combobox.setBounds(601, 252, 602, 66);
+		contentPane.add(combobox);
 		
 		JSeparator separator_6 = new JSeparator();
 		separator_6.setBounds(743, 196, 363, 12);
@@ -194,5 +186,12 @@ public class NewDeviceMenu extends JFrame {
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(601, 366, 602, 48);
 		contentPane.add(lblNewLabel_1);
+	}
+	
+	public void newDevice() {
+//		String customerName = new String(jc.getSelectedItem().toString());
+//		String projectName = textField_1.getText();
+//		bepm.newProject(customerName, projectName);
+//		bepm.createFileStructure(customerName, projectName);
 	}
 }

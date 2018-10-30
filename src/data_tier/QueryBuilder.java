@@ -31,11 +31,11 @@ public class QueryBuilder {
 	}
 
 	// Create new Device
-	public ResultSet insertNewDevice(String deviceName, String MACAdres, String IPAdres, String versionNumber, int typeID) {
+	public Integer insertNewDevice(String deviceName, String MACAdres, String IPAdres, String versionNumber, int typeID) {
 		// Creating a query to creat a new device
 		String query = "INSERT INTO Devices VALUES (4,'" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','"+versionNumber+"',"+typeID+",0,null,null)";
 		if (this.debug) System.out.print(query);
-		return dbm.execute(query);
+		return dbm.__insert(query);
 	}
 
 	// Disble Device
@@ -51,6 +51,13 @@ public class QueryBuilder {
 		// Creating a query to remove a device
 		String query = "DELETE FROM Devices WHERE DeviceID=" + deviceID;
 		if (this.debug) System.out.print(query);
+		return dbm.execute(query);
+	}
+	
+	// List Device Types
+	public ResultSet getDeviceTypes() {
+		String query = "Select Omschrijving From DeviceTypes";
+		System.out.println(query);
 		return dbm.execute(query);
 	}
 

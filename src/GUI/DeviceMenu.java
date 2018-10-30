@@ -1,5 +1,6 @@
 package GUI;
 
+import logic_tier.Device;
 import logic_tier.User;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -50,6 +51,7 @@ public class DeviceMenu extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	User us;
+	Device dev; 
 	private JPanel contentPane;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -327,6 +329,15 @@ public class DeviceMenu extends JFrame {
 	table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
 	table.getColumnModel().getColumn(0).setResizable(false);
 	table.getColumnModel().getColumn(0).setPreferredWidth(186);
+	table.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int column = 0;
+			int row = table.getSelectedRow();
+			String value = table.getModel().getValueAt(row, column).toString();
+			System.out.println(value);
+		}
+	});
 	scrollPane.setViewportView(table);
 }
 }

@@ -4,6 +4,10 @@ import java.sql.Connection;
 import data_tier.QueryBuilder;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 import java.sql.ResultSet;
 
 public class User {
@@ -44,6 +48,86 @@ public class User {
 			System.out.println(e);
 		}
 		return convertArrayListToArray(output);
+	}
+
+	public Integer getDeviceTypeID(String deviceName) {
+		System.out.println("Device Type ID Database Loaded");
+		Integer typeID = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.DevicesTypeID(deviceName);
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				System.out.println(rs.getInt("typeID"));
+				typeID = rs.getInt("typeID");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return typeID;
+	}
+
+	public Integer getDeviceEnabledStatus(String deviceName) {
+		System.out.println("Device Enabled Status Database Loaded");
+		Integer typeID = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.DevicesEnabledStatus(deviceName);
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				System.out.println(rs.getInt("DeviceEnabled"));
+				typeID = rs.getInt("DeviceEnabled");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return typeID;
+	}
+
+	public void getDeviceTypes(JComboBox selectBox) {
+		System.out.println("Device Type Database Loaded");
+		ResultSet rs = null;
+		try {
+			rs = qb.getDeviceTypes();
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				selectBox.addItem(rs.getString("Omschrijving"));
+				System.out.println(rs.getString("Omschrijving"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		System.out.println(selectBox.getItemCount());
+	}
+
+	public void enableDisableDevice(int id, String deviceName) {
+		try {
+			qb.enableDisableDevice(id, deviceName);
+			// PreparedStatement pst;
+			// pst = db.prepareStatement(query);
+			// pst.executeUpdate();
+			//JOptionPane.showMessageDialog(null, "Device has been Deleted!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public void deleteDevice(String deviceName) {
+		try {
+			qb.deleteDevice(deviceName);
+			// PreparedStatement pst;
+			// pst = db.prepareStatement(query);
+			// pst.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Device has been Deleted!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }

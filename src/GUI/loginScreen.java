@@ -114,6 +114,17 @@ public class loginScreen {
 		panel_1.add(separator_1);
 
 		txtPassword = new JPasswordField();
+		txtPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
+					DeviceMenu dm = new DeviceMenu();
+					dm.setVisible(true);
+					frame.dispose();
+				}
+			}
+		});
 		txtPassword.setColumns(10);
 		txtPassword.setToolTipText("");
 		txtPassword.setText("admin");

@@ -17,11 +17,18 @@ public class QueryBuilder {
 	// Get the device data
 	public String setDeviceData(int deviceID) {
 		// Creating a query @Stijn add more info please
-		String query = "HIER MOET NOG DE GOEDE QUERY KOMEN" + deviceID;
+		String query = "SELECT deviceID, name, MAC, IP, versionNumber, typeID, Omschrijving, DeviceEnabled, timerStatus, timerOn, timerOff FROM Devices d JOIN DeviceTypes dt ON d.typeID=dt.ID WHERE d.deviceID = " + deviceID;
 		if (this.debug) System.out.print(query);
 		return query;
 	}
 
+	// Get typeID device
+	public ResultSet DevicesTypeID(String deviceName) {
+	String query = "SELECT typeID FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
 	// Get a list of devices
 	public ResultSet Devices() {
 		// @Stijn What do you want to do with this??
@@ -31,26 +38,43 @@ public class QueryBuilder {
 	}
 
 	// Create new Device
-	public ResultSet insertNewDevice(String deviceName, String MACAdres, String IPAdres, String versionNumber, int typeID) {
+	public Integer insertNewDevice(String deviceName, String MACAdres, String IPAdres, String versionNumber, int typeID) {
 		// Creating a query to creat a new device
-		String query = "INSERT INTO Devices VALUES (4,'" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','"+versionNumber+"',"+typeID+",0,null,null)";
+		String query = "INSERT INTO Devices VALUES (4,'" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','"+versionNumber+"',"+typeID+",1,0,null,null)";
 		if (this.debug) System.out.print(query);
-		return dbm.execute(query);
+		return dbm.__insert(query);
 	}
 
+	// Get enabledStatus device
+	public ResultSet DevicesEnabledStatus(String deviceName) {
+	String query = "SELECT DeviceEnabled FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+
 	// Disble Device
-	public ResultSet disableDevice(Integer deviceID) {
+	public void enableDisableDevice(int id, String deviceName) {
 		// Creating a query to disable a device
-		String query = "XXXXXXXXXXX WHERE DeviceID=" + deviceID;
+			String query = "UPDATE Devices SET DeviceEnabled = "+id+" WHERE name = '" + deviceName + "'";
+			System.out.print(query);
 		if (this.debug) System.out.print(query);
-		return dbm.execute(query);
+		dbm.update(query);
 	}
 
 	// Remove Device
-	public ResultSet deleteDevice(Integer deviceID) {
+	public void deleteDevice(String deviceName) {
 		// Creating a query to remove a device
-		String query = "DELETE FROM Devices WHERE DeviceID=" + deviceID;
+		String query = "DELETE FROM Devices WHERE name='" + deviceName + "'";
+		//System.out.print(query);
 		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+
+	// List Device Types
+	public ResultSet getDeviceTypes() {
+		String query = "Select Omschrijving From DeviceTypes";
+		System.out.println(query);
 		return dbm.execute(query);
 	}
 

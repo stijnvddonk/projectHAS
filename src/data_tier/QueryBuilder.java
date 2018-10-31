@@ -22,6 +22,13 @@ public class QueryBuilder {
 		return query;
 	}
 
+	// Get typeID device
+	public ResultSet DevicesTypeID(String deviceName) {
+	String query = "SELECT typeID FROM fontys_group666.Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
 	// Get a list of devices
 	public ResultSet Devices() {
 		// @Stijn What do you want to do with this??
@@ -47,13 +54,14 @@ public class QueryBuilder {
 	}
 
 	// Remove Device
-	public ResultSet deleteDevice(Integer deviceID) {
+	public void deleteDevice(String deviceName) {
 		// Creating a query to remove a device
-		String query = "DELETE FROM Devices WHERE DeviceID=" + deviceID;
+		String query = "DELETE FROM Devices WHERE name='" + deviceName + "'";
+		//System.out.print(query);
 		if (this.debug) System.out.print(query);
-		return dbm.execute(query);
+		dbm.update(query);
 	}
-	
+
 	// List Device Types
 	public ResultSet getDeviceTypes() {
 		String query = "Select Omschrijving From DeviceTypes";

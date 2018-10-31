@@ -39,7 +39,7 @@ public class Admin extends User{
   public void disableDevice() {
   try {
     int deviceID = Integer.parseInt(deviceData.get("deviceID"));
-    ResultSet query = qb.deleteDevice(deviceID);
+    //ResultSet query = qb.deleteDevice(deviceID);
     //PreparedStatement pst;
     //pst = db.prepareStatement(query);
     //pst.executeUpdate();
@@ -49,6 +49,17 @@ public class Admin extends User{
   }
 }
 
+// public void deleteDevice(String deviceName) {
+// try {
+//   ResultSet query = qb.deleteDevice(deviceName);
+//   // PreparedStatement pst;
+//   // pst = db.prepareStatement(query);
+//   // pst.executeUpdate();
+//   JOptionPane.showMessageDialog(null, "User has been Deleted!");
+// } catch (Exception e) {
+//   System.out.println(e);
+// }
+// }
 
   //remove devive
 //  public void deleteDevice() {

@@ -25,7 +25,9 @@ public class Device {
 	private String ip;
 	private String versionNumber;
 	private Integer typeID;
-	private boolean timerStatus;
+	private String typeDesc;
+	private Integer deviceStatus;
+	private Integer timerStatus;
 	private Integer timerOnID;
 	private Integer timerOffID;
 
@@ -38,7 +40,9 @@ public class Device {
 		this.ip = null;
 		this.versionNumber = null;
 		this.typeID = null;
-		//this.timerStatus = null;
+		this.typeDesc = null;
+		this.deviceStatus = null;
+		this.timerStatus = null;
 		this.timerOnID = null;
 		this.timerOffID = null;
 		this.setDeviceData(deviceID);
@@ -52,12 +56,14 @@ public class Device {
 		try {
 			for (rs = this.dbm.execute(query); rs.next();) {
 				this.deviceID = rs.getInt("deviceID");
-				this.name = rs.getString("Name");
+				this.name = rs.getString("name");
 				this.mac = rs.getString("MAC");
 				this.ip = rs.getString("IP");
 				this.versionNumber = rs.getString("versionNumber");
 				this.typeID = rs.getInt("typeID");
-				this.timerStatus = rs.getBoolean("timerStatus");
+				this.typeDesc = rs.getString("Omschrijving");
+				this.deviceStatus = rs.getInt("DeviceEnabled");
+				this.timerStatus = rs.getInt("timerStatus");
 				this.timerOnID = rs.getInt("timerOn");
 				this.timerOffID = rs.getInt("timerOff");
 				deviceData.put("Device Name: ", this.name);
@@ -66,7 +72,7 @@ public class Device {
 			e.printStackTrace();
 		}
 	}
-	
+
 //	  public void newDevice(String deviceName, String deviceType) {
 //			System.out.println("new Device Method Called");
 //			try {
@@ -123,7 +129,7 @@ public class Device {
 		return this.typeID;
 	}
 
-	public boolean getTimerStatus() {
+	public int getTimerStatus() {
 		return this.timerStatus;
 	}
 

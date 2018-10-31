@@ -17,14 +17,14 @@ public class QueryBuilder {
 	// Get the device data
 	public String setDeviceData(int deviceID) {
 		// Creating a query @Stijn add more info please
-		String query = "HIER MOET NOG DE GOEDE QUERY KOMEN" + deviceID;
+		String query = "SELECT deviceID, name, MAC, IP, versionNumber, typeID, Omschrijving, DeviceEnabled, timerStatus, timerOn, timerOff FROM Devices d JOIN DeviceTypes dt ON d.typeID=dt.ID WHERE d.deviceID = " + deviceID;
 		if (this.debug) System.out.print(query);
 		return query;
 	}
 
 	// Get typeID device
 	public ResultSet DevicesTypeID(String deviceName) {
-	String query = "SELECT typeID FROM fontys_group666.Devices WHERE name ='"+deviceName+"'";
+	String query = "SELECT typeID FROM Devices WHERE name ='"+deviceName+"'";
 	System.out.print(query);
 	if (this.debug) System.out.print(query);
 	return dbm.execute(query);
@@ -40,17 +40,26 @@ public class QueryBuilder {
 	// Create new Device
 	public Integer insertNewDevice(String deviceName, String MACAdres, String IPAdres, String versionNumber, int typeID) {
 		// Creating a query to creat a new device
-		String query = "INSERT INTO Devices VALUES (4,'" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','"+versionNumber+"',"+typeID+",0,null,null)";
+		String query = "INSERT INTO Devices VALUES (4,'" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','"+versionNumber+"',"+typeID+",1,0,null,null)";
 		if (this.debug) System.out.print(query);
 		return dbm.__insert(query);
 	}
 
+	// Get enabledStatus device
+	public ResultSet DevicesEnabledStatus(String deviceName) {
+	String query = "SELECT DeviceEnabled FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+
 	// Disble Device
-	public ResultSet disableDevice(Integer deviceID) {
+	public void enableDisableDevice(int id, String deviceName) {
 		// Creating a query to disable a device
-		String query = "XXXXXXXXXXX WHERE DeviceID=" + deviceID;
+			String query = "UPDATE Devices SET DeviceEnabled = "+id+" WHERE name = '" + deviceName + "'";
+			System.out.print(query);
 		if (this.debug) System.out.print(query);
-		return dbm.execute(query);
+		dbm.update(query);
 	}
 
 	// Remove Device

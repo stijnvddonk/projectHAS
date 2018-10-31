@@ -58,6 +58,7 @@ public class DeviceMenu extends JFrame {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JToggleButton deviceEnableButton = new JToggleButton("On");
 	private JToggleButton deviceTimerStatus = new JToggleButton("On");
 	private JLabel lblNewLabel = new JLabel("Device 1");
 	private JLabel lblTimer = new JLabel("Timer Status");
@@ -74,6 +75,7 @@ public class DeviceMenu extends JFrame {
 	 */
 	public DeviceMenu() {
 		us = new User();
+
 		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280, 720);
@@ -277,19 +279,36 @@ public class DeviceMenu extends JFrame {
 		});
 		deviceTimerStatus.setBounds(1020, 209, 161, 51);
 		contentPane.add(deviceTimerStatus);
-
-		JToggleButton deviceEnableButton = new JToggleButton("On");
-		deviceEnableButton.setSelected(true);
-		deviceEnableButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				int state = e.getStateChange();
-				if (state == ItemEvent.SELECTED) {
+		String value = lblNewLabel.getText();
+		if(us.getDeviceEnabledStatus(value) == 1) {
+			deviceEnableButton.setSelected(true);
+			deviceEnableButton.setText("On");
+			deviceTimerStatus.setEnabled(true);
+			comboBoxTimeOn.setEnabled(true);
+			comboBoxTimeOff.setEnabled(true);
+		}
+		else {
+			deviceEnableButton.setSelected(false);
+			deviceEnableButton.setText("Off");
+			deviceTimerStatus.setSelected(false);
+			deviceTimerStatus.setEnabled(false);
+			comboBoxTimeOn.setEnabled(false);
+			comboBoxTimeOff.setEnabled(false);
+		}
+		deviceEnableButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		 		String deviceName = lblNewLabel.getText();
+		 		int i = us.getDeviceEnabledStatus(deviceName);
+		 		System.out.println(i);
+				if (i == 0) {
+					us.enableDisableDevice(1, deviceName);
 					deviceEnableButton.setText("On");
 					System.out.println("Device Status ON");
 					deviceTimerStatus.setEnabled(true);
 					comboBoxTimeOn.setEnabled(true);
 					comboBoxTimeOff.setEnabled(true);
 				} else {
+					us.enableDisableDevice(0, deviceName);
 					deviceEnableButton.setText("Off");
 					System.out.println("Device Status OFF");
 					deviceTimerStatus.setSelected(false);
@@ -299,6 +318,31 @@ public class DeviceMenu extends JFrame {
 				}
 			}
 		});
+
+//		deviceEnableButton.setSelected(true);
+//		deviceEnableButton.addItemListener(new ItemListener() {
+//		 	public void itemStateChanged(ItemEvent e) {
+//		 		String deviceName = lblNewLabel.getText();
+//		 		int i = us.getDeviceEnabledStatus(deviceName);
+//		 		System.out.println(i);
+//				if (i == 1) {
+//					System.out.println("I: " + i);
+//					deviceEnableButton.setText("On");
+//					System.out.println("Device Status ON");
+//					deviceTimerStatus.setEnabled(true);
+//					comboBoxTimeOn.setEnabled(true);
+//					comboBoxTimeOff.setEnabled(true);
+//				} else {
+//					System.out.println("I: " + i);
+//					deviceEnableButton.setText("Off");
+//					System.out.println("Device Status OFF");
+//					deviceTimerStatus.setSelected(false);
+//					deviceTimerStatus.setEnabled(false);
+//					comboBoxTimeOn.setEnabled(false);
+//					comboBoxTimeOff.setEnabled(false);
+//				}
+//		 	}
+//		});
 		deviceEnableButton.setBounds(1020, 50, 161, 51);
 		contentPane.add(deviceEnableButton);
 
@@ -347,6 +391,7 @@ public class DeviceMenu extends JFrame {
 		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(186);
+		table.changeSelection(0, 0, false, false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -355,6 +400,15 @@ public class DeviceMenu extends JFrame {
 				String value = table.getModel().getValueAt(row, column).toString();
 				lblNewLabel.setText(value);
 				int typeID = us.getDeviceTypeID(value);
+				System.out.println("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value));
+				if(us.getDeviceEnabledStatus(value) == 1) {
+					deviceEnableButton.setSelected(true);
+					deviceEnableButton.setText("On");
+				}
+				else {
+					deviceEnableButton.setSelected(false);
+					deviceEnableButton.setText("Off");
+				}
 				setStuffVisible(typeID);
 			}
 		});

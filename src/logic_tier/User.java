@@ -69,6 +69,25 @@ public class User {
 		return typeID;
 	}
 
+	public Integer getDeviceEnabledStatus(String deviceName) {
+		System.out.println("Device Enabled Status Database Loaded");
+		Integer typeID = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.DevicesEnabledStatus(deviceName);
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				System.out.println(rs.getInt("DeviceEnabled"));
+				typeID = rs.getInt("DeviceEnabled");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return typeID;
+	}
+
 	public void getDeviceTypes(JComboBox selectBox) {
 		System.out.println("Device Type Database Loaded");
 		ResultSet rs = null;
@@ -85,6 +104,18 @@ public class User {
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		System.out.println(selectBox.getItemCount());
+	}
+
+	public void enableDisableDevice(int id, String deviceName) {
+		try {
+			qb.enableDisableDevice(id, deviceName);
+			// PreparedStatement pst;
+			// pst = db.prepareStatement(query);
+			// pst.executeUpdate();
+			//JOptionPane.showMessageDialog(null, "Device has been Deleted!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public void deleteDevice(String deviceName) {

@@ -12,26 +12,26 @@ public class Admin extends User{
   public Map<String, String> deviceData = new HashMap<String, String>();
 
   // add device
-  public void newDevice(String deviceName, String deviceType) {
-		System.out.println("new Device Method Called");
-		//Date date = new java.sql.Date(new java.util.Date().getTime());
-		try {
-			System.out.println("Device Name: " + deviceName);
-			//String query = qb.insertNewDevice(query, query, query, query, userID);
-			//PreparedStatement pst;
-			//pst = db.prepareStatement(query);
-      //AANPASSEN
-			// pst.setInt(1, customerID);
-			// pst.setString(2, projectName);
-			// pst.setInt(3, 1);
-			// pst.setDate(4, date);
-			// pst.setInt(5, 1);
-			//pst.executeUpdate();
-		} catch (Exception e) {
-			System.out.println(e);
-			JOptionPane.showMessageDialog(null, e);
-		}
-	}
+//  public void newDevice(String deviceName, String deviceType) {
+//		System.out.println("new Device Method Called");
+//		try {
+//			System.out.println("Device Name: " + deviceName);
+//			//Resultset query = qb.insertNewDevice(deviceName, MACAdres, IPAdres, versionNumber, deviceType);
+//			//PreparedStatement pst;
+//			//pst = db.prepareStatement(query);
+//			 pst.setInt(1, deviceID);
+//			 pst.setString(2, deviceName);
+//			 pst.setString(3, MAC);
+//			 pst.setString(4, IP);
+//			 pst.setString(5, versionNumber);
+//
+//			 pst.setInt(6, typeID);
+//			//pst.executeUpdate();
+//		} catch (Exception e) {
+//			System.out.println(e);
+//			JOptionPane.showMessageDialog(null, e);
+//		}
+//	}
   // edit device
 
 
@@ -39,7 +39,7 @@ public class Admin extends User{
   public void disableDevice() {
   try {
     int deviceID = Integer.parseInt(deviceData.get("deviceID"));
-    ResultSet query = qb.deleteDevice(deviceID);
+    //ResultSet query = qb.deleteDevice(deviceID);
     //PreparedStatement pst;
     //pst = db.prepareStatement(query);
     //pst.executeUpdate();
@@ -49,6 +49,17 @@ public class Admin extends User{
   }
 }
 
+// public void deleteDevice(String deviceName) {
+// try {
+//   ResultSet query = qb.deleteDevice(deviceName);
+//   // PreparedStatement pst;
+//   // pst = db.prepareStatement(query);
+//   // pst.executeUpdate();
+//   JOptionPane.showMessageDialog(null, "User has been Deleted!");
+// } catch (Exception e) {
+//   System.out.println(e);
+// }
+// }
 
   //remove devive
 //  public void deleteDevice() {

@@ -118,7 +118,7 @@ public final class passwordAuthentication
    * 
    * @return a secure authentication token to be stored for later authentication 
    */
-  public String getSaltString(int length) 
+  public String getPeperString(int length) 
   {
       String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
       StringBuilder salt = new StringBuilder();

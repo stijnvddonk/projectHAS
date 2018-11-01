@@ -172,7 +172,6 @@ public class DeviceMenu extends JFrame {
 							us.deleteDevice(deviceName);
 							createTable();
 				}
-
 			}
 		});
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
@@ -219,39 +218,11 @@ public class DeviceMenu extends JFrame {
 		separator_4.setBounds(579, 436, 310, 12);
 		contentPane.add(separator_4);
 
-//		Calendar startCalendar = Calendar.getInstance();
-//		startCalendar.set(Calendar.HOUR_OF_DAY, 0);
-//		startCalendar.set(Calendar.MINUTE, 0);
-//
-//		Calendar startEnd = Calendar.getInstance();
-//		startEnd.set(Calendar.HOUR_OF_DAY, 23);
-//		startEnd.set(Calendar.MINUTE, 59);
-//		DefaultComboBoxModel<Date> startTime = new DefaultComboBoxModel<>();
-//		do {
-//			startTime.addElement(startCalendar.getTime());
-//			startCalendar.add(Calendar.MINUTE, 15);
-//		} while (startCalendar.getTime().before(startEnd.getTime()));
-
-//		JComboBox<Date> comboBoxTimeOn = new JComboBox<>(startTime);
 		comboBoxTimeOn.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
 		comboBoxTimeOn.setRenderer(new DateFormattedListCellRenderer(new SimpleDateFormat("HH:mm")));
 		comboBoxTimeOn.setBounds(1020, 300, 161, 55);
 		contentPane.add(comboBoxTimeOn);
 
-//		Calendar endCalendar = Calendar.getInstance();
-//		endCalendar.set(Calendar.HOUR_OF_DAY, 0);
-//		endCalendar.set(Calendar.MINUTE, 0);
-//
-//		Calendar endEnd = Calendar.getInstance();
-//		endEnd.set(Calendar.HOUR_OF_DAY, 23);
-//		endEnd.set(Calendar.MINUTE, 59);
-//		DefaultComboBoxModel<Date> endTime = new DefaultComboBoxModel<>();
-//		do {
-//			endTime.addElement(endCalendar.getTime());
-//			endCalendar.add(Calendar.MINUTE, 15);
-//		} while (endCalendar.getTime().before(endEnd.getTime()));
-//
-//		JComboBox<Date> comboBoxTimeOff = new JComboBox<>(endTime);
 		comboBoxTimeOff.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
 		comboBoxTimeOff.setRenderer(new DateFormattedListCellRenderer(new SimpleDateFormat("HH:mm")));
 		comboBoxTimeOff.setBounds(1020, 393, 161, 55);
@@ -280,7 +251,7 @@ public class DeviceMenu extends JFrame {
 		});
 		deviceTimerStatus.setBounds(1020, 209, 161, 51);
 		contentPane.add(deviceTimerStatus);
-		
+
 		String value = lblNewLabel.getText();
 		if(us.getDeviceEnabledStatus(value) == 1) {
 			deviceEnableButton.setSelected(true);
@@ -350,7 +321,7 @@ public class DeviceMenu extends JFrame {
 		}
 
 	}
-	
+
 	private DefaultComboBoxModel startTime() {
 		Calendar startCalendar = Calendar.getInstance();
 		startCalendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -366,7 +337,7 @@ public class DeviceMenu extends JFrame {
 		} while (startCalendar.getTime().before(startEnd.getTime()));
 		return startTime;
 	}
-	
+
 	private DefaultComboBoxModel endTime() {
 		Calendar endCalendar = Calendar.getInstance();
 		endCalendar.set(Calendar.HOUR_OF_DAY, 0);

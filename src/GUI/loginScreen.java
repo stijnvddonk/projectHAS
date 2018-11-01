@@ -165,14 +165,14 @@ public class loginScreen {
 		lblExit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblExit.setForeground(new Color(90, 142, 200));
 		lblExit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblExit.setBounds(25, 5, 58, 25);
+		lblExit.setBounds(0, 0, 103, 36);
 		panel_2.add(lblExit);
 
 		lblSubmit = new JLabel("Login");
 		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubmit.setForeground(new Color(90, 142, 200));
 		lblSubmit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblSubmit.setBounds(15, 5, 72, 25);
+		lblSubmit.setBounds(0, 0, 103, 36);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
@@ -181,9 +181,9 @@ public class loginScreen {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
-				DeviceMenu dm = new DeviceMenu();
-				dm.setVisible(true);
-				frame.dispose();
+//				DeviceMenu dm = new DeviceMenu();
+//				dm.setVisible(true);
+//				frame.dispose();
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);

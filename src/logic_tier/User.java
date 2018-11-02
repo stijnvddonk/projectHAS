@@ -103,16 +103,63 @@ public class User {
 			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
-		System.out.println(selectBox.getItemCount());
 	}
 
 	public void enableDisableDevice(int id, String deviceName) {
 		try {
 			qb.enableDisableDevice(id, deviceName);
-			// PreparedStatement pst;
-			// pst = db.prepareStatement(query);
-			// pst.executeUpdate();
-			//JOptionPane.showMessageDialog(null, "Device has been Deleted!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public Integer getDeviceTimerEnabledStatus(String deviceName) {
+		System.out.println("Device Timer Enabled Status Database Loaded");
+		Integer typeID = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.DevicesTimerStatus(deviceName);
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				System.out.println(rs.getInt("timerStatus"));
+				typeID = rs.getInt("timerStatus");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return typeID;
+	}
+	
+	public void enableDisableDeviceTimer(int id, String deviceName) {
+		try {
+			qb.enableDisableTimerDevice(id, deviceName);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public void getOnOffTimer(JComboBox timerOn, JComboBox timerOff, String deviceName) {
+		System.out.println("Device Timer Database Loaded");
+		ResultSet rs = null;
+		try {
+			rs = qb.getStartEndTime(deviceName);
+			System.out.println("# - Updating...");
+
+			while (rs.next()) {
+				timerOn.setSelectedItem(rs.getString("timerOn"));
+				timerOff.setSelectedItem(rs.getString("timerOff"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+	}
+
+	public void setStartEndTime(String timerOn, String timerOff, String deviceName) {
+		try {
+			qb.setStartEndTime(timerOn,timerOff, deviceName);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -121,9 +168,6 @@ public class User {
 	public void deleteDevice(String deviceName) {
 		try {
 			qb.deleteDevice(deviceName);
-			// PreparedStatement pst;
-			// pst = db.prepareStatement(query);
-			// pst.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Device has been Deleted!");
 		} catch (Exception e) {
 			System.out.println(e);

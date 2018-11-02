@@ -15,7 +15,7 @@ public class Config {
 
 			InputStream is = new FileInputStream("config/main.properties");
 			configFile.load(is);
-			configFile.list(System.out);
+			//configFile.list(System.out);
 
 		} catch(Exception eta) {
 			System.out.print("Config file won't load!\n");

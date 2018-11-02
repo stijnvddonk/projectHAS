@@ -62,6 +62,39 @@ public class QueryBuilder {
 		dbm.update(query);
 	}
 
+	// Get startEndTime
+	public ResultSet getStartEndTime(String deviceName) {
+	String query = "SELECT timerOn, timerOff FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+	// Set startEndTime
+	public void setStartEndTime(String timerOn, String timerOff, String deviceName) {
+		// Creating a query to disable a device
+			String query = "UPDATE Devices SET timerOn = '"+ timerOn +"', timerOff = '"+ timerOff +"' WHERE name = '" + deviceName + "'";
+			System.out.print(query);
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+
+	// Get DevicesTimerStatus device
+	public ResultSet DevicesTimerStatus(String deviceName) {
+	String query = "SELECT timerStatus FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+
+	// Disble enableDisableTimerDevice
+	public void enableDisableTimerDevice(int id, String deviceName) {
+		// Creating a query to disable a device
+			String query = "UPDATE Devices SET timerStatus = "+id+" WHERE name = '" + deviceName + "'";
+			System.out.print(query);
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+
 	// Remove Device
 	public void deleteDevice(String deviceName) {
 		// Creating a query to remove a device
@@ -86,7 +119,6 @@ public class QueryBuilder {
 	}
 
 	public ResultSet selectLogin(String user, String peperredPass) {
-		System.out.println("Vat die deze code hier of wahh");
 		String query = "SELECT * FROM Users WHERE username='" + user + "' AND password='" + peperredPass + "' LIMIT 1";
 		System.out.println(query);
 		return dbm.execute(query);

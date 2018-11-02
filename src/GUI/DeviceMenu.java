@@ -1,5 +1,8 @@
 package GUI;
 
+import java.util.Locale;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import logic_tier.Device;
 import logic_tier.User;
@@ -15,6 +18,7 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Component;
@@ -35,6 +39,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListSelectionModel;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -58,14 +63,16 @@ public class DeviceMenu extends JFrame {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private JTable table;
+	DateFormat df = new SimpleDateFormat("HH:mm");
+	private JButton btnSaveSettings = new JButton("Save Settings");
 	private JToggleButton deviceEnableButton = new JToggleButton("On");
 	private JToggleButton deviceTimerStatus = new JToggleButton("On");
 	private JLabel lblNewLabel = new JLabel("Device 1");
 	private JLabel lblTimer = new JLabel("Timer Status");
 	private JLabel lblTimerOn = new JLabel("Timer On");
 	private JLabel lblTimerOff = new JLabel("Timer Off");
-	private JComboBox<Date> comboBoxTimeOn = new JComboBox<>(startTime());
-	private JComboBox<Date> comboBoxTimeOff = new JComboBox<>(endTime());
+	private JComboBox<String> comboBoxTimeOn = new JComboBox<>(startTime());
+	private JComboBox<String> comboBoxTimeOff = new JComboBox<>(endTime());
 	private Color activeMenu = Color.decode("#43B7BA");
 	private Color hoverMenu = Color.decode("#ba8243");
 	private Color notActiveMenu = Color.decode("#cfa77a");
@@ -228,27 +235,39 @@ public class DeviceMenu extends JFrame {
 		comboBoxTimeOff.setBounds(1020, 393, 161, 55);
 		contentPane.add(comboBoxTimeOff);
 
-		JButton btnSaveSettings = new JButton("Save Settings");
 		btnSaveSettings.setBounds(601, 622, 190, 70);
+		btnSaveSettings.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String deviceName = lblNewLabel.getText();
+				setOnOffTime(comboBoxTimeOn, comboBoxTimeOff, deviceName);
+				JOptionPane.showMessageDialog(null, "Settings have been Saved ", "Settings Saved", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		contentPane.add(btnSaveSettings);
 
-		deviceTimerStatus.setSelected(true);
-		deviceTimerStatus.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				int state = e.getStateChange();
-				if (state == ItemEvent.SELECTED) {
+		deviceTimerStatus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		 		String deviceName = lblNewLabel.getText();
+		 		int i = us.getDeviceTimerEnabledStatus(deviceName);
+		 		System.out.println("getDeviceTimerEnabledStatus: " + i);
+				if (i == 0) {
+					us.enableDisableDeviceTimer(1, deviceName);
 					deviceTimerStatus.setText("On");
-					System.out.println("Device Timer Status ON");
+					System.out.println("Device Status ON");
+					deviceTimerStatus.setSelected(true);
 					comboBoxTimeOn.setEnabled(true);
 					comboBoxTimeOff.setEnabled(true);
 				} else {
+					us.enableDisableDeviceTimer(0, deviceName);
 					deviceTimerStatus.setText("Off");
-					System.out.println("Device Timer Status OFF");
+					System.out.println("Device Status OFF");
+					deviceTimerStatus.setSelected(false);
 					comboBoxTimeOn.setEnabled(false);
 					comboBoxTimeOff.setEnabled(false);
 				}
 			}
 		});
+
 		deviceTimerStatus.setBounds(1020, 209, 161, 51);
 		contentPane.add(deviceTimerStatus);
 
@@ -303,6 +322,24 @@ public class DeviceMenu extends JFrame {
 
 	}
 
+	public void setOnOffTime(JComboBox comboBoxTimeOn, JComboBox comboBoxTimeOff, String deviceName) {
+//		DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
+//		DateFormat dfn = new SimpleDateFormat("HH:mm", Locale.US);
+		String timeOn = comboBoxTimeOn.getSelectedItem().toString();
+		String timeOff = comboBoxTimeOff.getSelectedItem().toString();
+//		//String
+//		try {
+//			timeOn = new SimpleDateFormat("HH:mm").format(df.parse(timeOn));
+			System.out.println("timer On: " + timeOn);
+//			timeOff = new SimpleDateFormat("HH:mm").format(df.parse(timeOff));
+			System.out.println("timer Off: " + timeOff);
+//		} catch (ParseException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		us.setStartEndTime(timeOn, timeOff, deviceName);
+	}
+
 	public class DateFormattedListCellRenderer extends DefaultListCellRenderer {
 
 		private DateFormat format;
@@ -330,9 +367,11 @@ public class DeviceMenu extends JFrame {
 		Calendar startEnd = Calendar.getInstance();
 		startEnd.set(Calendar.HOUR_OF_DAY, 23);
 		startEnd.set(Calendar.MINUTE, 59);
-		DefaultComboBoxModel<Date> startTime = new DefaultComboBoxModel<>();
+		DefaultComboBoxModel<String> startTime = new DefaultComboBoxModel<>();
 		do {
-			startTime.addElement(startCalendar.getTime());
+			SimpleDateFormat format1 = new SimpleDateFormat("HH:mm");
+			String formatted = format1.format(startCalendar.getTime());
+			startTime.addElement(formatted);
 			startCalendar.add(Calendar.MINUTE, 15);
 		} while (startCalendar.getTime().before(startEnd.getTime()));
 		return startTime;
@@ -346,12 +385,30 @@ public class DeviceMenu extends JFrame {
 		Calendar endEnd = Calendar.getInstance();
 		endEnd.set(Calendar.HOUR_OF_DAY, 23);
 		endEnd.set(Calendar.MINUTE, 59);
-		DefaultComboBoxModel<Date> endTime = new DefaultComboBoxModel<>();
+		DefaultComboBoxModel<String> endTime = new DefaultComboBoxModel<>();
 		do {
-			endTime.addElement(endCalendar.getTime());
+			SimpleDateFormat format1 = new SimpleDateFormat("HH:mm");
+			String formatted = format1.format(endCalendar.getTime());
+			endTime.addElement(formatted);
 			endCalendar.add(Calendar.MINUTE, 15);
 		} while (endCalendar.getTime().before(endEnd.getTime()));
 		return endTime;
+	}
+	
+	public class ForcedListSelectionModel extends DefaultListSelectionModel {
+
+	    public ForcedListSelectionModel () {
+	        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    }
+
+	    @Override
+	    public void clearSelection() {
+	    }
+
+	    @Override
+	    public void removeSelectionInterval(int index0, int index1) {
+	    }
+
 	}
 
 	private void createTable() {
@@ -370,6 +427,7 @@ public class DeviceMenu extends JFrame {
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
 		table.setRowHeight(35);
 		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
+		table.setSelectionModel(new ForcedListSelectionModel());;
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(186);
 		table.changeSelection(0, 0, false, false);
@@ -382,6 +440,7 @@ public class DeviceMenu extends JFrame {
 				lblNewLabel.setText(value);
 				int typeID = us.getDeviceTypeID(value);
 				System.out.println("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value));
+				us.getOnOffTimer(comboBoxTimeOn, comboBoxTimeOff, value);
 				if(us.getDeviceEnabledStatus(value) == 1) {
 					deviceEnableButton.setSelected(true);
 					deviceEnableButton.setText("On");

@@ -19,16 +19,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
+import logic_tier.User;
+
 public class NewUserMenu extends JFrame {
 
+	private User us;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_2;
 
 	/**
 	 * Create the frame.
+	 * @param _us 
 	 */
-	public NewUserMenu() {
+	public NewUserMenu(User _us) {
+		us = _us;
 		setTitle("New User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -65,7 +70,7 @@ public class NewUserMenu extends JFrame {
 		lblDevices.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				DeviceMenu dm = new DeviceMenu();
+				DeviceMenu dm = new DeviceMenu(us);
 				dm.setVisible(true);
 				dispose();
 			}
@@ -84,7 +89,7 @@ public class NewUserMenu extends JFrame {
 		lblSystemSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SystemSettings ss = new SystemSettings();
+				SystemSettings ss = new SystemSettings(us);
 				ss.setVisible(true);
 				dispose();
 			}

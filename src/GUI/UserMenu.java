@@ -19,8 +19,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
+import logic_tier.User;
+
 public class UserMenu extends JFrame {
 
+	private User us;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -28,7 +31,8 @@ public class UserMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserMenu() {
+	public UserMenu(User _us) {
+		us = _us;
 		setTitle("User Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -65,7 +69,7 @@ public class UserMenu extends JFrame {
 		lblDevices.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				DeviceMenu dm = new DeviceMenu();
+				DeviceMenu dm = new DeviceMenu(us);
 				dm.setVisible(true);
 				dispose();
 			}
@@ -84,7 +88,7 @@ public class UserMenu extends JFrame {
 		lblSystemSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SystemSettings ss = new SystemSettings();
+				SystemSettings ss = new SystemSettings(us);
 				ss.setVisible(true);
 				dispose();
 			}
@@ -104,7 +108,7 @@ public class UserMenu extends JFrame {
 		btnNewDecicw.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				NewUserMenu num = new NewUserMenu();
+				NewUserMenu num = new NewUserMenu(us);
 				num.setVisible(true);
 				dispose();
 			}

@@ -81,8 +81,8 @@ public class DeviceMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeviceMenu() {
-		us = new User();
+	public DeviceMenu(User user) {
+		us = user;
 
 		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,7 +132,7 @@ public class DeviceMenu extends JFrame {
 		lblUsers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UserMenu um = new UserMenu();
+				UserMenu um = new UserMenu(us);
 				um.setVisible(true);
 				dispose();
 			}
@@ -145,7 +145,7 @@ public class DeviceMenu extends JFrame {
 		lblSystemSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SystemSettings ss = new SystemSettings();
+				SystemSettings ss = new SystemSettings(us);
 				ss.setVisible(true);
 				dispose();
 			}

@@ -5,23 +5,36 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListSelectionModel;
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+import GUI.DeviceMenu.ForcedListSelectionModel;
+import logic_tier.User;
 
 public class UserMenu extends JFrame {
-
+	User us;
 	private JPanel contentPane;
+	private DefaultTableModel model;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JLabel lblUser = new JLabel("User 1");
 	private JTextField textField;
 	private JTextField textField_1;
 	
@@ -29,6 +42,7 @@ public class UserMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public UserMenu() {
+		us = new User();
 		setTitle("User Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -112,37 +126,6 @@ public class UserMenu extends JFrame {
 		btnNewDecicw.setBounds(6, 622, 190, 70);
 		panel_1.add(btnNewDecicw);
 		
-		JLabel lblUser = new JLabel("User 1");
-		lblUser.setForeground(Color.LIGHT_GRAY);
-		lblUser.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblUser.setBounds(6, 30, 190, 55);
-		panel_1.add(lblUser);
-		
-		JLabel lblDevice = new JLabel("User 2");
-		lblDevice.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice.setBounds(6, 90, 190, 55);
-		panel_1.add(lblDevice);
-		
-		JLabel lblDevice_1 = new JLabel("User 3");
-		lblDevice_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_1.setBounds(6, 150, 190, 55);
-		panel_1.add(lblDevice_1);
-		
-		JLabel lblDevice_4 = new JLabel("User 6");
-		lblDevice_4.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_4.setBounds(6, 325, 190, 55);
-		panel_1.add(lblDevice_4);
-		
-		JLabel lblDevice_2 = new JLabel("User 4");
-		lblDevice_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_2.setBounds(6, 205, 190, 55);
-		panel_1.add(lblDevice_2);
-		
-		JLabel lblDevice_3 = new JLabel("User 5");
-		lblDevice_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_3.setBounds(6, 265, 190, 55);
-		panel_1.add(lblDevice_3);
-		
 		JButton btnRemoveDevice = new JButton("Remove User");
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
 		contentPane.add(btnRemoveDevice);
@@ -151,10 +134,9 @@ public class UserMenu extends JFrame {
 		separator.setBounds(549, 139, 725, 12);
 		contentPane.add(separator);
 		
-		JLabel lblNewLabel = new JLabel("User 1");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblNewLabel.setBounds(865, 39, 277, 55);
-		contentPane.add(lblNewLabel);
+		lblUser.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblUser.setBounds(865, 39, 277, 55);
+		contentPane.add(lblUser);
 		
 		JLabel lblSettings = new JLabel("Information");
 		lblSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
@@ -209,5 +191,61 @@ public class UserMenu extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(601, 479, 291, 48);
 		contentPane.add(comboBox);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 10, 190, 600);
+		panel_1.add(scrollPane);
+
+		createTable();
 	}
+	
+	public class ForcedListSelectionModel extends DefaultListSelectionModel {
+
+	    public ForcedListSelectionModel () {
+	        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    }
+
+	    @Override
+	    public void clearSelection() {
+	    }
+
+	    @Override
+	    public void removeSelectionInterval(int index0, int index1) {
+	    }
+
+	}
+	
+	private void createTable() {
+		if (model != null)
+			model.setRowCount(0);
+		String[] header = { "User Name" };
+		System.out.println("Loading data");
+		String[][] data = us.Users();
+		model = new DefaultTableModel(data, header);
+		table = new JTable(model) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		table.getTableHeader().setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		table.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		table.setRowHeight(35);
+		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
+		table.setSelectionModel(new ForcedListSelectionModel());;
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(186);
+		table.setRowSelectionInterval(0, 0);
+		table.changeSelection(0, 0, false, false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int column = 0;
+				int row = table.getSelectedRow();
+				String value = table.getModel().getValueAt(row, column).toString();
+				lblUser.setText(value);
+			}
+		});
+		scrollPane.setViewportView(table);
+	}
+	
 }

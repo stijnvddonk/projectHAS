@@ -418,6 +418,7 @@ public class DeviceMenu extends JFrame {
 		table.setSelectionModel(new ForcedListSelectionModel());;
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(186);
+		table.setRowSelectionInterval(0, 0);
 		table.changeSelection(0, 0, false, false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override

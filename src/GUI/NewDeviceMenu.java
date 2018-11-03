@@ -79,7 +79,7 @@ public class NewDeviceMenu extends JFrame {
 		lblUsers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UserMenu um = new UserMenu();
+				UserMenu um = new UserMenu(us);
 				um.setVisible(true);
 				dispose();
 			}
@@ -92,7 +92,7 @@ public class NewDeviceMenu extends JFrame {
 		lblSystemSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SystemSettings ss = new SystemSettings();
+				SystemSettings ss = new SystemSettings(us);
 				ss.setVisible(true);
 				dispose();
 			}
@@ -115,7 +115,7 @@ public class NewDeviceMenu extends JFrame {
 					JOptionPane.showMessageDialog(textField_1, "Please enter a valid Device Name");
 				} else {
 					newDevice();
-					DeviceMenu dm = new DeviceMenu();
+					DeviceMenu dm = new DeviceMenu(us);
 					dm.setVisible(true);
 					dispose();
 				}
@@ -190,7 +190,7 @@ public class NewDeviceMenu extends JFrame {
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DeviceMenu dm = new DeviceMenu();
+				DeviceMenu dm = new DeviceMenu(us);
 				dm.setVisible(true);
 				dispose();
 			}

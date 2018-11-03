@@ -18,10 +18,21 @@ public class User {
 ;
 	protected QueryBuilder qb = new QueryBuilder();
 
-	protected int userID;
-	protected String name;
-	protected String email;
-	private String password;
+	protected Integer userID;
+	protected String username;
+	protected String password;
+	protected Integer role;
+	protected String token;
+	protected Integer active;
+	
+	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
+		userID = uid;
+		username = uName;
+		password = uPass;
+		role = uRole;
+		token = uToken;
+		active = uAct;
+	}
 
 	private String[][] convertArrayListToArray(ArrayList<ArrayList<String>> output) {
 		String[][] array = new String[output.size()][];

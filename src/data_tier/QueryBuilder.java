@@ -67,7 +67,6 @@ public class QueryBuilder {
 
 	// Disble Device
 	public void enableDisableDevice(int id, String deviceName) {
-
 		if (this.debug) System.out.print("QueryBuilder: disableDevice\n");
 		// Creating a query to disable a device
 			String query = "UPDATE Devices SET DeviceEnabled = "+id+" WHERE name = '" + deviceName + "'";
@@ -145,6 +144,11 @@ public class QueryBuilder {
 		String query = "SELECT * FROM Users WHERE username='" + user + "' AND password='" + peperredPass + "' LIMIT 1";
 		System.out.println(query);
 		return dbm.execute(query);
+	}
+
+	public void updateLogin(Integer userid, Timestamp currentTimeStamp) {
+		String query = "UPDATE users SET lastLogin=? WHERE userId=?";
+		dbm.updateLogin(query, userid, currentTimeStamp);
 	}
 
 }

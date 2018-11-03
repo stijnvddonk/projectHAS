@@ -89,14 +89,15 @@ public class Login {
 			// loginReturn.put("text", "Username or password is incorrect.");
 			if (this.debug) System.out.print("Incorrect username or password.\n");
 		}
-		// else if (user.equals(this.username) && pswa.authenticate(pass.toCharArray(), this.token)) {
-		else if (user.equals(this.username)) {
+		else if (user.equals(this.username) && pswa.authenticate(pass.toCharArray(), this.token)) {
+		// else if (user.equals(this.username)) {
+			if (debug) System.out.print("Last if statement\n");
 			Calendar calendar = Calendar.getInstance();
 		    java.sql.Timestamp currentTimeStamp = new java.sql.Timestamp(calendar.getTime().getTime());
 			valid = true;
 			// loginReturn.put("type", "success");
 			// loginReturn.put("text", "Successfully logged in.\n");
-//			qb.updateLogin(this.userid, currentTimeStamp);
+			qb.updateLogin(this.userid, currentTimeStamp);
 			if (this.debug) System.out.print("Correct credentials.\n");
 		}
 //

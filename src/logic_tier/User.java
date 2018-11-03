@@ -15,10 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class User {
-
-	protected DatabaseManager dbm = new DatabaseManager();
+;
 	protected QueryBuilder qb = new QueryBuilder();
-	protected Connection db;
 
 	protected int userID;
 	protected String name;

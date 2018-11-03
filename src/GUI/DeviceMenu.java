@@ -323,20 +323,8 @@ public class DeviceMenu extends JFrame {
 	}
 
 	public void setOnOffTime(JComboBox comboBoxTimeOn, JComboBox comboBoxTimeOff, String deviceName) {
-//		DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-//		DateFormat dfn = new SimpleDateFormat("HH:mm", Locale.US);
 		String timeOn = comboBoxTimeOn.getSelectedItem().toString();
 		String timeOff = comboBoxTimeOff.getSelectedItem().toString();
-//		//String
-//		try {
-//			timeOn = new SimpleDateFormat("HH:mm").format(df.parse(timeOn));
-			System.out.println("timer On: " + timeOn);
-//			timeOff = new SimpleDateFormat("HH:mm").format(df.parse(timeOff));
-			System.out.println("timer Off: " + timeOff);
-//		} catch (ParseException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 		us.setStartEndTime(timeOn, timeOff, deviceName);
 	}
 
@@ -442,12 +430,21 @@ public class DeviceMenu extends JFrame {
 				System.out.println("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value));
 				us.getOnOffTimer(comboBoxTimeOn, comboBoxTimeOff, value);
 				if(us.getDeviceEnabledStatus(value) == 1) {
+					us.enableDisableDevice(1, value);
 					deviceEnableButton.setSelected(true);
 					deviceEnableButton.setText("On");
+					deviceTimerStatus.setEnabled(true);
+					comboBoxTimeOn.setEnabled(true);
+					comboBoxTimeOff.setEnabled(true);
 				}
 				else {
+					us.enableDisableDevice(0, value);
 					deviceEnableButton.setSelected(false);
 					deviceEnableButton.setText("Off");
+					deviceTimerStatus.setSelected(false);
+					deviceTimerStatus.setEnabled(false);
+					comboBoxTimeOn.setEnabled(false);
+					comboBoxTimeOff.setEnabled(false);
 				}
 				setStuffVisible(typeID);
 			}

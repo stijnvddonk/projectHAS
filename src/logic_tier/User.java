@@ -1,14 +1,18 @@
 package logic_tier;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import data_tier.QueryBuilder;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class User {
 
@@ -112,7 +116,7 @@ public class User {
 			System.out.println(e);
 		}
 	}
-	
+
 	public Integer getDeviceTimerEnabledStatus(String deviceName) {
 		System.out.println("Device Timer Enabled Status Database Loaded");
 		Integer typeID = null;
@@ -131,7 +135,7 @@ public class User {
 		}
 		return typeID;
 	}
-	
+
 	public void enableDisableDeviceTimer(int id, String deviceName) {
 		try {
 			qb.enableDisableTimerDevice(id, deviceName);
@@ -169,6 +173,58 @@ public class User {
 		try {
 			qb.deleteDevice(deviceName);
 			JOptionPane.showMessageDialog(null, "Device has been Deleted!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public String getTopIP() {
+		System.out.println("Device Timer Enabled Status Database Loaded");
+		String lastIP = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.getTopIP();
+			while (rs.next()) {
+				System.out.println(rs.getString("IP"));
+				lastIP = rs.getString("IP");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return lastIP;
+	}
+	
+	public Integer getTypeID(String type) {
+		Integer typeID = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.getDeviceTypesID(type);
+			while (rs.next()) {
+				System.out.println(rs.getInt("id"));
+				typeID = rs.getInt("id");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return typeID;
+	}
+
+	public void addNewDevice(String deviceName, String IPAdres, int typeID) {
+		String randomChars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder randomStr = new StringBuilder();
+		String name = "0050";
+		Random rnd = new Random();
+		while (randomStr.length() < 8) {
+			int index = (int) (rnd.nextFloat() * randomChars.length());
+			randomStr.append(randomChars.charAt(index));
+			}
+			String MACAdres = name + randomStr.toString();
+			MACAdres = MACAdres.replaceAll("..", "$0:").substring(0, 17);
+		try {
+			qb.addNewDevice(deviceName, IPAdres, typeID, MACAdres);
+			JOptionPane.showMessageDialog(null, "Device has been Added!");
 		} catch (Exception e) {
 			System.out.println(e);
 		}

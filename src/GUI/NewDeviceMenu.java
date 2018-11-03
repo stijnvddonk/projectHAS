@@ -115,9 +115,9 @@ public class NewDeviceMenu extends JFrame {
 					JOptionPane.showMessageDialog(textField_1, "Please enter a valid Device Name");
 				} else {
 					newDevice();
-//					MainProjectManager mpm = new MainProjectManager(bepm);
-//					mpm.setVisible(true);
-//					dispose();
+					DeviceMenu dm = new DeviceMenu();
+					dm.setVisible(true);
+					dispose();
 				}
 			}
 		});
@@ -182,16 +182,31 @@ public class NewDeviceMenu extends JFrame {
 		separator_6.setBounds(743, 196, 363, 12);
 		contentPane.add(separator_6);
 		
-		JLabel lblNewLabel_1 = new JLabel("00:18:AE:48:TU:P4");
+		JLabel lblNewLabel_1 = new JLabel("WORDT GEGENEREERD DOOR CODE");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(601, 366, 602, 48);
 		contentPane.add(lblNewLabel_1);
+		
+		JButton btnReturn = new JButton("Return");
+		btnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeviceMenu dm = new DeviceMenu();
+				dm.setVisible(true);
+				dispose();
+			}
+		});
+		btnReturn.setBounds(601, 622, 190, 70);
+		contentPane.add(btnReturn);
 	}
 	
 	public void newDevice() {
-//		String customerName = new String(jc.getSelectedItem().toString());
-//		String projectName = textField_1.getText();
-//		bepm.newProject(customerName, projectName);
-//		bepm.createFileStructure(customerName, projectName);
+		String deviceType = combobox.getSelectedItem().toString();
+		int typeID = us.getTypeID(deviceType);
+		System.out.println(deviceType);
+		String deviceName = textField_1.getText();
+		String lastIP= us.getTopIP();
+		String newIP = "192.168.10." + (Integer.parseInt(lastIP.substring(11,lastIP.length()))+1);
+	    System.out.println(newIP);
+	    us.addNewDevice(deviceName, newIP, typeID);
 	}
 }

@@ -6,22 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
-import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
@@ -35,7 +26,6 @@ public class loginScreen {
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JLabel lblSubmit;
-	private Login lgn = new Login();
 
 	/**
 	 * Launch the application.
@@ -117,10 +107,7 @@ public class loginScreen {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
-					DeviceMenu dm = new DeviceMenu();
-					dm.setVisible(true);
-					frame.dispose();
+					new Login().login(txtUsername.getText(), new String(txtPassword.getPassword()));
 				}
 			}
 		});
@@ -179,10 +166,7 @@ public class loginScreen {
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lgn.login(txtUsername.getText(), new String(txtPassword.getPassword()));
-//				DeviceMenu dm = new DeviceMenu();
-//				dm.setVisible(true);
-//				frame.dispose();
+				new Login().login(txtUsername.getText(), new String(txtPassword.getPassword()));
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);

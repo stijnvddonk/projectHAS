@@ -113,7 +113,7 @@ public class DatabaseManager {
 	 * Output: None
 	 */
 	public void updateLogin(String query, Integer userid, Timestamp currentTimeStamp) {
-		if (debug) System.out.print("Query: " + query + "\nUserId: " + userid + "\nTimestamp: " + currentTimeStamp + "\n");
+		if (debug) System.out.print("- Query: " + query + "\n- - UserId: " + userid + "\n- - Timestamp: " + currentTimeStamp + "\n");
 		try {
 			PreparedStatement ppstm = db.prepareStatement(query);
 			ppstm.setTimestamp(1, currentTimeStamp);

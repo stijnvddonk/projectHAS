@@ -27,6 +27,7 @@ public class Login {
 	protected Integer role;
 	protected String token;
 	protected Integer active = 0;
+	protected User user = new User();
 
 	public Login() {
 		if (debug)
@@ -60,12 +61,15 @@ public class Login {
 
 		if (validateUser(user, saltedPass, pass)) {
 			// Call Next Class
+			// Create userObject
+			this.user.setUser(userid, username, password, role, token, active);
+			
 //			if (this.debug) logging.log("Call next class\n");
 			if (this.role.equals(1)) {
-				DeviceMenu dm = new DeviceMenu();
+				DeviceMenu dm = new DeviceMenu(this.user);
 				dm.setVisible(true);
 			} else if (this.role.equals(2) || this.role.equals(3)) {
-				DeviceMenu dm = new DeviceMenu();
+				DeviceMenu dm = new DeviceMenu(this.user);
 				dm.setVisible(true);
 			} else {
 				// We will do nothing here

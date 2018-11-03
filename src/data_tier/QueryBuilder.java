@@ -146,4 +146,9 @@ public class QueryBuilder {
 		return dbm.execute(query);
 	}
 
+	public void updateLogin(Integer userid, Timestamp currentTimeStamp) {
+		String query = "UPDATE users SET lastLogin=? WHERE userId=?";
+		dbm.updateLogin(query, userid, currentTimeStamp);
+	}
+
 }

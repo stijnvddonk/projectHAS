@@ -62,6 +62,26 @@ public class User {
 		}
 		return convertArrayListToArray(output);
 	}
+	
+	public String[][] Users() {
+		System.out.println("Starting data retrieval");
+		ResultSet rs = null;
+		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		try {
+			System.out.println("Start Try");
+			rs = qb.Users();
+			while (rs.next()) {
+				ArrayList<String> row = new ArrayList<String>();
+				row.add(rs.getString("UserName"));
+				output.add(row);
+			}
+			System.out.println(output.toString());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return convertArrayListToArray(output);
+	}
+
 
 	public Integer getDeviceTypeID(String deviceName) {
 		System.out.println("Device Type ID Database Loaded");

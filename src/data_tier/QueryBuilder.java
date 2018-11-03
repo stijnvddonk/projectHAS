@@ -39,6 +39,16 @@ public class QueryBuilder {
 		if (this.debug) System.out.print("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
+	
+	// Get a list of Users
+	public ResultSet Users() {
+		if (this.debug) System.out.print("QueryBuilder: Devices\n");
+		// @Stijn What do you want to do with this??
+		String query = "SELECT UserName FROM Users";
+		if (this.debug) System.out.print(query);
+		return dbm.execute(query);
+	}
+
 
 	// Get last IP device
 	public ResultSet getTopIP() {

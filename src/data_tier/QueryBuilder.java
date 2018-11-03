@@ -1,5 +1,6 @@
 package data_tier;
 
+import java.util.Random;
 import java.sql.*;
 
 public class QueryBuilder {
@@ -39,11 +40,19 @@ public class QueryBuilder {
 		return dbm.execute(query);
 	}
 
+	// Get last IP device
+	public ResultSet getTopIP() {
+	String query = "SELECT IP FROM Devices ORDER BY IP DESC LIMIT 1";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+
 	// Create new Device
-	public Integer insertNewDevice(String deviceName, String MACAdres, String IPAdres, String versionNumber, int typeID) {
+	public Integer addNewDevice(String deviceName, String IPAdres, int typeID, String MACAdres) {
 		if (this.debug) System.out.print("QueryBuilder: insertNewDevice\n");
 		// Creating a query to creat a new device
-		String query = "INSERT INTO Devices VALUES (4,'" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','"+versionNumber+"',"+typeID+",1,0,null,null)";
+		String query = "INSERT INTO Devices (`name`, `MAC`, `IP`, `versionNumber`, `typeID`, `DeviceEnabled`, `timerStatus`, `timerOn`, `timerOff`) VALUES ('" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','v1.1.1',"+typeID+",1,0,null,null)";
 		if (this.debug) System.out.print(query);
 		return dbm.__insert(query);
 	}
@@ -67,6 +76,39 @@ public class QueryBuilder {
 		dbm.update(query);
 	}
 
+	// Get startEndTime
+	public ResultSet getStartEndTime(String deviceName) {
+	String query = "SELECT timerOn, timerOff FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+	// Set startEndTime
+	public void setStartEndTime(String timerOn, String timerOff, String deviceName) {
+		// Creating a query to disable a device
+			String query = "UPDATE Devices SET timerOn = '"+ timerOn +"', timerOff = '"+ timerOff +"' WHERE name = '" + deviceName + "'";
+			System.out.print(query);
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+
+	// Get DevicesTimerStatus device
+	public ResultSet DevicesTimerStatus(String deviceName) {
+	String query = "SELECT timerStatus FROM Devices WHERE name ='"+deviceName+"'";
+	System.out.print(query);
+	if (this.debug) System.out.print(query);
+	return dbm.execute(query);
+}
+
+	// Disble enableDisableTimerDevice
+	public void enableDisableTimerDevice(int id, String deviceName) {
+		// Creating a query to disable a device
+			String query = "UPDATE Devices SET timerStatus = "+id+" WHERE name = '" + deviceName + "'";
+			System.out.print(query);
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+
 	// Remove Device
 	public void deleteDevice(String deviceName) {
 		if (this.debug) System.out.print("QueryBuilder: deleteDevice\n");
@@ -79,7 +121,13 @@ public class QueryBuilder {
 
 	// List Device Types
 	public ResultSet getDeviceTypes() {
-		String query = "Select Omschrijving From DeviceTypes";
+		String query = "SELECT Omschrijving FROM DeviceTypes";
+		System.out.println(query);
+		return dbm.execute(query);
+	}
+	
+	public ResultSet getDeviceTypesID(String omschrijving) {
+		String query = "SELECT id FROM DeviceTypes WHERE Omschrijving = '" + omschrijving + "'";
 		System.out.println(query);
 		return dbm.execute(query);
 	}

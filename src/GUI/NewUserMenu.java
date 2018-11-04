@@ -20,13 +20,15 @@ import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
 import logic_tier.User;
+import javax.swing.SwingConstants;
 
 public class NewUserMenu extends JFrame {
 
 	private User us;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_2;
+	private JTextField txtUsername;
+	private JTextField txtFullName;
+	private JTextField txtEmailaddress;
 
 	/**
 	 * Create the frame.
@@ -98,109 +100,105 @@ public class NewUserMenu extends JFrame {
 		lblSystemSettings.setBounds(6, 327, 300, 55);
 		panel.add(lblSystemSettings);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(350, 0, 200, 720);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblUser = new JLabel("User 1");
-		lblUser.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblUser.setBounds(6, 30, 190, 55);
-		panel_1.add(lblUser);
-		
-		JLabel lblDevice = new JLabel("User 2");
-		lblDevice.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice.setBounds(6, 90, 190, 55);
-		panel_1.add(lblDevice);
-		
-		JLabel lblDevice_1 = new JLabel("User 3");
-		lblDevice_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_1.setBounds(6, 150, 190, 55);
-		panel_1.add(lblDevice_1);
-		
-		JLabel lblDevice_4 = new JLabel("User 6");
-		lblDevice_4.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_4.setBounds(6, 325, 190, 55);
-		panel_1.add(lblDevice_4);
-		
-		JLabel lblDevice_2 = new JLabel("User 4");
-		lblDevice_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_2.setBounds(6, 205, 190, 55);
-		panel_1.add(lblDevice_2);
-		
-		JLabel lblDevice_3 = new JLabel("User 5");
-		lblDevice_3.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblDevice_3.setBounds(6, 265, 190, 55);
-		panel_1.add(lblDevice_3);
-		
-		JButton btnRemoveDevice = new JButton("Create User");
-		btnRemoveDevice.setBounds(1084, 622, 190, 70);
-		contentPane.add(btnRemoveDevice);
-		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(549, 139, 725, 12);
+		separator.setBounds(457, 139, 725, 12);
 		contentPane.add(separator);
 		
-		JLabel lblNewLabel = new JLabel("New User");
+		JLabel lblNewLabel = new JLabel("New user ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblNewLabel.setBounds(865, 39, 277, 55);
+		lblNewLabel.setBounds(651, 39, 399, 55);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblSettings = new JLabel("Information");
+		JLabel lblSettings = new JLabel("User details");
+		lblSettings.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblSettings.setBounds(850, 152, 209, 55);
+		lblSettings.setBounds(651, 152, 363, 55);
 		contentPane.add(lblSettings);
 		
-		JLabel lblTimer = new JLabel("Name");
+		JLabel lblTimer = new JLabel("Full name");
 		lblTimer.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblTimer.setBounds(601, 209, 277, 55);
+		lblTimer.setBounds(509, 209, 277, 55);
 		contentPane.add(lblTimer);
 		
-		JLabel lblTimerOn = new JLabel("E-mail");
+		JLabel lblTimerOn = new JLabel("Username");
 		lblTimerOn.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblTimerOn.setBounds(601, 324, 277, 55);
+		lblTimerOn.setBounds(509, 324, 277, 55);
 		contentPane.add(lblTimerOn);
 		
-		JLabel lblTimerOff = new JLabel("Rights");
+		JLabel lblTimerOff = new JLabel("User role");
 		lblTimerOff.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblTimerOff.setBounds(601, 425, 277, 55);
+		lblTimerOff.setBounds(509, 534, 277, 55);
 		contentPane.add(lblTimerOff);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(743, 94, 363, 12);
+		separator_1.setBounds(651, 94, 363, 12);
 		contentPane.add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(601, 251, 310, 12);
+		separator_2.setBounds(509, 251, 310, 12);
 		contentPane.add(separator_2);
 		
 		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(601, 367, 310, 12);
+		separator_3.setBounds(509, 367, 310, 12);
 		contentPane.add(separator_3);
 		
 		JSeparator separator_4 = new JSeparator();
-		separator_4.setBounds(601, 468, 310, 12);
+		separator_4.setBounds(509, 577, 310, 12);
 		contentPane.add(separator_4);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(601, 377, 602, 48);
-		contentPane.add(textField);
+		txtUsername = new JTextField();
+		txtUsername.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(509, 377, 602, 48);
+		contentPane.add(txtUsername);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(601, 264, 602, 48);
-		contentPane.add(textField_2);
+		txtFullName = new JTextField();
+		txtFullName.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtFullName.setColumns(10);
+		txtFullName.setBounds(509, 264, 602, 48);
+		contentPane.add(txtFullName);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User"}));
-		comboBox.setBounds(601, 479, 291, 48);
-		contentPane.add(comboBox);
+		JComboBox cbUserRole = new JComboBox();
+		cbUserRole.setFont(new Font("Calibri", Font.PLAIN, 18));
+		cbUserRole.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User"}));
+		cbUserRole.setBounds(509, 588, 291, 48);
+		contentPane.add(cbUserRole);
 		
 		JSeparator separator_6 = new JSeparator();
-		separator_6.setBounds(743, 195, 363, 12);
+		separator_6.setBounds(651, 195, 363, 12);
 		contentPane.add(separator_6);
+		
+		txtEmailaddress = new JTextField();
+		txtEmailaddress.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtEmailaddress.setColumns(10);
+		txtEmailaddress.setBounds(509, 489, 602, 48);
+		contentPane.add(txtEmailaddress);
+		
+		JSeparator separator_7 = new JSeparator();
+		separator_7.setBounds(509, 479, 310, 12);
+		contentPane.add(separator_7);
+		
+		JLabel lblEmailaddress = new JLabel("Emailaddress");
+		lblEmailaddress.setFont(new Font("Dialog", Font.PLAIN, 35));
+		lblEmailaddress.setBounds(509, 436, 277, 55);
+		contentPane.add(lblEmailaddress);
+		
+		JButton btnRemoveDevice = new JButton("Save & Close");
+		btnRemoveDevice.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.print("Save & Close mannn!");
+				String ufn = txtFullName.getText();
+				String uun = txtUsername.getText();
+				String uea = txtEmailaddress.getText();
+				String uro = String.valueOf(cbUserRole.getSelectedItem());
+				System.out.print("\nFull Name: " + ufn + "\nUsername: " + uun + "\nEmailaddress: " + uea + "\nRole: " + uro + "\n");
+				us.createNewUser(ufn, uun, uea, uro);
+			}
+		});
+		btnRemoveDevice.setFont(new Font("Calibri", Font.BOLD, 18));
+		btnRemoveDevice.setBounds(992, 622, 190, 70);
+		contentPane.add(btnRemoveDevice);
 	}
 }

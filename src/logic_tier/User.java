@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import data_tier.QueryBuilder;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.swing.JComboBox;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class User {
 ;
@@ -20,10 +22,15 @@ public class User {
 
 	protected Integer userID;
 	protected String username;
+	protected String emailaddress;
+	protected String fullname;
 	protected String password;
 	protected Integer role;
 	protected String token;
+	protected Timestamp lastLogin;
 	protected Integer active;
+	protected ArrayList<ArrayList<String>> userNameList = null;
+	protected ArrayList<User> userObject;
 	
 	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
 		userID = uid;
@@ -32,6 +39,35 @@ public class User {
 		role = uRole;
 		token = uToken;
 		active = uAct;
+	}
+	
+	public void setAdditionalInfo(String email, String name, Timestamp llog) {
+		emailaddress = email;
+		fullname = name;
+		lastLogin = llog;
+		
+	}
+
+	/* 
+	 * Method: createNewUser
+	 * Return: Integer, success (1) / Failed (0)
+	 */
+	public Integer createNewUser(String ufn, String uun, String uea, String uro) {
+		Integer result = 0; // Standard it will say it failed.
+
+		// First check if the user exists: (Check the userNameList)
+		String[][] usrObj = convertArrayListToArray(userNameList);
+		
+		
+		
+		for (int i = 0; i < usrObj.length; i++) {
+			if (!Arrays.asList(usrObj[i]).contains(uun)) {
+				System.out.print("\nThe user: " + uun + " is notfound found!\n");
+			}
+		}
+		
+
+		return result;
 	}
 
 	private String[][] convertArrayListToArray(ArrayList<ArrayList<String>> output) {
@@ -60,10 +96,11 @@ public class User {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
 		return convertArrayListToArray(output);
 	}
 	
-	public String[][] Users() {
+	/*public String[][] Users() {
 		System.out.println("Starting data retrieval");
 		ResultSet rs = null;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
@@ -80,8 +117,44 @@ public class User {
 			System.out.println(e);
 		}
 		return convertArrayListToArray(output);
-	}
+	}*/
 
+	public String[][] Users() {
+		System.out.println("/n/n-----------------/nStarting userdata retrieval v2/n");
+		
+		if (userNameList == null) {
+		
+			ResultSet rs = null;
+			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+			try {
+				System.out.println("Start Try");
+				rs = qb.Users();
+				while (rs.next()) {
+					ArrayList<String> row = new ArrayList<String>();
+					Integer _uid = rs.getInt("userID");
+					String _una = rs.getString("UserName");
+					String _ups = rs.getString("Password");
+					Integer _uro = rs.getInt("Role");
+					String _uto = rs.getString("Token");
+					Integer _uac = rs.getInt("Active");
+					String _uea = rs.getString("Email");
+					String _ufn = rs.getString("Name");
+					Timestamp _ull = rs.getTimestamp("lastLogin");
+					row.add(_una);
+					User tempUsrObj = new User();
+					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
+					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
+					userObject.add(tempUsrObj);
+					output.add(row);
+				}
+				System.out.println(output.toString());
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			userNameList = output;
+		}		
+		return convertArrayListToArray(userNameList);
+	}
 
 	public Integer getDeviceTypeID(String deviceName) {
 		System.out.println("Device Type ID Database Loaded");

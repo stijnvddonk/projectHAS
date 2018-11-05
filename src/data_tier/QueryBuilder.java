@@ -44,7 +44,7 @@ public class QueryBuilder {
 	public ResultSet Users() {
 		if (this.debug) System.out.print("QueryBuilder: Devices\n");
 		// @Stijn What do you want to do with this??
-		String query = "SELECT UserName FROM Users";
+		String query = "SELECT * FROM Users";
 		if (this.debug) System.out.print(query);
 		return dbm.execute(query);
 	}

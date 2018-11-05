@@ -168,4 +168,13 @@ public class QueryBuilder {
 		dbm.updateLogin(query, userid, currentTimeStamp);
 	}
 
+	public Integer insertUser(String fullname, String username, String pass, String email, Integer role, String token) {		
+		System.out.print("QueryBuilder: insertUser\n");
+		System.out.print("Values:\nFullname: " + fullname + "\n- username: " + username + "\n- password: " + pass + "\n- email: " + email + "\n- Role: " + role + "\n- token: " + token + "\n");
+//		String query = "INSERT INTO users (userId, role, username, password, email, name, address, city, zipcode, created, active, lastLogin, token) VALUES (NULL, '1', '" + username + "', '" + password + "', '" + email + "', '" + name + "', '" + address + "', '" + city + "', '" + zipcode + "', CURRENT_TIMESTAMP, '1', '0000-00-00 00:00:00.000000', '" + token + "');";
+//		System.out.print(query + "\n");
+//		return dbm.__insert(query);
+		return 1;
+	}
+
 }

@@ -1,9 +1,11 @@
 package logic_tier;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import data_tier.QueryBuilder;
+import data_tier.passwordAuthentication;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +24,7 @@ import java.sql.Timestamp;
 public class User {
 ;
 	protected QueryBuilder qb = new QueryBuilder();
+	private passwordAuthentication pswa;
 
 	protected Integer userID;
 	protected String username;
@@ -56,28 +59,34 @@ public class User {
 	 * Method: createNewUser
 	 * Return: Integer, success (1) / Failed (0)
 	 */
-	public Integer createNewUser(String ufn, String uun, String uea, String uro) {
-		Integer result = 0; // Standard it will say it failed.
+	public void createNewUser(String ufn, String uun, String uea, String uro) {
+		Integer result = 1; // Standard it will say it successfull.
 
 		Predicate<User> pun = e -> e.username.contains(uun);
-		Predicate<User> pea = e -> e.username.contains(uea);
+		Predicate<User> pea = e -> e.emailaddress.contains(uea);
 		System.out.print("uun: " + uun + "\n");
 		
 		if (userObject.stream().allMatch(pun))
 		{
 			System.out.print("Username "+ uun + " found\n");
-			result = 1;
+			result = 0;
 		} 
 		
 		if (userObject.stream().allMatch(pea))
 		{
 			System.out.print("Emailaddress "+ uea + " found\n");
-			result = 1;
-		} 
+			result = 0;
+		}
 		
-		
-
-		return result;
+		if (result == 1) {
+			System.out.print(pswa.getPeperString(25));
+			String pass = pswa.getPeperString(25);
+			Integer role = 1;
+			String token = pswa.hash(pass.toCharArray());
+			qb.insertUser(ufn, uun, pass, uea, role, token);
+		} else {
+			System.out.print("Error");
+		}
 	}
 
 	private String[][] convertArrayListToArray(ArrayList<ArrayList<String>> output) {
@@ -109,25 +118,6 @@ public class User {
 		
 		return convertArrayListToArray(output);
 	}
-	
-	/*public String[][] Users() {
-		System.out.println("Starting data retrieval");
-		ResultSet rs = null;
-		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		try {
-			System.out.println("Start Try");
-			rs = qb.Users();
-			while (rs.next()) {
-				ArrayList<String> row = new ArrayList<String>();
-				row.add(rs.getString("UserName"));
-				output.add(row);
-			}
-			System.out.println(output.toString());
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return convertArrayListToArray(output);
-	}*/
 
 	public String[][] Users() {
 		System.out.println("/n/n-----------------/nStarting userdata retrieval v2/n");

@@ -241,7 +241,7 @@ public class User {
 	}
 	public void addNewUser(String name, String email, String rights)
 	{
-		int userID= GetUserId()+1;
+		int userID= GetLatestUserId()+1;
 		ResultSet rs = null;
 		try {
 			rs = qb.checkemail(email);
@@ -259,7 +259,7 @@ public class User {
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 	}
-	public Integer GetUserId() {
+	public Integer GetLatestUserId() {
 		Integer userId = null;
 		ResultSet rs = null;
 		try {

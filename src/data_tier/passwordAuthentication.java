@@ -114,20 +114,20 @@ public final class passwordAuthentication
   
 
   /**
-   * Generate a salt for extra security.
+   * Generate a peper for extra security.
    * 
    * @return a secure authentication token to be stored for later authentication 
    */
   public String getPeperString(int length) 
   {
-      String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-      StringBuilder salt = new StringBuilder();
+      String PEPERCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+      StringBuilder peper = new StringBuilder();
       Random rnd = new Random();
-      while (salt.length() < length) { // length of the random string.
-          int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-          salt.append(SALTCHARS.charAt(index));
+      while (peper.length() < length) { // length of the random string.
+          int index = (int) (rnd.nextFloat() * PEPERCHARS.length());
+          peper.append(PEPERCHARS.charAt(index));
       }
-      String saltStr = salt.toString();
-      return saltStr;
+      String peperStr = peper.toString();
+      return peperStr;
   }
 }

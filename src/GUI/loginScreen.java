@@ -108,6 +108,7 @@ public class loginScreen {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					new Login().login(txtUsername.getText(), new String(txtPassword.getPassword()));
+					frame.dispose();
 				}
 			}
 		});
@@ -167,6 +168,7 @@ public class loginScreen {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new Login().login(txtUsername.getText(), new String(txtPassword.getPassword()));
+				frame.dispose();
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);

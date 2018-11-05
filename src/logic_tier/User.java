@@ -238,5 +238,23 @@ public class User {
 			System.out.println(e);
 		}
 	}
+	public void addNewUser(String name, String email, String rights)
+	{
+		ResultSet rs = null;
+		try {
+			rs = qb.checkemail(email);
+			if (rs.getFetchSize()== 0)
+			{
+				//add user
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "This email adress already exists!");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+	}
 
 }

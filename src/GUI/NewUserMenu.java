@@ -135,9 +135,17 @@ public class NewUserMenu extends JFrame {
 		lblDevice_3.setBounds(6, 265, 190, 55);
 		panel_1.add(lblDevice_3);
 		
-		JButton btnRemoveDevice = new JButton("Create User");
-		btnRemoveDevice.setBounds(1084, 622, 190, 70);
-		contentPane.add(btnRemoveDevice);
+		JButton createUser = new JButton("Create User");
+		createUser.setBounds(1084, 622, 190, 70);
+		contentPane.add(createUser);
+		createUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			us.addNewUser(textField.getText(), textField_2.getText(), comboBox1.getSelectedItem().toString() );
+			}
+		});
+	    
+		
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(549, 139, 725, 12);
@@ -194,10 +202,11 @@ public class NewUserMenu extends JFrame {
 		textField_2.setBounds(601, 264, 602, 48);
 		contentPane.add(textField_2);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User"}));
-		comboBox.setBounds(601, 479, 291, 48);
-		contentPane.add(comboBox);
+		JComboBox comboBox1 = new JComboBox();
+		comboBox1.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User"}));
+		comboBox1.setBounds(601, 479, 291, 48);
+		
+		contentPane.add(comboBox1);
 		
 		JSeparator separator_6 = new JSeparator();
 		separator_6.setBounds(743, 195, 363, 12);

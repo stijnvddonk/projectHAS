@@ -157,5 +157,46 @@ public class QueryBuilder {
 		String query = "UPDATE users SET lastLogin=? WHERE userId=?";
 		dbm.updateLogin(query, userid, currentTimeStamp);
 	}
+	public Integer insertNewUser(int userID, String name, String email, String password) {
+		// creating a new user
+		String query = "INSERT INTO Users VALUES ('" +userID+"','"+name+ "','"+email+"','"+password+")";
+		if (this.debug) System.out.print(query);
+		return dbm.__insert(query);
+	}
+	
+	public Integer editUserEmail(int userID, String email) {
+		// Edit user email
+		String query = "UPDATE Users SET email = "+email+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.__insert(query);
+	}
+	public Integer editUserPassword(int userID, String password) {
+		// Edit user password
+		String query = "UPDATE Users SET password = "+password+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.__insert(query);
+	}
+	
+	public Integer editUserName(int userID, String name) {
+		// Edit user name
+		String query = "UPDATE Users SET name = "+name+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.__insert(query);
+	}
+	
+	public Integer deleteUser(int userID) {
+		// Edit user name
+		String query = "DELETE FROM Users WHERE userID='" + userID + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.__insert(query);
+	}
+	
+	public ResultSet checkemail(String email) {
+		// Edit user name
+		String query = "select FROM Users WHERE email='" + email + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.execute(query);
+	}
+
 
 }

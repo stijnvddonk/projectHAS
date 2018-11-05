@@ -240,12 +240,14 @@ public class User {
 	}
 	public void addNewUser(String name, String email, String rights)
 	{
+		int userID= GetUserId()+1;
 		ResultSet rs = null;
 		try {
 			rs = qb.checkemail(email);
 			if (rs.getFetchSize()== 0)
 			{
 				//add user
+				
 			}
 			else
 			{
@@ -255,6 +257,21 @@ public class User {
 			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
+	}
+	public Integer GetUserId() {
+		Integer userId = null;
+		ResultSet rs = null;
+		try {
+			rs = qb.getUserID();
+			while (rs.next()) {
+				System.out.println(rs.getInt("id"));
+				userId = rs.getInt("id");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "ERROR");
+		}
+		return userId;
 	}
 
 }

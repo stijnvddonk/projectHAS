@@ -197,6 +197,11 @@ public class QueryBuilder {
 		if (this.debug) System.out.print(query);
 		return dbm.execute(query);
 	}
-
+	public ResultSet getUserID() {
+		if (debug) System.out.print("QueryBuilder: getDeviceTypesID\n");
+		String query = "SELECT id FROM Users";
+		System.out.print("- Query: " + query + "\n");
+		return dbm.execute(query);
+	}
 
 }

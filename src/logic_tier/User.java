@@ -62,7 +62,7 @@ public class User {
 		
 		for (int i = 0; i < usrObj.length; i++) {
 			if (!Arrays.asList(usrObj[i]).contains(uun)) {
-				System.out.print("\nThe user: " + uun + " is notfound found!\n");
+				System.out.print("\nThe user: " + uun + " is not found!\n");
 			}
 		}
 		
@@ -131,20 +131,20 @@ public class User {
 				rs = qb.Users();
 				while (rs.next()) {
 					ArrayList<String> row = new ArrayList<String>();
-					Integer _uid = rs.getInt("userID");
+//					Integer _uid = rs.getInt("userID");
 					String _una = rs.getString("UserName");
-					String _ups = rs.getString("Password");
-					Integer _uro = rs.getInt("Role");
-					String _uto = rs.getString("Token");
-					Integer _uac = rs.getInt("Active");
-					String _uea = rs.getString("Email");
-					String _ufn = rs.getString("Name");
-					Timestamp _ull = rs.getTimestamp("lastLogin");
+//					String _ups = rs.getString("Password");
+//					Integer _uro = rs.getInt("Role");
+//					String _uto = rs.getString("Token");
+//					Integer _uac = rs.getInt("Active");
+//					String _uea = rs.getString("Email");
+//					String _ufn = rs.getString("Name");
+//					Timestamp _ull = rs.getTimestamp("lastLogin");
 					row.add(_una);
-					User tempUsrObj = new User();
-					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
-					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
-					userObject.add(tempUsrObj);
+//					User tempUsrObj = new User();
+//					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
+//					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
+//					userObject.add(tempUsrObj);
 					output.add(row);
 				}
 				System.out.println(output.toString());

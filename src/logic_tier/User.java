@@ -24,6 +24,7 @@ public class User {
 	protected Integer role;
 	protected String token;
 	protected Integer active;
+	protected String email;
 	
 	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
 		userID = uid;

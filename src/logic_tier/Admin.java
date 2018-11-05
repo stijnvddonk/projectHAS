@@ -9,8 +9,9 @@ import java.sql.PreparedStatement;
 
 public class Admin extends User{
 
-  public Map<String, String> deviceData = new HashMap<String, String>();
-
+	  public Map<String, String> deviceData = new HashMap<String, String>();
+	  public Map<String, String> userData = new HashMap<String, String>();
+	  User us;
   // add device
 //  public void newDevice(String deviceName, String deviceType) {
 //		System.out.println("new Device Method Called");
@@ -48,6 +49,25 @@ public class Admin extends User{
     System.out.println(e);
   }
 }
+  
+  public void fillUserList()
+  {
+	  ResultSet rs = null;
+		rs = qb.getAllUsers();
+		System.out.println("Project Query: " + query + "\n");
+
+		try {
+			for  (rs.next();) {
+				us.username = rs.getString("name");
+				us.email= rs.getString("email");
+				us.role = rs.getInt("role");
+				userData.put("email adress: ", us.email);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	  
+  }
 
 // public void deleteDevice(String deviceName) {
 // try {

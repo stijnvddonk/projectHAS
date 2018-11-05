@@ -204,4 +204,11 @@ public class QueryBuilder {
 		return dbm.execute(query);
 	}
 
+	public ResultSet getAllUsers() {
+		if (this.debug) System.out.print("QueryBuilder: Users\n");
+		
+		String query = "SELECT * FROM Users";
+		if (this.debug) System.out.print("- Query: " + query + "\n");
+		return dbm.execute(query);
+	}
 }

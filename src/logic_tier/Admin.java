@@ -50,7 +50,7 @@ public class Admin extends User{
   }
 }
   
-  public void fillUserList()
+  public void showUserList()
   {
 	  ResultSet rs = null;
 		rs = qb.getAllUsers();

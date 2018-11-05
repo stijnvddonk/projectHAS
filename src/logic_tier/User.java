@@ -1,13 +1,18 @@
 package logic_tier;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import data_tier.QueryBuilder;
+import data_tier.passwordAuthentication;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -19,6 +24,7 @@ import java.sql.Timestamp;
 public class User {
 ;
 	protected QueryBuilder qb = new QueryBuilder();
+	private passwordAuthentication pswa;
 
 	protected Integer userID;
 	protected String username;
@@ -30,7 +36,7 @@ public class User {
 	protected Timestamp lastLogin;
 	protected Integer active;
 	protected ArrayList<ArrayList<String>> userNameList = null;
-	protected ArrayList<User> userObject;
+	protected List<User> userObject = new ArrayList<>();
 	
 	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
 		userID = uid;
@@ -47,27 +53,40 @@ public class User {
 		lastLogin = llog;
 		
 	}
+	
 
 	/* 
 	 * Method: createNewUser
 	 * Return: Integer, success (1) / Failed (0)
 	 */
-	public Integer createNewUser(String ufn, String uun, String uea, String uro) {
-		Integer result = 0; // Standard it will say it failed.
+	public void createNewUser(String ufn, String uun, String uea, String uro) {
+		Integer result = 1; // Standard it will say it successfull.
 
-		// First check if the user exists: (Check the userNameList)
-		String[][] usrObj = convertArrayListToArray(userNameList);
+		Predicate<User> pun = e -> e.username.contains(uun);
+		Predicate<User> pea = e -> e.emailaddress.contains(uea);
+		System.out.print("uun: " + uun + "\n");
 		
+		if (userObject.stream().allMatch(pun))
+		{
+			System.out.print("Username "+ uun + " found\n");
+			result = 0;
+		} 
 		
-		
-		for (int i = 0; i < usrObj.length; i++) {
-			if (!Arrays.asList(usrObj[i]).contains(uun)) {
-				System.out.print("\nThe user: " + uun + " is not found!\n");
-			}
+		if (userObject.stream().allMatch(pea))
+		{
+			System.out.print("Emailaddress "+ uea + " found\n");
+			result = 0;
 		}
 		
-
-		return result;
+		if (result == 1) {
+			System.out.print(pswa.getPeperString(25));
+			String pass = pswa.getPeperString(25);
+			Integer role = 1;
+			String token = pswa.hash(pass.toCharArray());
+			qb.insertUser(ufn, uun, pass, uea, role, token);
+		} else {
+			System.out.print("Error");
+		}
 	}
 
 	private String[][] convertArrayListToArray(ArrayList<ArrayList<String>> output) {
@@ -99,25 +118,6 @@ public class User {
 		
 		return convertArrayListToArray(output);
 	}
-	
-	/*public String[][] Users() {
-		System.out.println("Starting data retrieval");
-		ResultSet rs = null;
-		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		try {
-			System.out.println("Start Try");
-			rs = qb.Users();
-			while (rs.next()) {
-				ArrayList<String> row = new ArrayList<String>();
-				row.add(rs.getString("UserName"));
-				output.add(row);
-			}
-			System.out.println(output.toString());
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return convertArrayListToArray(output);
-	}*/
 
 	public String[][] Users() {
 		System.out.println("/n/n-----------------/nStarting userdata retrieval v2/n");
@@ -131,21 +131,23 @@ public class User {
 				rs = qb.Users();
 				while (rs.next()) {
 					ArrayList<String> row = new ArrayList<String>();
-//					Integer _uid = rs.getInt("userID");
+					Integer _uid = rs.getInt("userID");
 					String _una = rs.getString("UserName");
-//					String _ups = rs.getString("Password");
-//					Integer _uro = rs.getInt("Role");
-//					String _uto = rs.getString("Token");
-//					Integer _uac = rs.getInt("Active");
-//					String _uea = rs.getString("Email");
-//					String _ufn = rs.getString("Name");
-//					Timestamp _ull = rs.getTimestamp("lastLogin");
+					String _ups = rs.getString("Password");
+					Integer _uro = rs.getInt("Role");
+					String _uto = rs.getString("Token");
+					Integer _uac = rs.getInt("Active");
+					String _uea = rs.getString("Email");
+					String _ufn = rs.getString("Name");
+					Timestamp _ull = rs.getTimestamp("lastLogin");
+					
 					row.add(_una);
-//					User tempUsrObj = new User();
-//					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
-//					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
-//					userObject.add(tempUsrObj);
 					output.add(row);
+					
+					User tempUsrObj = new User();
+					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
+					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
+					userObject.add(tempUsrObj);
 				}
 				System.out.println(output.toString());
 			} catch (Exception e) {

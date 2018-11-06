@@ -18,7 +18,7 @@ public class DatabaseManager {
 	private void setConnection() {
 		try {
 			db = DriverManager.getConnection(dbBuild, cfg.getProperty("dbUser"), cfg.getProperty("dbPass"));
-			if (this.debug) System.out.print("Connection successfully\n");
+			if (this.debug) DataLogger.log("Connection successfully\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,7 +113,7 @@ public class DatabaseManager {
 	 * Output: None
 	 */
 	public void updateLogin(String query, Integer userid, Timestamp currentTimeStamp) {
-		if (debug) System.out.print("- Query: " + query + "\n- - UserId: " + userid + "\n- - Timestamp: " + currentTimeStamp + "\n");
+		if (debug) DataLogger.log("- Query: " + query + "\n- - UserId: " + userid + "\n- - Timestamp: " + currentTimeStamp + "\n");
 		try {
 			PreparedStatement ppstm = db.prepareStatement(query);
 			ppstm.setTimestamp(1, currentTimeStamp);
@@ -123,7 +123,7 @@ public class DatabaseManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    if (this.debug) System.out.print("Update done\n");
+	    if (this.debug) DataLogger.log("Update done\n");
 	}
 
 }

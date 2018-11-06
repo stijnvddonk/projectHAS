@@ -18,8 +18,8 @@ public class Config {
 			// configFile.list(System.out);
 
 		} catch(Exception e) {
-			System.out.print("Config file won't load!\n");
-			e.printStackTrace();
+			DataLogger.log("Config file won't load!\n");
+			DataLogger.errorLog(e);
 		}
 	}
 

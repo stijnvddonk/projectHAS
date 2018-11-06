@@ -1,5 +1,6 @@
 package logic_tier;
 
+import data_tier.DataLogger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -24,7 +25,7 @@ public class User {
 	protected Integer role;
 	protected String token;
 	protected Integer active;
-	
+
 	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
 		userID = uid;
 		username = uName;
@@ -38,82 +39,76 @@ public class User {
 		String[][] array = new String[output.size()][];
 		for (int i = 0; i < output.size(); i++) {
 			ArrayList<String> row = output.get(i);
-			System.out.println(output.get(i).toString());
+			DataLogger.log(output.get(i).toString() + "\n");
 			array[i] = row.toArray(new String[row.size()]);
 		}
 		return array;
 	}
 
 	public String[][] Devices() {
-		System.out.println("Starting data retrieval");
+		DataLogger.log("Starting data retrieval\n");
 		ResultSet rs = null;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		try {
-			System.out.println("Start Try");
+			DataLogger.log("Start Try\n");
 			rs = qb.Devices();
 			while (rs.next()) {
 				ArrayList<String> row = new ArrayList<String>();
 				row.add(rs.getString("name"));
 				output.add(row);
 			}
-			System.out.println(output.toString());
+			DataLogger.log(output.toString() + "\n");
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 		return convertArrayListToArray(output);
 	}
 
 	public Integer getDeviceTypeID(String deviceName) {
-		System.out.println("Device Type ID Database Loaded");
+		DataLogger.log("Device Type ID Database Loaded\n");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.DevicesTypeID(deviceName);
-			System.out.println("# - Updating...");
 
 			while (rs.next()) {
-				System.out.println(rs.getInt("typeID"));
 				typeID = rs.getInt("typeID");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
 	}
 
 	public Integer getDeviceEnabledStatus(String deviceName) {
-		System.out.println("Device Enabled Status Database Loaded");
+		DataLogger.log("Device Enabled Status Database Loaded\n");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.DevicesEnabledStatus(deviceName);
-			System.out.println("# - Updating...");
 
 			while (rs.next()) {
-				System.out.println(rs.getInt("DeviceEnabled"));
 				typeID = rs.getInt("DeviceEnabled");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
 	}
 
 	public void getDeviceTypes(JComboBox selectBox) {
-		System.out.println("Device Type Database Loaded");
+		DataLogger.log("Device Type Database Loaded\n");
 		ResultSet rs = null;
 		try {
 			rs = qb.getDeviceTypes();
-			System.out.println("# - Updating...");
 
 			while (rs.next()) {
 				selectBox.addItem(rs.getString("Omschrijving"));
-				System.out.println(rs.getString("Omschrijving"));
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 	}
@@ -122,24 +117,22 @@ public class User {
 		try {
 			qb.enableDisableDevice(id, deviceName);
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
 	public Integer getDeviceTimerEnabledStatus(String deviceName) {
-		System.out.println("Device Timer Enabled Status Database Loaded");
+		DataLogger.log("Device Timer Enabled Status Database Loaded\n");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.DevicesTimerStatus(deviceName);
-			System.out.println("# - Updating...");
 
 			while (rs.next()) {
-				System.out.println(rs.getInt("timerStatus"));
 				typeID = rs.getInt("timerStatus");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
@@ -149,23 +142,22 @@ public class User {
 		try {
 			qb.enableDisableTimerDevice(id, deviceName);
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
 	public void getOnOffTimer(JComboBox timerOn, JComboBox timerOff, String deviceName) {
-		System.out.println("Device Timer Database Loaded");
+		DataLogger.log("Device Timer Database Loaded\n");
 		ResultSet rs = null;
 		try {
 			rs = qb.getStartEndTime(deviceName);
-			System.out.println("# - Updating...");
 
 			while (rs.next()) {
 				timerOn.setSelectedItem(rs.getString("timerOn"));
 				timerOff.setSelectedItem(rs.getString("timerOff"));
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 	}
@@ -174,7 +166,7 @@ public class User {
 		try {
 			qb.setStartEndTime(timerOn,timerOff, deviceName);
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
@@ -183,38 +175,36 @@ public class User {
 			qb.deleteDevice(deviceName);
 			JOptionPane.showMessageDialog(null, "Device has been Deleted!");
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
 	public String getTopIP() {
-		System.out.println("Device Timer Enabled Status Database Loaded");
+		DataLogger.log("Device Timer Enabled Status Database Loaded\n");
 		String lastIP = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.getTopIP();
 			while (rs.next()) {
-				System.out.println(rs.getString("IP"));
 				lastIP = rs.getString("IP");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return lastIP;
 	}
-	
+
 	public Integer getTypeID(String type) {
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.getDeviceTypesID(type);
 			while (rs.next()) {
-				System.out.println(rs.getInt("id"));
 				typeID = rs.getInt("id");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
@@ -235,7 +225,7 @@ public class User {
 			qb.addNewDevice(deviceName, IPAdres, typeID, MACAdres);
 			JOptionPane.showMessageDialog(null, "Device has been Added!");
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 

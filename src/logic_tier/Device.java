@@ -1,5 +1,6 @@
 package logic_tier;
 
+import data_tier.DataLogger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class Device {
 	public void setDeviceData(int deviceID) {
 		ResultSet rs = null;
 		String query = qb.setDeviceData(deviceID);
-		System.out.println("Project Query: " + query + "\n");
+		DataLogger.log("Project Query: " + query + "\n");
 
 		try {
 			for (rs = this.dbm.execute(query); rs.next();) {
@@ -72,38 +73,6 @@ public class Device {
 			e.printStackTrace();
 		}
 	}
-
-//	  public void newDevice(String deviceName, String deviceType) {
-//			System.out.println("new Device Method Called");
-//			try {
-//				System.out.println("Device Name: " + deviceName);
-//				//Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
-//				PreparedStatement pst;
-//				pst = db.prepareStatement(query);
-//				 pst.setInt(1, deviceID);
-//				 pst.setString(2, deviceName);
-//				 pst.setString(3, mac);
-//				 pst.setString(4, ip);
-//				 pst.setString(5, versionNumber);
-//					switch (deviceType) {
-//					case "Lamp":
-//						typeID = 1;
-//						break;
-//					case "Deur":
-//						typeID = 2;
-//						break;
-//					case "LuchtVochtigheids Lezer":
-//						typeID = 3;
-//						break;
-//					}
-//				 pst.setInt(6, typeID);
-//				 Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
-//				//pst.executeUpdate();
-//			} catch (Exception e) {
-//				System.out.println(e);
-//				JOptionPane.showMessageDialog(null, e);
-//			}
-//		}
 
 	public int getDeviceID() {
 		return this.deviceID;

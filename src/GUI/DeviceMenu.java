@@ -1,5 +1,6 @@
 package GUI;
 
+import data_tier.DataLogger;
 import java.util.Locale;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -175,7 +176,7 @@ public class DeviceMenu extends JFrame {
 				if (JOptionPane.showConfirmDialog(frmDeleteDevice,
 						"Confirm you want to Delete " + deviceName, "Delete Device",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-							System.out.println("About to Delete: "+deviceName);
+							DataLogger.log("About to Delete: "+deviceName + "\n");
 							us.deleteDevice(deviceName);
 							createTable();
 				}
@@ -249,18 +250,18 @@ public class DeviceMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		 		String deviceName = lblNewLabel.getText();
 		 		int i = us.getDeviceTimerEnabledStatus(deviceName);
-		 		System.out.println("getDeviceTimerEnabledStatus: " + i);
+		 		DataLogger.log("getDeviceTimerEnabledStatus: " + i + "\n");
 				if (i == 0) {
 					us.enableDisableDeviceTimer(1, deviceName);
 					deviceTimerStatus.setText("On");
-					System.out.println("Device Status ON");
+					DataLogger.log("Device Status ON\n");
 					deviceTimerStatus.setSelected(true);
 					comboBoxTimeOn.setEnabled(true);
 					comboBoxTimeOff.setEnabled(true);
 				} else {
 					us.enableDisableDeviceTimer(0, deviceName);
 					deviceTimerStatus.setText("Off");
-					System.out.println("Device Status OFF");
+					DataLogger.log("Device Status OFF\n");
 					deviceTimerStatus.setSelected(false);
 					comboBoxTimeOn.setEnabled(false);
 					comboBoxTimeOff.setEnabled(false);
@@ -291,18 +292,17 @@ public class DeviceMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		 		String deviceName = lblNewLabel.getText();
 		 		int i = us.getDeviceEnabledStatus(deviceName);
-		 		System.out.println(i);
 				if (i == 0) {
 					us.enableDisableDevice(1, deviceName);
 					deviceEnableButton.setText("On");
-					System.out.println("Device Status ON");
+					DataLogger.log("Device Status ON\n");
 					deviceTimerStatus.setEnabled(true);
 					comboBoxTimeOn.setEnabled(true);
 					comboBoxTimeOff.setEnabled(true);
 				} else {
 					us.enableDisableDevice(0, deviceName);
 					deviceEnableButton.setText("Off");
-					System.out.println("Device Status OFF");
+					DataLogger.log("Device Status OFF\n");
 					deviceTimerStatus.setSelected(false);
 					deviceTimerStatus.setEnabled(false);
 					comboBoxTimeOn.setEnabled(false);
@@ -382,7 +382,7 @@ public class DeviceMenu extends JFrame {
 		} while (endCalendar.getTime().before(endEnd.getTime()));
 		return endTime;
 	}
-	
+
 	public class ForcedListSelectionModel extends DefaultListSelectionModel {
 
 	    public ForcedListSelectionModel () {
@@ -403,7 +403,7 @@ public class DeviceMenu extends JFrame {
 		if (model != null)
 			model.setRowCount(0);
 		String[] header = { "Device Name" };
-		System.out.println("Loading data");
+		DataLogger.log("Loading data\n");
 		String[][] data = us.Devices();
 		model = new DefaultTableModel(data, header);
 		table = new JTable(model) {
@@ -427,7 +427,7 @@ public class DeviceMenu extends JFrame {
 				String value = table.getModel().getValueAt(row, column).toString();
 				lblNewLabel.setText(value);
 				int typeID = us.getDeviceTypeID(value);
-				System.out.println("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value));
+				DataLogger.log("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value)+"\n");
 				us.getOnOffTimer(comboBoxTimeOn, comboBoxTimeOff, value);
 				if(us.getDeviceEnabledStatus(value) == 1) {
 					us.enableDisableDevice(1, value);
@@ -453,7 +453,7 @@ public class DeviceMenu extends JFrame {
 	}
 
 	public void setStuffVisible(int typeID) {
-		System.out.println("Value: " + typeID);
+		DataLogger.log("Value: " + typeID+"\n");
 		switch (typeID) {
 		case 1:
 			lblTimer.setVisible(true);
@@ -462,7 +462,7 @@ public class DeviceMenu extends JFrame {
 			deviceTimerStatus.setVisible(true);
 			comboBoxTimeOn.setVisible(true);
 			comboBoxTimeOff.setVisible(true);
-			System.out.println("Labels Visible");
+			DataLogger.log("Labels Visible\n");
 			break;
 		case 2:
 			lblTimer.setVisible(false);
@@ -471,7 +471,7 @@ public class DeviceMenu extends JFrame {
 			deviceTimerStatus.setVisible(false);
 			comboBoxTimeOn.setVisible(false);
 			comboBoxTimeOff.setVisible(false);
-			System.out.println("Labels Not Visible");
+			DataLogger.log("Labels Not Visible\n");
 			break;
 		case 3:
 			lblTimer.setVisible(false);
@@ -480,7 +480,7 @@ public class DeviceMenu extends JFrame {
 			deviceTimerStatus.setVisible(false);
 			comboBoxTimeOn.setVisible(false);
 			comboBoxTimeOff.setVisible(false);
-			System.out.println("Labels Not Visible");
+			DataLogger.log("Labels Not Visible\n");
 			break;
 		}
 	}

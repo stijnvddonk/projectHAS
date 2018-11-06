@@ -1,0 +1,5 @@
+2018-11-06 14.38.53 : java.io.FileNotFoundException: main.properties (No such file or directory)
+2018-11-06 14.38.53 : java.io.FileNotFoundException: main.properties (No such file or directory)
+2018-11-06 14.38.53 : java.io.FileNotFoundException: main.properties (No such file or directory)
+2018-11-06 14.38.53 : java.io.FileNotFoundException: main.properties (No such file or directory)
+2018-11-06 14.38.53 : java.io.FileNotFoundException: main.properties (No such file or directory)

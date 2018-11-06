@@ -1,6 +1,5 @@
 package logic_tier;
 
-import data_tier.DataLogger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import data_tier.DataLogger;
 import data_tier.DatabaseManager;
 import data_tier.QueryBuilder;
 

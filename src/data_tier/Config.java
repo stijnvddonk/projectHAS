@@ -1,5 +1,6 @@
 package data_tier;
 
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.util.Properties;
@@ -12,10 +13,8 @@ public class Config {
 
 		configFile = new java.util.Properties();
 		try {
-
 			InputStream is = new FileInputStream("config/main.properties");
 			configFile.load(is);
-			// configFile.list(System.out);
 
 		} catch(Exception e) {
 			DataLogger.log("Config file won't load!\n");

@@ -207,7 +207,7 @@ public class NewDeviceMenu extends JFrame {
 		String deviceName = textField_1.getText();
 		String lastIP= us.getTopIP();
 		String newIP = "192.168.10." + (Integer.parseInt(lastIP.substring(11,lastIP.length()))+1);
-	    DataLogger.log(newIP+"\n");
+		DataLogger.log(newIP+"\n");
 	    us.addNewDevice(deviceName, newIP, typeID);
 	}
 }

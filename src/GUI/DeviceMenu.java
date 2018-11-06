@@ -427,7 +427,7 @@ public class DeviceMenu extends JFrame {
 				String value = table.getModel().getValueAt(row, column).toString();
 				lblNewLabel.setText(value);
 				int typeID = us.getDeviceTypeID(value);
-				DataLogger.log("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value)+"\n");
+				DataLogger.deviceLog("DeviceEnabled Status : "+us.getDeviceEnabledStatus(value)+"\n");
 				us.getOnOffTimer(comboBoxTimeOn, comboBoxTimeOff, value);
 				if(us.getDeviceEnabledStatus(value) == 1) {
 					us.enableDisableDevice(1, value);

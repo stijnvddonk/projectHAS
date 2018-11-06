@@ -1,0 +1,104 @@
+2018-11-06 13.59.56 : Query builder loaded
+
+2018-11-06 13.59.57 : Connection successfully
+
+2018-11-06 13.59.57 : Query builder loaded
+
+2018-11-06 13.59.58 : Connection successfully
+
+2018-11-06 13.59.58 : Login loaded
+---------------------
+
+2018-11-06 13.59.58 : 
+The user is: admin
+The password is: admin
+
+2018-11-06 13.59.58 : QueryBuilder: selectSaltedPassword
+
+2018-11-06 13.59.58 : - Query: SELECT * FROM Peper WHERE peperId=(SELECT userId FROM Users WHERE username='admin' LIMIT 1) LIMIT 1
+
+2018-11-06 13.59.58 : Salt: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin
+
+2018-11-06 13.59.58 : QueryBuilder: selectLogin
+
+2018-11-06 13.59.58 : - Query: SELECT * FROM Users WHERE username='admin' AND password='Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW' LIMIT 1
+
+2018-11-06 13.59.58 : User data:
+- userid: 1
+- role: 1
+- username: admin
+- password: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW
+- token: $31$16$LATr96YGZQm6fiHjm4L09pgLwkKGl1ij0VjdEbjQff4
+
+2018-11-06 13.59.58 : QueryBuilder: updateLogin
+
+2018-11-06 13.59.58 : - Query: UPDATE users SET lastLogin=? WHERE userId=?
+- - UserId: 1
+- - Timestamp: 2018-11-06 13:59:58.868
+
+2018-11-06 13.59.59 : Update done
+
+2018-11-06 13.59.59 : Correct credentials.
+
+2018-11-06 13.59.59 : ---------------------
+
+2018-11-06 13.59.59 : Loading data
+
+2018-11-06 13.59.59 : [Device 1]
+
+2018-11-06 13.59.59 : [Device 2]
+
+2018-11-06 13.59.59 : [Device 3]
+
+2018-11-06 13.59.59 : [Device 4]
+
+2018-11-06 13.59.59 : [New Device]
+
+2018-11-06 13.59.59 : [TEST]
+
+2018-11-06 14.00.01 : Value: 1
+
+2018-11-06 14.00.01 : Labels Visible
+
+2018-11-06 14.00.04 : Value: 2
+
+2018-11-06 14.00.04 : Labels Not Visible
+
+2018-11-06 14.00.06 : Value: 1
+
+2018-11-06 14.00.06 : Labels Visible
+
+2018-11-06 14.00.08 : About to Delete: TEST
+
+2018-11-06 14.00.10 : Loading data
+
+2018-11-06 14.00.10 : [Device 1]
+
+2018-11-06 14.00.10 : [Device 2]
+
+2018-11-06 14.00.10 : [Device 3]
+
+2018-11-06 14.00.10 : [Device 4]
+
+2018-11-06 14.00.10 : [New Device]
+
+2018-11-06 14.00.12 : Value: 2
+
+2018-11-06 14.00.12 : Labels Not Visible
+
+2018-11-06 14.00.13 : Value: 1
+
+2018-11-06 14.00.13 : Labels Visible
+
+2018-11-06 14.00.19 : Loading data
+
+2018-11-06 14.00.19 : [Device 1]
+
+2018-11-06 14.00.19 : [Device 2]
+
+2018-11-06 14.00.19 : [Device 3]
+
+2018-11-06 14.00.19 : [Device 4]
+
+2018-11-06 14.00.19 : [New Device]
+

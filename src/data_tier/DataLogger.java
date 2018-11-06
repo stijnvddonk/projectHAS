@@ -41,7 +41,7 @@ public class DataLogger {
 		}
 	}
 
-	public static void deviceLog(Exception error) {
+	public static void deviceLog(String msg) {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
 		String name = filename;
 		File file = null;
@@ -55,7 +55,7 @@ public class DataLogger {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + error + "\n");
+				out.write(timeStamp + ": " + msg + "\n");
 				out.close();
 			}
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class DataLogger {
 		}
 	}
 
-	public static void userLog(Exception error) {
+	public static void userLog(String msg) {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
 		String name = filename;
 		File file = null;
@@ -77,7 +77,7 @@ public class DataLogger {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + error + "\n");
+				out.write(timeStamp + ": " + msg + "\n");
 				out.close();
 			}
 		} catch (Exception e) {

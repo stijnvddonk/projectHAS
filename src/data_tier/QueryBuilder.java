@@ -16,116 +16,113 @@ public class QueryBuilder {
 
 	// Get the device data
 	public String setDeviceData(int deviceID) {
-		if (this.debug) DataLogger.log("QueryBuilder: setDeviceData\n");
-		// Creating a query @Stijn add more info please
+		if (this.debug) DataLogger.deviceLog("QueryBuilder: setDeviceData\n");
 		String query = "SELECT deviceID, name, MAC, IP, versionNumber, typeID, Omschrijving, DeviceEnabled, timerStatus, timerOn, timerOff FROM Devices d JOIN DeviceTypes dt ON d.typeID=dt.ID WHERE d.deviceID = " + deviceID;
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return query;
 	}
 
 	// Get typeID device
 	public ResultSet DevicesTypeID(String deviceName) {
-		if (debug) DataLogger.log("QueryBuilder: DevicesTypeID\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: DevicesTypeID\n");
 		String query = "SELECT typeID FROM Devices WHERE name ='"+deviceName+"'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 	// Get a list of devices
 	public ResultSet Devices() {
-		if (this.debug) DataLogger.log("QueryBuilder: Devices\n");
-		// @Stijn What do you want to do with this??
+		if (this.debug) DataLogger.deviceLog("QueryBuilder: Devices\n");
 		String query = "SELECT name FROM Devices";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 
 	// Get last IP device
 	public ResultSet getTopIP() {
-		if (debug) DataLogger.log("QueryBuilder: getTopIP\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: getTopIP\n");
 		String query = "SELECT IP FROM Devices ORDER BY IP DESC LIMIT 1";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 
 	// Create new Device
 	public Integer addNewDevice(String deviceName, String IPAdres, int typeID, String MACAdres) {
-		if (this.debug) DataLogger.log("QueryBuilder: insertNewDevice\n");
+		if (this.debug) DataLogger.deviceLog("QueryBuilder: insertNewDevice\n");
 		// Creating a query to create a new device
 		String query = "INSERT INTO Devices (`name`, `MAC`, `IP`, `versionNumber`, `typeID`, `DeviceEnabled`, `timerStatus`, `timerOn`, `timerOff`) VALUES ('" +deviceName+"','"+MACAdres+ "','"+IPAdres+"','v1.1.1',"+typeID+",1,0,null,null)";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.__insert(query);
 	}
 
 	// Get enabledStatus device
 	public ResultSet DevicesEnabledStatus(String deviceName) {
-		if (debug) DataLogger.log("QueryBuilder: DevicesEnabledStatus\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: DevicesEnabledStatus\n");
 		String query = "SELECT DeviceEnabled FROM Devices WHERE name ='"+deviceName+"'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 
 	// disable Device
 	public void enableDisableDevice(int id, String deviceName) {
-		if (this.debug) DataLogger.log("QueryBuilder: disableDevice\n");
+		if (this.debug) DataLogger.deviceLog("QueryBuilder: disableDevice\n");
 		// Creating a query to disable a device
 			String query = "UPDATE Devices SET DeviceEnabled = "+id+" WHERE name = '" + deviceName + "'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		dbm.update(query);
 	}
 
 	// Get startEndTime
 	public ResultSet getStartEndTime(String deviceName) {
-		if (debug) DataLogger.log("QueryBuilder: getStartEndTime\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: getStartEndTime\n");
 		String query = "SELECT timerOn, timerOff FROM Devices WHERE name ='"+deviceName+"'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 	// Set startEndTime
 	public void setStartEndTime(String timerOn, String timerOff, String deviceName) {
-		// Creating a query to disable a device
 			String query = "UPDATE Devices SET timerOn = '"+ timerOn +"', timerOff = '"+ timerOff +"' WHERE name = '" + deviceName + "'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		dbm.update(query);
 	}
 
 	// Get DevicesTimerStatus device
 	public ResultSet DevicesTimerStatus(String deviceName) {
-		if (debug) DataLogger.log("QueryBuilder: DevicesTimerStatus\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: DevicesTimerStatus\n");
 		String query = "SELECT timerStatus FROM Devices WHERE name ='"+deviceName+"'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 
 	// Disable enableDisableTimerDevice
 	public void enableDisableTimerDevice(int id, String deviceName) {
-		if (debug) DataLogger.log("QueryBuilder: enableDisableTimerDevice\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: enableDisableTimerDevice\n");
 		// Creating a query to disable a device
 		String query = "UPDATE Devices SET timerStatus = "+id+" WHERE name = '" + deviceName + "'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		dbm.update(query);
 	}
 
 	// Remove Device
 	public void deleteDevice(String deviceName) {
-		if (this.debug) DataLogger.log("QueryBuilder: deleteDevice\n");
+		if (this.debug) DataLogger.deviceLog("QueryBuilder: deleteDevice\n");
 		// Creating a query to remove a device
 		String query = "DELETE FROM Devices WHERE name='" + deviceName + "'";
-		if (this.debug) DataLogger.log("- Query: " + query + "\n");
+		if (this.debug) DataLogger.deviceLog("- Query: " + query + "\n");
 		dbm.update(query);
 	}
 
 	// List Device Types
 	public ResultSet getDeviceTypes() {
-		if (debug) DataLogger.log("QueryBuilder: getDeviceTypes\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: getDeviceTypes\n");
 		String query = "SELECT Omschrijving FROM DeviceTypes";
-		DataLogger.log("- Query: " + query + "\n");
+		DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 
 	public ResultSet getDeviceTypesID(String omschrijving) {
-		if (debug) DataLogger.log("QueryBuilder: getDeviceTypesID\n");
+		if (debug) DataLogger.deviceLog("QueryBuilder: getDeviceTypesID\n");
 		String query = "SELECT id FROM DeviceTypes WHERE Omschrijving = '" + omschrijving + "'";
-		DataLogger.log("- Query: " + query + "\n");
+		DataLogger.deviceLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
 

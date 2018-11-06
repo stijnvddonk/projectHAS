@@ -46,18 +46,18 @@ public class User {
 	}
 
 	public String[][] Devices() {
-		DataLogger.log("Starting data retrieval\n");
+		DataLogger.deviceLog("Starting data retrieval\n");
 		ResultSet rs = null;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		try {
-			DataLogger.log("Start Try\n");
+			DataLogger.deviceLog("Start Try\n");
 			rs = qb.Devices();
 			while (rs.next()) {
 				ArrayList<String> row = new ArrayList<String>();
 				row.add(rs.getString("name"));
 				output.add(row);
 			}
-			DataLogger.log(output.toString() + "\n");
+			DataLogger.deviceLog(output.toString() + "\n");
 		} catch (Exception e) {
 			DataLogger.errorLog(e);
 		}
@@ -65,7 +65,7 @@ public class User {
 	}
 
 	public Integer getDeviceTypeID(String deviceName) {
-		DataLogger.log("Device Type ID Database Loaded\n");
+		DataLogger.deviceLog("Device Type ID Database Loaded\n");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
@@ -82,7 +82,7 @@ public class User {
 	}
 
 	public Integer getDeviceEnabledStatus(String deviceName) {
-		DataLogger.log("Device Enabled Status Database Loaded\n");
+		DataLogger.deviceLog("Device Enabled Status Database Loaded\n");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
@@ -99,7 +99,7 @@ public class User {
 	}
 
 	public void getDeviceTypes(JComboBox selectBox) {
-		DataLogger.log("Device Type Database Loaded\n");
+		DataLogger.deviceLog("Device Type Database Loaded\n");
 		ResultSet rs = null;
 		try {
 			rs = qb.getDeviceTypes();
@@ -122,7 +122,7 @@ public class User {
 	}
 
 	public Integer getDeviceTimerEnabledStatus(String deviceName) {
-		DataLogger.log("Device Timer Enabled Status Database Loaded\n");
+		DataLogger.deviceLog("Device Timer Enabled Status Database Loaded\n");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
@@ -147,7 +147,7 @@ public class User {
 	}
 
 	public void getOnOffTimer(JComboBox timerOn, JComboBox timerOff, String deviceName) {
-		DataLogger.log("Device Timer Database Loaded\n");
+		DataLogger.deviceLog("Device Timer Database Loaded\n");
 		ResultSet rs = null;
 		try {
 			rs = qb.getStartEndTime(deviceName);
@@ -171,6 +171,7 @@ public class User {
 	}
 
 	public void deleteDevice(String deviceName) {
+		DataLogger.deviceLog("Deleting Device\n");
 		try {
 			qb.deleteDevice(deviceName);
 			JOptionPane.showMessageDialog(null, "Device has been Deleted!");
@@ -180,7 +181,7 @@ public class User {
 	}
 
 	public String getTopIP() {
-		DataLogger.log("Device Timer Enabled Status Database Loaded\n");
+		DataLogger.deviceLog("Device Timer Enabled Status Database Loaded\n");
 		String lastIP = null;
 		ResultSet rs = null;
 		try {

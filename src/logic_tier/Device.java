@@ -52,7 +52,7 @@ public class Device {
 	public void setDeviceData(int deviceID) {
 		ResultSet rs = null;
 		String query = qb.setDeviceData(deviceID);
-		DataLogger.log("Project Query: " + query + "\n");
+		DataLogger.deviceLog("Device Query: " + query + "\n");
 
 		try {
 			for (rs = this.dbm.execute(query); rs.next();) {

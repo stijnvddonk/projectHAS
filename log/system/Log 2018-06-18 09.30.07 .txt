@@ -1,0 +1,63 @@
+2018-06-18 09.30.07 : Connection successfully
+
+2018-06-18 09.30.10 : Login Database loaded
+
+2018-06-18 09.30.10 : Checking...
+2018-06-18 09.30.10 : 
+Login Succesfull, 
+Logged in User info:
+First Name: Stijn 
+Last Name: van de Donk
+Full Name: Stijn van de Donk
+Function ID: 1
+UserID: 2
+2018-06-18 09.30.10 : Connection successfully
+
+2018-06-18 09.30.10 : Connection successfully
+
+2018-06-18 09.30.10 : Connection successfully
+
+2018-06-18 09.30.10 : 2
+2018-06-18 09.30.10 : SELECT * FROM Users u
+JOIN Functions f ON u.FunctionID = f.FunctionID
+WHERE u.UserID =2
+2018-06-18 09.30.12 : Opening User Sub Form
+2018-06-18 09.30.12 : Select u.UserID, u.FirstName, u.LastName, u.UserName, u.Password, f.FunctionDescription FROM Users u
+Join Functions f on u.FunctionID = f.FunctionID WHERE NOT u.UserID = 1
+2018-06-18 09.30.12 : [[2, Stijn, van de Donk, stijn.vandedonk, ProjectManager], [3, Mark, van der Sloot, mark.vandersloot, Engineer], [4, Max, Gertu, max.gertu, Engineer], [5, Bart, van de Beek, bart.vandebeek, Engineer]]
+2018-06-18 09.30.12 : [2, Stijn, van de Donk, stijn.vandedonk, ProjectManager]
+2018-06-18 09.30.12 : [3, Mark, van der Sloot, mark.vandersloot, Engineer]
+2018-06-18 09.30.12 : [4, Max, Gertu, max.gertu, Engineer]
+2018-06-18 09.30.12 : [5, Bart, van de Beek, bart.vandebeek, Engineer]
+2018-06-18 09.30.14 : Opening User Sub Form
+2018-06-18 09.30.16 : Function Database Loaded
+
+2018-06-18 09.30.16 : Select FunctionDescription From Functions
+2018-06-18 09.30.16 : # - Updating...
+2018-06-18 09.30.27 : insert into Users(FirstName, LastName, UserName, Password, FunctionID)values(?,?,?,?,?)
+2018-06-18 09.30.28 : Select u.UserID, u.FirstName, u.LastName, u.UserName, u.Password, f.FunctionDescription FROM Users u
+Join Functions f on u.FunctionID = f.FunctionID WHERE NOT u.UserID = 1
+2018-06-18 09.30.28 : [[2, Stijn, van de Donk, stijn.vandedonk, ProjectManager], [3, Mark, van der Sloot, mark.vandersloot, Engineer], [4, Max, Gertu, max.gertu, Engineer], [5, Bart, van de Beek, bart.vandebeek, Engineer], [6, weer, eentest, weer.eentest, Engineer]]
+2018-06-18 09.30.28 : [2, Stijn, van de Donk, stijn.vandedonk, ProjectManager]
+2018-06-18 09.30.28 : [3, Mark, van der Sloot, mark.vandersloot, Engineer]
+2018-06-18 09.30.28 : [4, Max, Gertu, max.gertu, Engineer]
+2018-06-18 09.30.28 : [5, Bart, van de Beek, bart.vandebeek, Engineer]
+2018-06-18 09.30.28 : [6, weer, eentest, weer.eentest, Engineer]
+2018-06-18 09.30.30 : Rijen bemachtingt
+weer
+eentest
+weer.eentest
+Engineer
+2018-06-18 09.30.30 : Select u.FirstName, u.LastName, u.UserName, u.Password, f.FunctionDescription FROM Users u
+	Join Functions f ON u.FunctionID = f.FunctionID
+2018-06-18 09.30.30 : Connection successfully
+
+2018-06-18 09.30.32 : DELETE FROM Users WHERE UserID=6
+2018-06-18 09.30.32 : Select u.UserID, u.FirstName, u.LastName, u.UserName, u.Password, f.FunctionDescription FROM Users u
+Join Functions f on u.FunctionID = f.FunctionID WHERE NOT u.UserID = 1
+2018-06-18 09.30.32 : [[2, Stijn, van de Donk, stijn.vandedonk, ProjectManager], [3, Mark, van der Sloot, mark.vandersloot, Engineer], [4, Max, Gertu, max.gertu, Engineer], [5, Bart, van de Beek, bart.vandebeek, Engineer]]
+2018-06-18 09.30.32 : [2, Stijn, van de Donk, stijn.vandedonk, ProjectManager]
+2018-06-18 09.30.32 : [3, Mark, van der Sloot, mark.vandersloot, Engineer]
+2018-06-18 09.30.32 : [4, Max, Gertu, max.gertu, Engineer]
+2018-06-18 09.30.32 : [5, Bart, van de Beek, bart.vandebeek, Engineer]
+2018-06-18 09.30.38 : Closing the application..:(

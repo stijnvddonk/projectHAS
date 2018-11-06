@@ -1,0 +1,24 @@
+2018-08-06 13.18.06 : Connection successfully
+
+2018-08-06 13.18.07 : Login Database loaded
+
+2018-08-06 13.18.07 : Checking...
+2018-08-06 13.18.07 : 
+Login Succesfull, 
+Logged in User info:
+First Name: Stijn 
+Last Name: van de Donk
+Full Name: Stijn van de Donk
+Function ID: 1
+UserID: 2
+2018-08-06 13.18.07 : Connection successfully
+
+2018-08-06 13.18.07 : Connection successfully
+
+2018-08-06 13.18.07 : Connection successfully
+
+2018-08-06 13.18.07 : 2
+2018-08-06 13.18.07 : SELECT * FROM Users u
+JOIN Functions f ON u.FunctionID = f.FunctionID
+WHERE u.UserID =2
+2018-08-06 13.18.13 : Closing the application..:(

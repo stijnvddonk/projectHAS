@@ -54,7 +54,7 @@ public class ArduinoCommunication {
 		return allPorts;
 	}
 
-	// Method to read data from the arduino:
+	// Method to read data from the arduino::
 	public void dataArduino() {
 		Scanner dataFromArduino = new Scanner(sp.getInputStream());
 		//String result = "";

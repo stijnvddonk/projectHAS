@@ -1,0 +1,12 @@
+2018-11-07 10.16.35 : Config file won't load!
+
+2018-11-07 10.16.35 : Config file won't load!
+
+2018-11-07 10.16.35 : Config file won't load!
+
+2018-11-07 10.16.35 : Config file won't load!
+
+2018-11-07 10.16.35 : Config file won't load!
+
+2018-11-07 10.16.35 : - Query: SELECT * FROM Users WHERE username='admin' AND password='nulladminnull' LIMIT 1
+

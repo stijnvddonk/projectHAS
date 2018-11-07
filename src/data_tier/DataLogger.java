@@ -4,22 +4,34 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DataLogger {
 
 	//static String sessionName = Company.sessionString();
 	private static final String filename = logName() + ".txt";
-
+	
+	public static String timeStamp() {
+		LocalDateTime ldt = LocalDateTime.now().plusDays(1);
+		DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH.mm.ss", Locale.ENGLISH);
+		String formatter = formmat1.format(ldt);
+		return formatter;		
+	}
+	 
 	public static String logName() {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		//String timeStamp = timeStamp();
+		String timestamp = timeStamp();
 		String name = "Log ";
-		return name + timeStamp;
+		return name + timestamp;
 	}
 
 	public static void log(String msg) {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		String timeStamp = timeStamp();
 		String name = filename;
 		File file = null;
 		FileWriter fw = null;
@@ -42,7 +54,7 @@ public class DataLogger {
 	}
 
 	public static void deviceLog(String msg) {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		String timeStamp = timeStamp();
 		String name = filename;
 		File file = null;
 		FileWriter fw = null;
@@ -64,7 +76,7 @@ public class DataLogger {
 	}
 
 	public static void userLog(String msg) {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		String timeStamp = timeStamp();
 		String name = filename;
 		File file = null;
 		FileWriter fw = null;
@@ -86,7 +98,7 @@ public class DataLogger {
 	}
 
 	public static void apiLog(String msg) {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		String timeStamp = timeStamp();
 		String name = filename;
 		File file = null;
 		FileWriter fw = null;
@@ -104,12 +116,12 @@ public class DataLogger {
 			}
 
 		} catch (Exception e) {
-			errorLog(e);
+			System.out.println("error");
 		}
 	}
 
 	public static void serverLog(String msg) {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		String timeStamp = timeStamp();
 		String name = filename;
 		File file = null;
 		FileWriter fw = null;
@@ -127,12 +139,12 @@ public class DataLogger {
 			}
 
 		} catch (Exception e) {
-			errorLog(e);
+			System.out.println("error");
 		}
 	}
 
 	public static void errorLog(Exception error) {
-		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+		String timeStamp = timeStamp();
 		String name = filename;
 		File file = null;
 		FileWriter fw = null;

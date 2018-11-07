@@ -1,0 +1,136 @@
+2018-11-08 13.55.33: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.33: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.33: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-08 13.55.34: Starting data retrieval
+
+2018-11-08 13.55.34: Start Try
+
+2018-11-08 13.55.34: QueryBuilder: Devices
+
+2018-11-08 13.55.34: - Query: SELECT name FROM Devices
+
+2018-11-08 13.55.34: [[Device 1], [Device 2], [Device 3], [Device 4], [New Device]]
+
+2018-11-08 13.55.35: Device Type ID Database Loaded
+
+2018-11-08 13.55.35: QueryBuilder: DevicesTypeID
+
+2018-11-08 13.55.35: - Query: SELECT typeID FROM Devices WHERE name ='Device 3'
+
+2018-11-08 13.55.36: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.36: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.36: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 3'
+
+2018-11-08 13.55.36: DeviceEnabled Status : 0
+
+2018-11-08 13.55.36: Device Timer Database Loaded
+
+2018-11-08 13.55.36: QueryBuilder: getStartEndTime
+
+2018-11-08 13.55.36: - Query: SELECT timerOn, timerOff FROM Devices WHERE name ='Device 3'
+
+2018-11-08 13.55.36: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.36: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.36: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 3'
+
+2018-11-08 13.55.36: QueryBuilder: disableDevice
+
+2018-11-08 13.55.36: - Query: UPDATE Devices SET DeviceEnabled = 0 WHERE name = 'Device 3'
+
+2018-11-08 13.55.36: Device Type ID Database Loaded
+
+2018-11-08 13.55.36: QueryBuilder: DevicesTypeID
+
+2018-11-08 13.55.36: - Query: SELECT typeID FROM Devices WHERE name ='Device 2'
+
+2018-11-08 13.55.37: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.37: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.37: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 2'
+
+2018-11-08 13.55.37: DeviceEnabled Status : 0
+
+2018-11-08 13.55.37: Device Timer Database Loaded
+
+2018-11-08 13.55.37: QueryBuilder: getStartEndTime
+
+2018-11-08 13.55.37: - Query: SELECT timerOn, timerOff FROM Devices WHERE name ='Device 2'
+
+2018-11-08 13.55.37: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.37: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.37: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 2'
+
+2018-11-08 13.55.37: QueryBuilder: disableDevice
+
+2018-11-08 13.55.37: - Query: UPDATE Devices SET DeviceEnabled = 0 WHERE name = 'Device 2'
+
+2018-11-08 13.55.37: Device Type ID Database Loaded
+
+2018-11-08 13.55.37: QueryBuilder: DevicesTypeID
+
+2018-11-08 13.55.37: - Query: SELECT typeID FROM Devices WHERE name ='Device 1'
+
+2018-11-08 13.55.38: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.38: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.38: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-08 13.55.38: DeviceEnabled Status : 1
+
+2018-11-08 13.55.38: Device Timer Database Loaded
+
+2018-11-08 13.55.38: QueryBuilder: getStartEndTime
+
+2018-11-08 13.55.38: - Query: SELECT timerOn, timerOff FROM Devices WHERE name ='Device 1'
+
+2018-11-08 13.55.38: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.38: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.38: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-08 13.55.38: QueryBuilder: disableDevice
+
+2018-11-08 13.55.38: - Query: UPDATE Devices SET DeviceEnabled = 1 WHERE name = 'Device 1'
+
+2018-11-08 13.55.38: Device Type ID Database Loaded
+
+2018-11-08 13.55.38: QueryBuilder: DevicesTypeID
+
+2018-11-08 13.55.38: - Query: SELECT typeID FROM Devices WHERE name ='Device 4'
+
+2018-11-08 13.55.39: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.39: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.39: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 4'
+
+2018-11-08 13.55.39: DeviceEnabled Status : 0
+
+2018-11-08 13.55.39: Device Timer Database Loaded
+
+2018-11-08 13.55.39: QueryBuilder: getStartEndTime
+
+2018-11-08 13.55.39: - Query: SELECT timerOn, timerOff FROM Devices WHERE name ='Device 4'
+
+2018-11-08 13.55.39: Device Enabled Status Database Loaded
+
+2018-11-08 13.55.39: QueryBuilder: DevicesEnabledStatus
+
+2018-11-08 13.55.39: - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 4'
+
+2018-11-08 13.55.39: QueryBuilder: disableDevice
+
+2018-11-08 13.55.39: - Query: UPDATE Devices SET DeviceEnabled = 0 WHERE name = 'Device 4'
+

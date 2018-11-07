@@ -1,0 +1,16 @@
+2018-11-07 12.23.59 : Device Enabled Status Database Loaded
+
+2018-11-07 12.23.59 : QueryBuilder: DevicesEnabledStatus
+
+2018-11-07 12.23.59 : - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-07 12.23.59 : Starting data retrieval
+
+2018-11-07 12.23.59 : Start Try
+
+2018-11-07 12.23.59 : QueryBuilder: Devices
+
+2018-11-07 12.23.59 : - Query: SELECT name FROM Devices
+
+2018-11-07 12.23.59 : [[Device 1], [Device 2], [Device 3], [Device 4], [New Device]]
+

@@ -1,0 +1,56 @@
+2018-11-07 10.10.16 : Query builder loaded
+
+2018-11-07 10.10.18 : Connection successfully
+
+2018-11-07 10.10.18 : Query builder loaded
+
+2018-11-07 10.10.19 : Connection successfully
+
+2018-11-07 10.10.19 : Login loaded
+---------------------
+
+2018-11-07 10.10.19 : 
+The user is: admin
+The password is: admin
+
+2018-11-07 10.10.19 : QueryBuilder: selectSaltedPassword
+
+2018-11-07 10.10.19 : - Query: SELECT * FROM Peper WHERE peperId=(SELECT userId FROM Users WHERE username='admin' LIMIT 1) LIMIT 1
+
+2018-11-07 10.10.19 : Salt: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin
+
+2018-11-07 10.10.19 : QueryBuilder: selectLogin
+
+2018-11-07 10.10.19 : - Query: SELECT * FROM Users WHERE username='admin' AND password='Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW' LIMIT 1
+
+2018-11-07 10.10.19 : User data:
+- userid: 1
+- role: 1
+- username: admin
+- password: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW
+- token: $31$16$LATr96YGZQm6fiHjm4L09pgLwkKGl1ij0VjdEbjQff4
+
+2018-11-07 10.10.20 : QueryBuilder: updateLogin
+
+2018-11-07 10.10.20 : - Query: UPDATE users SET lastLogin=? WHERE userId=?
+- - UserId: 1
+- - Timestamp: 2018-11-07 10:10:20.067
+
+2018-11-07 10.10.20 : Update done
+
+2018-11-07 10.10.20 : Correct credentials.
+
+2018-11-07 10.10.20 : ---------------------
+
+2018-11-07 10.10.20 : Loading data
+
+2018-11-07 10.10.20 : [Device 1]
+
+2018-11-07 10.10.20 : [Device 2]
+
+2018-11-07 10.10.20 : [Device 3]
+
+2018-11-07 10.10.20 : [Device 4]
+
+2018-11-07 10.10.20 : [New Device]
+

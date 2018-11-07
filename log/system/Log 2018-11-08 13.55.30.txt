@@ -1,0 +1,72 @@
+2018-11-08 13.55.30: Query builder loaded
+
+2018-11-08 13.55.31: Connection successfully
+
+2018-11-08 13.55.31: Query builder loaded
+
+2018-11-08 13.55.33: Connection successfully
+
+2018-11-08 13.55.33: Login loaded
+---------------------
+
+2018-11-08 13.55.33: 
+The user is: admin
+The password is: admin
+
+2018-11-08 13.55.33: QueryBuilder: selectSaltedPassword
+
+2018-11-08 13.55.33: - Query: SELECT * FROM Peper WHERE peperId=(SELECT userId FROM Users WHERE username='admin' LIMIT 1) LIMIT 1
+
+2018-11-08 13.55.33: Salt: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin
+
+2018-11-08 13.55.33: QueryBuilder: selectLogin
+
+2018-11-08 13.55.33: - Query: SELECT * FROM Users WHERE username='admin' AND password='Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW' LIMIT 1
+
+2018-11-08 13.55.33: User data:
+- userid: 1
+- role: 1
+- username: admin
+- password: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW
+- token: $31$16$LATr96YGZQm6fiHjm4L09pgLwkKGl1ij0VjdEbjQff4
+
+2018-11-08 13.55.33: QueryBuilder: updateLogin
+
+2018-11-08 13.55.33: - Query: UPDATE users SET lastLogin=? WHERE userId=?
+- - UserId: 1
+- - Timestamp: 2018-11-07 13:55:33.617
+
+2018-11-08 13.55.33: Update done
+
+2018-11-08 13.55.33: Correct credentials.
+
+2018-11-08 13.55.33: ---------------------
+
+2018-11-08 13.55.34: Loading data
+
+2018-11-08 13.55.34: [Device 1]
+
+2018-11-08 13.55.34: [Device 2]
+
+2018-11-08 13.55.34: [Device 3]
+
+2018-11-08 13.55.34: [Device 4]
+
+2018-11-08 13.55.34: [New Device]
+
+2018-11-08 13.55.36: Value: 3
+
+2018-11-08 13.55.36: Labels Not Visible
+
+2018-11-08 13.55.37: Value: 2
+
+2018-11-08 13.55.37: Labels Not Visible
+
+2018-11-08 13.55.38: Value: 1
+
+2018-11-08 13.55.38: Labels Visible
+
+2018-11-08 13.55.40: Value: 3
+
+2018-11-08 13.55.40: Labels Not Visible
+

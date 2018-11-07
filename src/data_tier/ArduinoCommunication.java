@@ -2,6 +2,8 @@ package data_tier;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import com.fazecast.jSerialComm.SerialPort;
 
 public class ArduinoCommunication {
@@ -12,6 +14,7 @@ public class ArduinoCommunication {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		sp.setComPortParameters(9800, 8, 1, 0);
 		sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);
+		sp.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
 
 		// Check if the port is open:
 		if (sp.openPort()) {
@@ -26,7 +29,7 @@ public class ArduinoCommunication {
 			sp.getOutputStream().write(i.byteValue());
 			sp.getOutputStream().flush();
 			// Check if the number is sent:
-			//System.out.println("Sent number: " + i);
+			// System.out.println("Sent number: " + i);
 			Thread.sleep(1000);
 		}
 
@@ -37,8 +40,8 @@ public class ArduinoCommunication {
 			System.out.println("Port is NOT closed :(");
 		}
 	}
-	
-	// Method to get al the port numbers available. 
+
+	// Method to get al the port numbers available.
 	public static ArrayList<String> portNumbersAvailable() {
 		ArrayList<String> allPorts = new ArrayList<>();
 		SerialPort ports[] = SerialPort.getCommPorts();
@@ -50,8 +53,18 @@ public class ArduinoCommunication {
 		}
 		return allPorts;
 	}
-	
-	/* LET OP: Onderstaande methodes werken nog niet!!!*/
+
+	// Method to read data from the arduino:
+	public void dataArduino() {
+		Scanner dataFromArduino = new Scanner(sp.getInputStream());
+		//String result = "";
+		while (dataFromArduino.hasNextLine()) {
+			System.out.println(dataFromArduino.nextLine());
+		}
+		dataFromArduino.close();
+	}
+
+	/* LET OP: Onderstaande methodes werken nog niet!!! */
 	public String sendToArduino(int number) {
 		sp.setComPortParameters(9800, 8, 1, 0);
 		sp.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);
@@ -65,10 +78,10 @@ public class ArduinoCommunication {
 		}
 
 		// Cijfers 0 tot 4 sturen naar de Arduino:
-			//sp.getOutputStream().write(number.byteValue());
-			//sp.getOutputStream().flush();
-			//System.out.println("Sent number: " + number);
-			//Thread.sleep(1000);
+		// sp.getOutputStream().write(number.byteValue());
+		// sp.getOutputStream().flush();
+		// System.out.println("Sent number: " + number);
+		// Thread.sleep(1000);
 
 		// Controleren of de poort gesloten is:
 		if (sp.closePort()) {

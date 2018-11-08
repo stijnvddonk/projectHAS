@@ -1,5 +1,6 @@
 package logic_tier;
 
+import data_tier.DataLogger;
 import java.util.HashMap;
 import java.util.Map;
 import java.sql.ResultSet;
@@ -13,9 +14,9 @@ public class Admin extends User{
 
   // add device
 //  public void newDevice(String deviceName, String deviceType) {
-//		System.out.println("new Device Method Called");
+//		DataLogger.systemLog("new Device Method Called");
 //		try {
-//			System.out.println("Device Name: " + deviceName);
+//			DataLogger.systemLog("Device Name: " + deviceName);
 //			//Resultset query = qb.insertNewDevice(deviceName, MACAdres, IPAdres, versionNumber, deviceType);
 //			//PreparedStatement pst;
 //			//pst = db.prepareStatement(query);
@@ -28,7 +29,7 @@ public class Admin extends User{
 //			 pst.setInt(6, typeID);
 //			//pst.executeUpdate();
 //		} catch (Exception e) {
-//			System.out.println(e);
+//			DataLogger.errorLog(e);
 //			JOptionPane.showMessageDialog(null, e);
 //		}
 //	}
@@ -45,7 +46,7 @@ public class Admin extends User{
     //pst.executeUpdate();
     JOptionPane.showMessageDialog(null, "Device has been Disabled!");
   } catch (Exception e) {
-    System.out.println(e);
+    DataLogger.errorLog(e);
   }
 }
 
@@ -57,7 +58,7 @@ public class Admin extends User{
 //   // pst.executeUpdate();
 //   JOptionPane.showMessageDialog(null, "User has been Deleted!");
 // } catch (Exception e) {
-//   System.out.println(e);
+//   DataLogger.errorLog(e);
 // }
 // }
 
@@ -71,7 +72,7 @@ public class Admin extends User{
 //    pst.executeUpdate();
 //    JOptionPane.showMessageDialog(null, "Device has been Deleted!");
 //  } catch (Exception e) {
-//    System.out.println(e);
+//    DataLogger.errorLog(e);
 //  }
 //}
 

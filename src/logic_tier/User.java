@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 
 import data_tier.QueryBuilder;
 import data_tier.passwordAuthentication;
+import data_tier.DataLogger;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,9 @@ import java.sql.Timestamp;
 public class User {
 ;
 	protected QueryBuilder qb = new QueryBuilder();
-	private passwordAuthentication pswa;
+	//private passwordAuthentication pswa OLD
+	//New
+	private passwordAuthentication pswa =  new passwordAuthentication();
 
 	protected Integer userID;
 	protected String username;
@@ -53,81 +56,46 @@ public class User {
 		lastLogin = llog;
 		
 	}
-	
-
-	/* 
-	 * Method: createNewUser
-	 * Return: Integer, success (1) / Failed (0)
-	 */
-	public void createNewUser(String ufn, String uun, String uea, String uro) {
-		Integer result = 1; // Standard it will say it successfull.
-
-		Predicate<User> pun = e -> e.username.contains(uun);
-		Predicate<User> pea = e -> e.emailaddress.contains(uea);
-		System.out.print("uun: " + uun + "\n");
-		
-		if (userObject.stream().allMatch(pun))
-		{
-			System.out.print("Username "+ uun + " found\n");
-			result = 0;
-		} 
-		
-		if (userObject.stream().allMatch(pea))
-		{
-			System.out.print("Emailaddress "+ uea + " found\n");
-			result = 0;
-		}
-		
-		if (result == 1) {
-			System.out.print(pswa.getPeperString(25));
-			String pass = pswa.getPeperString(25);
-			Integer role = 1;
-			String token = pswa.hash(pass.toCharArray());
-			qb.insertUser(ufn, uun, pass, uea, role, token);
-		} else {
-			System.out.print("Error");
-		}
-	}
 
 	private String[][] convertArrayListToArray(ArrayList<ArrayList<String>> output) {
 		String[][] array = new String[output.size()][];
 		for (int i = 0; i < output.size(); i++) {
 			ArrayList<String> row = output.get(i);
-			System.out.println(output.get(i).toString());
+			DataLogger.systemLog(output.get(i).toString());
 			array[i] = row.toArray(new String[row.size()]);
 		}
 		return array;
 	}
 
 	public String[][] Devices() {
-		System.out.println("Starting data retrieval");
+		DataLogger.systemLog("Starting data retrieval");
 		ResultSet rs = null;
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		try {
-			System.out.println("Start Try");
+			DataLogger.systemLog("Start Try");
 			rs = qb.Devices();
 			while (rs.next()) {
 				ArrayList<String> row = new ArrayList<String>();
 				row.add(rs.getString("name"));
 				output.add(row);
 			}
-			System.out.println(output.toString());
+			DataLogger.systemLog(output.toString());
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 		
 		return convertArrayListToArray(output);
 	}
 
 	public String[][] Users() {
-		System.out.println("/n/n-----------------/nStarting userdata retrieval v2/n");
+		DataLogger.systemLog("/n/n-----------------/nStarting userdata retrieval v2/n");
 		
 		if (userNameList == null) {
 		
 			ResultSet rs = null;
 			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 			try {
-				System.out.println("Start Try");
+				DataLogger.systemLog("Start Try");
 				rs = qb.Users();
 				while (rs.next()) {
 					ArrayList<String> row = new ArrayList<String>();
@@ -149,66 +117,104 @@ public class User {
 					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
 					userObject.add(tempUsrObj);
 				}
-				System.out.println(output.toString());
+				DataLogger.systemLog(output.toString());
 			} catch (Exception e) {
-				System.out.println(e);
+				DataLogger.errorLog(e);
 			}
 			userNameList = output;
 		}		
 		return convertArrayListToArray(userNameList);
 	}
+	
+	/* 
+	 * Method: createNewUser
+	 * Return: Integer, success (1) / Failed (0)
+	 */
+	public void createNewUser(String ufn, String uun, String uea, String uro) {
+		Integer result = 1; // Standard it will say it successfull.
+
+		Predicate<User> pun = e -> e.username.contains(uun);
+		Predicate<User> pea = e -> e.emailaddress.contains(uea);
+		DataLogger.systemLog("uun: " + uun + "\n");
+		
+		if (userObject.stream().allMatch(pun))
+		{
+			DataLogger.systemLog("Username "+ uun + " found\n");
+			result = 0;
+		} 
+		//Emailadres wordt gevonden wanneer deze leeg is
+		if (userObject.stream().allMatch(pea))
+		{
+			DataLogger.systemLog("Emailaddress "+ uea + " found\n");
+			result = 0;
+		}
+		
+		if (result == 1) {
+			String pass = pswa.getPeperString(25);
+			Integer role = 1;
+			String token = pswa.hash(pass.toCharArray());
+			try {
+				qb.insertUser(ufn, uun, pass, uea, role, token);
+				JOptionPane.showMessageDialog(null, "User has been Added!");
+			} catch (Exception e) {
+				DataLogger.errorLog(e);
+			}
+			
+		} else {
+			DataLogger.systemLog("Error");
+		}
+
+	}
 
 	public Integer getDeviceTypeID(String deviceName) {
-		System.out.println("Device Type ID Database Loaded");
+		DataLogger.systemLog("Device Type ID Database Loaded");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.DevicesTypeID(deviceName);
-			System.out.println("# - Updating...");
+			DataLogger.systemLog("# - Updating...");
 
 			while (rs.next()) {
-				System.out.println(rs.getInt("typeID"));
 				typeID = rs.getInt("typeID");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
 	}
 
 	public Integer getDeviceEnabledStatus(String deviceName) {
-		System.out.println("Device Enabled Status Database Loaded");
+		DataLogger.systemLog("Device Enabled Status Database Loaded");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.DevicesEnabledStatus(deviceName);
-			System.out.println("# - Updating...");
+			DataLogger.systemLog("# - Updating...");
 
 			while (rs.next()) {
-				System.out.println(rs.getInt("DeviceEnabled"));
 				typeID = rs.getInt("DeviceEnabled");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
 	}
 
 	public void getDeviceTypes(JComboBox selectBox) {
-		System.out.println("Device Type Database Loaded");
+		DataLogger.systemLog("Device Type Database Loaded");
 		ResultSet rs = null;
 		try {
 			rs = qb.getDeviceTypes();
-			System.out.println("# - Updating...");
+			DataLogger.systemLog("# - Updating...");
 
 			while (rs.next()) {
 				selectBox.addItem(rs.getString("Omschrijving"));
-				System.out.println(rs.getString("Omschrijving"));
+				DataLogger.systemLog(rs.getString("Omschrijving"));
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 	}
@@ -217,24 +223,23 @@ public class User {
 		try {
 			qb.enableDisableDevice(id, deviceName);
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
 	public Integer getDeviceTimerEnabledStatus(String deviceName) {
-		System.out.println("Device Timer Enabled Status Database Loaded");
+		DataLogger.systemLog("Device Timer Enabled Status Database Loaded");
 		Integer typeID = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.DevicesTimerStatus(deviceName);
-			System.out.println("# - Updating...");
+			DataLogger.systemLog("# - Updating...");
 
 			while (rs.next()) {
-				System.out.println(rs.getInt("timerStatus"));
 				typeID = rs.getInt("timerStatus");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
@@ -244,23 +249,23 @@ public class User {
 		try {
 			qb.enableDisableTimerDevice(id, deviceName);
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
 	public void getOnOffTimer(JComboBox timerOn, JComboBox timerOff, String deviceName) {
-		System.out.println("Device Timer Database Loaded");
+		DataLogger.systemLog("Device Timer Database Loaded");
 		ResultSet rs = null;
 		try {
 			rs = qb.getStartEndTime(deviceName);
-			System.out.println("# - Updating...");
+			DataLogger.systemLog("# - Updating...");
 
 			while (rs.next()) {
 				timerOn.setSelectedItem(rs.getString("timerOn"));
 				timerOff.setSelectedItem(rs.getString("timerOff"));
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 	}
@@ -269,7 +274,7 @@ public class User {
 		try {
 			qb.setStartEndTime(timerOn,timerOff, deviceName);
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
@@ -278,22 +283,22 @@ public class User {
 			qb.deleteDevice(deviceName);
 			JOptionPane.showMessageDialog(null, "Device has been Deleted!");
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 
 	public String getTopIP() {
-		System.out.println("Device Timer Enabled Status Database Loaded");
+		DataLogger.systemLog("Device Timer Enabled Status Database Loaded");
 		String lastIP = null;
 		ResultSet rs = null;
 		try {
 			rs = qb.getTopIP();
 			while (rs.next()) {
-				System.out.println(rs.getString("IP"));
+				DataLogger.systemLog(rs.getString("IP"));
 				lastIP = rs.getString("IP");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return lastIP;
@@ -305,11 +310,10 @@ public class User {
 		try {
 			rs = qb.getDeviceTypesID(type);
 			while (rs.next()) {
-				System.out.println(rs.getInt("id"));
 				typeID = rs.getInt("id");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 			JOptionPane.showMessageDialog(null, "ERROR");
 		}
 		return typeID;
@@ -330,7 +334,7 @@ public class User {
 			qb.addNewDevice(deviceName, IPAdres, typeID, MACAdres);
 			JOptionPane.showMessageDialog(null, "Device has been Added!");
 		} catch (Exception e) {
-			System.out.println(e);
+			DataLogger.errorLog(e);
 		}
 	}
 

@@ -18,7 +18,7 @@ public class DataLogger {
 		return name + timeStamp;
 	}
 
-	public static void log(String msg) {
+	public static void systemLog(String msg) {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
 		String name = filename;
 		File file = null;
@@ -37,7 +37,7 @@ public class DataLogger {
 			}
 
 		} catch (Exception e) {
-			errorLog(e);
+			System.out.print(e);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class DataLogger {
 				out.close();
 			}
 		} catch (Exception e) {
-			System.out.println("error");
+			DataLogger.systemLog("error");
 		}
 	}
 
@@ -81,7 +81,7 @@ public class DataLogger {
 				out.close();
 			}
 		} catch (Exception e) {
-			System.out.println("error");
+			DataLogger.systemLog("error");
 		}
 	}
 
@@ -104,7 +104,7 @@ public class DataLogger {
 			}
 
 		} catch (Exception e) {
-			errorLog(e);
+			System.out.print(e);
 		}
 	}
 
@@ -127,7 +127,7 @@ public class DataLogger {
 			}
 
 		} catch (Exception e) {
-			errorLog(e);
+			System.out.print(e);
 		}
 	}
 
@@ -149,7 +149,7 @@ public class DataLogger {
 				out.close();
 			}
 		} catch (Exception e) {
-			System.out.println("error");
+			DataLogger.systemLog("error");
 		}
 	}
 }

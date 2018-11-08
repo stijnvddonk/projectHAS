@@ -25,11 +25,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import data_tier.DataLogger;
 import logic_tier.User;
 
 public class UserMenu extends JFrame {
 
-	private User us;
+	User us;
 	private JPanel contentPane;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
@@ -42,7 +43,9 @@ public class UserMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public UserMenu(User _us) {
+		// Refresh van de Tabel na new User werkt niet
 		us = _us;
+		
 		setTitle("User Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -220,7 +223,7 @@ public class UserMenu extends JFrame {
 		if (model != null)
 			model.setRowCount(0);
 		String[] header = { "User Name" };
-		System.out.println("Loading data");
+		DataLogger.systemLog("Loading data");
 		String[][] data = us.Users();
 		model = new DefaultTableModel(data, header);
 		table = new JTable(model) {

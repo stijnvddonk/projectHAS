@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
+import data_tier.DataLogger;
 import logic_tier.User;
 
 import java.awt.event.ActionListener;
@@ -28,15 +29,15 @@ import java.awt.event.ActionEvent;
 public class NewDeviceMenu extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JComboBox combobox = new JComboBox();
+	private JTextField txtDeviceName;
+	private JComboBox cbDeviceType = new JComboBox();
 	private User us;
 	/**
 	 * Create the frame.
 	 */
 	public NewDeviceMenu(User _us) {
 		us = _us;
-		us.getDeviceTypes(combobox);
+		us.getDeviceTypes(cbDeviceType);
 		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280,720);
@@ -101,11 +102,11 @@ public class NewDeviceMenu extends JFrame {
 		lblSystemSettings.setBounds(6, 327, 300, 55);
 		panel.add(lblSystemSettings);
 		
-		JButton btnRemoveDevice = new JButton("Create Device");
-		btnRemoveDevice.addActionListener(new ActionListener() {
+		JButton btnAddDevice = new JButton("Create Device");
+		btnAddDevice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField_1.getText().equals("")) {
-					JOptionPane.showMessageDialog(textField_1, "Please enter a valid Device Name");
+				if (txtDeviceName.getText().equals("")) {
+					JOptionPane.showMessageDialog(txtDeviceName, "Please enter a valid Device Name");
 				} else {
 					newDevice();
 					DeviceMenu dm = new DeviceMenu(us);
@@ -114,8 +115,8 @@ public class NewDeviceMenu extends JFrame {
 				}
 			}
 		});
-		btnRemoveDevice.setBounds(993, 622, 190, 70);
-		contentPane.add(btnRemoveDevice);
+		btnAddDevice.setBounds(993, 622, 190, 70);
+		contentPane.add(btnAddDevice);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(458, 139, 725, 12);
@@ -162,14 +163,14 @@ public class NewDeviceMenu extends JFrame {
 		separator_4.setBounds(510, 469, 310, 12);
 		contentPane.add(separator_4);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(510, 480, 602, 48);
-		contentPane.add(textField_1);
-		combobox.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		txtDeviceName = new JTextField();
+		txtDeviceName.setColumns(10);
+		txtDeviceName.setBounds(510, 480, 602, 48);
+		contentPane.add(txtDeviceName);
+		cbDeviceType.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		
-		combobox.setBounds(510, 252, 602, 66);
-		contentPane.add(combobox);
+		cbDeviceType.setBounds(510, 252, 602, 66);
+		contentPane.add(cbDeviceType);
 		
 		JSeparator separator_6 = new JSeparator();
 		separator_6.setBounds(652, 196, 363, 12);
@@ -193,13 +194,13 @@ public class NewDeviceMenu extends JFrame {
 	}
 	
 	public void newDevice() {
-		String deviceType = combobox.getSelectedItem().toString();
+		String deviceType = cbDeviceType.getSelectedItem().toString();
 		int typeID = us.getTypeID(deviceType);
-		System.out.println(deviceType);
-		String deviceName = textField_1.getText();
+		DataLogger.systemLog(deviceType);
+		String deviceName = txtDeviceName.getText();
 		String lastIP= us.getTopIP();
 		String newIP = "192.168.10." + (Integer.parseInt(lastIP.substring(11,lastIP.length()))+1);
-	    System.out.println(newIP);
+	    DataLogger.systemLog(newIP);
 	    us.addNewDevice(deviceName, newIP, typeID);
 	}
 }

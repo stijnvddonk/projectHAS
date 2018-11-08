@@ -1,5 +1,7 @@
 package logic_tier;
 
+import data_tier.DataLogger;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Calendar;
@@ -31,13 +33,13 @@ public class Login {
 
 	public Login() {
 		if (debug)
-			System.out.print("Login loaded\n\n---------------------\n");
+			DataLogger.systemLog("Login loaded\n\n---------------------\n");
 	}
 
 	public void login(String user, String pass) {
 		ResultSet rs = null;
 		if (debug)
-			System.out.print("The user is: " + user + "\nThe password is: " + pass + "\n");
+			DataLogger.systemLog("The user is: " + user + "\nThe password is: " + pass + "\n");
 		String saltedPass = qb.selectSaltedPassword(user, pass);
 		try {
 			rs = qb.selectLogin(user, saltedPass);
@@ -51,19 +53,19 @@ public class Login {
 			}
 		} catch (Exception e) {
 			if (debug)
-				System.out.print(e.getStackTrace());
+				DataLogger.errorLog(e);
 //			logging.errorLog(e);
 		}
 
 		if (debug)
-			System.out.print("User data:\n- userid: " + this.userid + "\n- role: " + this.role + "\n- username: "
+			DataLogger.systemLog("User data:\n- userid: " + this.userid + "\n- role: " + this.role + "\n- username: "
 					+ this.username + "\n- password: " + this.password + "\n- token: " + this.token + "\n");
 
 		if (validateUser(user, saltedPass, pass)) {
 			// Call Next Class
 			// Create userObject
 			this.user.setUser(userid, username, password, role, token, active);
-			
+
 //			if (this.debug) logging.log("Call next class\n");
 			if (this.role.equals(1)) {
 				DeviceMenu dm = new DeviceMenu(this.user);
@@ -83,24 +85,24 @@ public class Login {
 
 		if (user.isEmpty() || pass.isEmpty()) {
 			if (this.debug)
-				System.out.print("Incorrect not all field filled in.\n");
+				DataLogger.systemLog("Incorrect not all field filled in.\n");
 		} else if (this.active != 1) {
 			if (this.debug)
-				System.out.print("User is deactivated.\n");
+				DataLogger.systemLog("User is deactivated.\n");
 		} else if (!user.equals(this.username) || !saltedPass.equals(this.password)) {
 			if (this.debug)
-				System.out.print("Incorrect username or password.\n");
+				DataLogger.systemLog("Incorrect username or password.\n");
 		} else if (user.equals(this.username) && pswa.authenticate(pass.toCharArray(), this.token)) {
 			Calendar calendar = Calendar.getInstance();
 			java.sql.Timestamp currentTimeStamp = new java.sql.Timestamp(calendar.getTime().getTime());
 			valid = true;
 			qb.updateLogin(this.userid, currentTimeStamp);
 			if (this.debug)
-				System.out.print("Correct credentials.\n");
+				DataLogger.systemLog("Correct credentials.\n");
 		}
 
 		if (debug)
-			System.out.print("---------------------\n");
+			DataLogger.systemLog("---------------------\n");
 
 		return valid;
 	}

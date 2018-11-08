@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import data_tier.DataLogger;
 import data_tier.DatabaseManager;
 import data_tier.QueryBuilder;
 
@@ -51,7 +52,7 @@ public class Device {
 	public void setDeviceData(int deviceID) {
 		ResultSet rs = null;
 		String query = qb.setDeviceData(deviceID);
-		System.out.println("Project Query: " + query + "\n");
+		DataLogger.systemLog("Project Query: " + query + "\n");
 
 		try {
 			for (rs = this.dbm.execute(query); rs.next();) {
@@ -74,9 +75,9 @@ public class Device {
 	}
 
 //	  public void newDevice(String deviceName, String deviceType) {
-//			System.out.println("new Device Method Called");
+//			DataLogger.systemLog("new Device Method Called");
 //			try {
-//				System.out.println("Device Name: " + deviceName);
+//				DataLogger.systemLog("Device Name: " + deviceName);
 //				//Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
 //				PreparedStatement pst;
 //				pst = db.prepareStatement(query);
@@ -100,7 +101,7 @@ public class Device {
 //				 Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
 //				//pst.executeUpdate();
 //			} catch (Exception e) {
-//				System.out.println(e);
+//				DataLogger.errorLog(e);
 //				JOptionPane.showMessageDialog(null, e);
 //			}
 //		}

@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
@@ -19,8 +21,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
+import data_tier.DataLogger;
 import logic_tier.User;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NewUserMenu extends JFrame {
 
@@ -29,6 +34,7 @@ public class NewUserMenu extends JFrame {
 	private JTextField txtUsername;
 	private JTextField txtFullName;
 	private JTextField txtEmailaddress;
+	private JComboBox cbUserRole = new JComboBox();
 
 	/**
 	 * Create the frame.
@@ -156,10 +162,9 @@ public class NewUserMenu extends JFrame {
 		txtFullName = new JTextField();
 		txtFullName.setFont(new Font("Calibri", Font.PLAIN, 18));
 		txtFullName.setColumns(10);
-		txtFullName.setBounds(509, 264, 602, 48);
+		txtFullName.setBounds(509, 276, 602, 48);
 		contentPane.add(txtFullName);
 		
-		JComboBox cbUserRole = new JComboBox();
 		cbUserRole.setFont(new Font("Calibri", Font.PLAIN, 18));
 		cbUserRole.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User"}));
 		cbUserRole.setBounds(509, 588, 291, 48);
@@ -184,21 +189,39 @@ public class NewUserMenu extends JFrame {
 		lblEmailaddress.setBounds(509, 436, 277, 55);
 		contentPane.add(lblEmailaddress);
 		
-		JButton btnRemoveDevice = new JButton("Save & Close");
-		btnRemoveDevice.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				System.out.print("Save & Close mannn!");
-				String ufn = txtFullName.getText();
-				String uun = txtUsername.getText();
-				String uea = txtEmailaddress.getText();
-				String uro = String.valueOf(cbUserRole.getSelectedItem());
-				System.out.print("\nFull Name: " + ufn + "\nUsername: " + uun + "\nEmailaddress: " + uea + "\nRole: " + uro + "\n");
-				us.createNewUser(ufn, uun, uea, uro);
+		JButton btnAddUser = new JButton("Save & Close");
+		btnAddUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtUsername.getText().equals("")) {
+					JOptionPane.showMessageDialog(txtUsername, "Please enter a valid Username Name");
+				} else {
+					newUser();
+					UserMenu um = new UserMenu(us);
+					um.setVisible(true);
+					dispose();
+				}
 			}
 		});
-		btnRemoveDevice.setFont(new Font("Calibri", Font.BOLD, 18));
-		btnRemoveDevice.setBounds(992, 622, 190, 70);
-		contentPane.add(btnRemoveDevice);
+		btnAddUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				newUser();
+				UserMenu um = new UserMenu(us);
+				um.setVisible(true);
+				dispose();
+			}
+		});
+		btnAddUser.setFont(new Font("Calibri", Font.BOLD, 18));
+		btnAddUser.setBounds(992, 622, 190, 70);
+		contentPane.add(btnAddUser);
+	}
+	
+	public void newUser() {
+		String ufn = txtFullName.getText();
+		String uun = txtUsername.getText();
+		String uea = txtEmailaddress.getText();
+		String uro = String.valueOf(cbUserRole.getSelectedItem());
+		DataLogger.systemLog("\nFull Name: " + ufn + "\nUsername: " + uun + "\nEmailaddress: " + uea + "\nRole: " + uro + "\n");
+		us.createNewUser(ufn, uun, uea, uro);
 	}
 }

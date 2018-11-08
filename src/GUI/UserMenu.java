@@ -236,7 +236,7 @@ public class UserMenu extends JFrame {
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
 		table.setRowHeight(35);
 		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
-		table.setSelectionModel(new ForcedListSelectionModel());;
+		table.setSelectionModel(new ForcedListSelectionModel());
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(186);
 		table.setRowSelectionInterval(0, 0);

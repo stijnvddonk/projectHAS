@@ -237,7 +237,7 @@ public class DeviceMenu extends JFrame {
 		comboBoxTimeOff.setRenderer(new DateFormattedListCellRenderer(new SimpleDateFormat("HH:mm")));
 		comboBoxTimeOff.setBounds(1020, 393, 161, 55);
 		contentPane.add(comboBoxTimeOff);
-
+		
 		btnSaveSettings.setBounds(601, 622, 190, 70);
 		btnSaveSettings.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -326,7 +326,9 @@ public class DeviceMenu extends JFrame {
 
 	public void setOnOffTime(JComboBox comboBoxTimeOn, JComboBox comboBoxTimeOff, String deviceName) {
 		String timeOn = comboBoxTimeOn.getSelectedItem().toString();
+		System.out.println(timeOn);
 		String timeOff = comboBoxTimeOff.getSelectedItem().toString();
+		System.out.println(timeOff);
 		us.setStartEndTime(timeOn, timeOff, deviceName);
 	}
 

@@ -18,9 +18,9 @@ public class DatabaseManager {
 	private void setConnection() {
 		try {
 			db = DriverManager.getConnection(dbBuild, cfg.getProperty("dbUser"), cfg.getProperty("dbPass"));
-			if (this.debug) DataLogger.systemLog("Connection successfully\n");
+			if (this.debug) DataLogger.systemLog("Connection successfully");
 		} catch (Exception e) {
-			e.printStackTrace();
+			DataLogger.errorLog(e);
 		}
 	}
 

@@ -10,7 +10,7 @@ public class QueryBuilder {
 
 	// The call of the QueryBuilder
 	public QueryBuilder() {
-		if (this.debug) DataLogger.systemLog("Query builder loaded\n");
+		if (this.debug) DataLogger.systemLog("Query builder loaded");
 		dbm = new DatabaseManager();
 	}
 
@@ -39,7 +39,7 @@ public class QueryBuilder {
 		if (this.debug) DataLogger.systemLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
-	
+
 	// Get a list of Users
 	public ResultSet Users() {
 		if (this.debug) DataLogger.systemLog("QueryBuilder: Devices\n");
@@ -139,7 +139,7 @@ public class QueryBuilder {
 		DataLogger.systemLog("- Query: " + query + "\n");
 		return dbm.execute(query);
 	}
-	
+
 	public ResultSet getDeviceTypesID(String omschrijving) {
 		if (debug) DataLogger.systemLog("QueryBuilder: getDeviceTypesID\n");
 		String query = "SELECT id FROM DeviceTypes WHERE Omschrijving = '" + omschrijving + "'";
@@ -148,7 +148,7 @@ public class QueryBuilder {
 	}
 
 	public String selectSaltedPassword(String user, String pass) {
-		if (this.debug) DataLogger.systemLog("QueryBuilder: selectSaltedPassword\n");
+		if (this.debug) DataLogger.systemLog("QueryBuilder: selectSaltedPassword");
 		String query = "SELECT * FROM Peper WHERE peperId=(SELECT userId FROM Users WHERE username='" + user + "' LIMIT 1) LIMIT 1";
 		if (this.debug) DataLogger.systemLog("- Query: " + query + "\n");
 		if (this.debug) DataLogger.systemLog("Salt: " + cfg.getProperty("salt") + pass + "\n");
@@ -168,7 +168,7 @@ public class QueryBuilder {
 		dbm.updateLogin(query, userid, currentTimeStamp);
 	}
 
-	public Integer insertUser(String fullname, String username, String pass, String email, Integer role, String token) {		
+	public Integer insertUser(String fullname, String username, String pass, String email, Integer role, String token) {
 		DataLogger.systemLog("QueryBuilder: insertUser\n");
 		DataLogger.systemLog("Values:\nFullname: " + fullname + "\n- username: " + username + "\n- password: " + pass + "\n- email: " + email + "\n- Role: " + role + "\n- token: " + token + "\n");
 		String query = "INSERT INTO users (Name, Email, Role, userName, Password, Active, locked, attempts, lockedUntil, Token, lastLogin) VALUES ( '" + fullname + "', '" + email + "', '1', '" + username + "', '" + pass + "', '1', '0', '0', NULL, '" + token + "', NULL)";

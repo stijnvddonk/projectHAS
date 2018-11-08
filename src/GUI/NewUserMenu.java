@@ -124,17 +124,17 @@ public class NewUserMenu extends JFrame {
 		
 		JLabel lblTimer = new JLabel("Full name");
 		lblTimer.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblTimer.setBounds(509, 209, 277, 55);
+		lblTimer.setBounds(509, 203, 277, 55);
 		contentPane.add(lblTimer);
 		
 		JLabel lblTimerOn = new JLabel("Username");
 		lblTimerOn.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblTimerOn.setBounds(509, 324, 277, 55);
+		lblTimerOn.setBounds(509, 318, 277, 55);
 		contentPane.add(lblTimerOn);
 		
 		JLabel lblTimerOff = new JLabel("User role");
 		lblTimerOff.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		lblTimerOff.setBounds(509, 534, 277, 55);
+		lblTimerOff.setBounds(509, 528, 277, 55);
 		contentPane.add(lblTimerOff);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -142,32 +142,32 @@ public class NewUserMenu extends JFrame {
 		contentPane.add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(509, 251, 310, 12);
+		separator_2.setBounds(509, 245, 310, 12);
 		contentPane.add(separator_2);
 		
 		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(509, 367, 310, 12);
+		separator_3.setBounds(509, 361, 310, 12);
 		contentPane.add(separator_3);
 		
 		JSeparator separator_4 = new JSeparator();
-		separator_4.setBounds(509, 577, 310, 12);
+		separator_4.setBounds(509, 571, 310, 12);
 		contentPane.add(separator_4);
 		
 		txtUsername = new JTextField();
 		txtUsername.setFont(new Font("Calibri", Font.PLAIN, 18));
 		txtUsername.setColumns(10);
-		txtUsername.setBounds(509, 377, 602, 48);
+		txtUsername.setBounds(509, 371, 602, 48);
 		contentPane.add(txtUsername);
 		
 		txtFullName = new JTextField();
 		txtFullName.setFont(new Font("Calibri", Font.PLAIN, 18));
 		txtFullName.setColumns(10);
-		txtFullName.setBounds(509, 276, 602, 48);
+		txtFullName.setBounds(509, 270, 602, 48);
 		contentPane.add(txtFullName);
 		
 		cbUserRole.setFont(new Font("Calibri", Font.PLAIN, 18));
 		cbUserRole.setModel(new DefaultComboBoxModel(new String[] {"Admin", "User"}));
-		cbUserRole.setBounds(509, 588, 291, 48);
+		cbUserRole.setBounds(509, 582, 291, 48);
 		contentPane.add(cbUserRole);
 		
 		JSeparator separator_6 = new JSeparator();
@@ -177,11 +177,11 @@ public class NewUserMenu extends JFrame {
 		txtEmailaddress = new JTextField();
 		txtEmailaddress.setFont(new Font("Calibri", Font.PLAIN, 18));
 		txtEmailaddress.setColumns(10);
-		txtEmailaddress.setBounds(509, 489, 602, 48);
+		txtEmailaddress.setBounds(509, 483, 602, 48);
 		contentPane.add(txtEmailaddress);
 		
 		JSeparator separator_7 = new JSeparator();
-		separator_7.setBounds(509, 479, 310, 12);
+		separator_7.setBounds(509, 473, 310, 12);
 		contentPane.add(separator_7);
 		
 		JLabel lblEmailaddress = new JLabel("Emailaddress");
@@ -214,6 +214,17 @@ public class NewUserMenu extends JFrame {
 		btnAddUser.setFont(new Font("Calibri", Font.BOLD, 18));
 		btnAddUser.setBounds(992, 622, 190, 70);
 		contentPane.add(btnAddUser);
+		
+		JButton button = new JButton("Return");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMenu um = new UserMenu(us);
+				um.setVisible(true);
+				dispose();
+			}
+		});
+		button.setBounds(395, 622, 190, 70);
+		contentPane.add(button);
 	}
 	
 	public void newUser() {

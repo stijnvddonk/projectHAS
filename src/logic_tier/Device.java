@@ -70,41 +70,9 @@ public class Device {
 				deviceData.put("Device Name: ", this.name);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			DataLogger.errorLog(e);
 		}
 	}
-
-//	  public void newDevice(String deviceName, String deviceType) {
-//			DataLogger.systemLog("new Device Method Called");
-//			try {
-//				DataLogger.systemLog("Device Name: " + deviceName);
-//				//Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
-//				PreparedStatement pst;
-//				pst = db.prepareStatement(query);
-//				 pst.setInt(1, deviceID);
-//				 pst.setString(2, deviceName);
-//				 pst.setString(3, mac);
-//				 pst.setString(4, ip);
-//				 pst.setString(5, versionNumber);
-//					switch (deviceType) {
-//					case "Lamp":
-//						typeID = 1;
-//						break;
-//					case "Deur":
-//						typeID = 2;
-//						break;
-//					case "LuchtVochtigheids Lezer":
-//						typeID = 3;
-//						break;
-//					}
-//				 pst.setInt(6, typeID);
-//				 Resultset query = qb.insertNewDevice(deviceName, mac, ip, versionNumber, deviceType);
-//				//pst.executeUpdate();
-//			} catch (Exception e) {
-//				DataLogger.errorLog(e);
-//				JOptionPane.showMessageDialog(null, e);
-//			}
-//		}
 
 	public int getDeviceID() {
 		return this.deviceID;

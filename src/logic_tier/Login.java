@@ -39,7 +39,7 @@ public class Login {
 	public void login(String user, String pass) {
 		ResultSet rs = null;
 		if (debug)
-			DataLogger.systemLog("The user is: " + user + "\nThe password is: " + pass + "\n");
+			DataLogger.systemLog("The user is: " + user + "\nThe password is: " + pass);
 		String saltedPass = qb.selectSaltedPassword(user, pass);
 		try {
 			rs = qb.selectLogin(user, saltedPass);

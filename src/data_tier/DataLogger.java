@@ -5,12 +5,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Locale;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DataLogger {
 
 	//static String sessionName = Company.sessionString();
 	private static final String filename = logName() + ".txt";
+	
+	public static String timeStamp() {
+		LocalDateTime ldt = LocalDateTime.now().plusDays(1);
+		DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH.mm.ss", Locale.ENGLISH);
+		String formatter = formmat1.format(ldt);
+		return formatter;		
+	}
 
 	public static String logName() {
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());

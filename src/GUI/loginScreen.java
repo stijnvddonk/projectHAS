@@ -17,6 +17,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 
+import data_tier.DataLogger;
+
 
 public class loginScreen {
 
@@ -37,7 +39,7 @@ public class loginScreen {
 					loginScreen window = new loginScreen();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					DataLogger.errorLog(e);
 				}
 			}
 		});

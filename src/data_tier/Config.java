@@ -20,7 +20,7 @@ public class Config {
 
 		} catch(Exception e) {
 			DataLogger.systemLog("Config file won't load!\n");
-			e.printStackTrace();
+			DataLogger.errorLog(e);
 		}
 	}
 

@@ -153,7 +153,7 @@ public class QueryBuilder {
 		if (this.debug) DataLogger.systemLog("- Query: " + query + "\n");
 		if (this.debug) DataLogger.systemLog("Salt: " + cfg.getProperty("salt") + pass + "\n");
 		return cfg.getProperty("salt") + pass + dbm.getPassPeper(query);
-	}
+	}	
 
 	public ResultSet selectLogin(String user, String peperredPass) {
 		if (this.debug) DataLogger.systemLog("QueryBuilder: selectLogin\n");
@@ -174,7 +174,6 @@ public class QueryBuilder {
 		String query = "INSERT INTO users (Name, Email, Role, userName, Password, Active, locked, attempts, lockedUntil, Token, lastLogin) VALUES ( '" + fullname + "', '" + email + "', '1', '" + username + "', '" + pass + "', '1', '0', '0', NULL, '" + token + "', NULL)";
 		DataLogger.systemLog(query + "\n");
 		return dbm.__insert(query);
-//		return 1;
 	}
 
 }

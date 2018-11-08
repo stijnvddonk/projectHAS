@@ -223,6 +223,7 @@ public class UserMenu extends JFrame {
 		if (model != null)
 			model.setRowCount(0);
 		String[] header = { "User Name" };
+		
 		DataLogger.systemLog("Loading data");
 		String[][] data = us.Users();
 		model = new DefaultTableModel(data, header);

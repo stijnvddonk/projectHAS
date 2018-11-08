@@ -25,8 +25,6 @@ import java.sql.Timestamp;
 public class User {
 ;
 	protected QueryBuilder qb = new QueryBuilder();
-	//private passwordAuthentication pswa OLD
-	//New
 	private passwordAuthentication pswa =  new passwordAuthentication();
 
 	protected Integer userID;
@@ -90,8 +88,6 @@ public class User {
 	public String[][] Users() {
 		DataLogger.systemLog("/n/n-----------------/nStarting userdata retrieval v2/n");
 		
-		if (userNameList == null) {
-		
 			ResultSet rs = null;
 			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 			try {
@@ -122,7 +118,6 @@ public class User {
 				DataLogger.errorLog(e);
 			}
 			userNameList = output;
-		}		
 		return convertArrayListToArray(userNameList);
 	}
 	

@@ -10,10 +10,13 @@ import data_tier.DataLogger;
 import data_tier.DatabaseManager;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -38,6 +41,7 @@ public class User {
 	protected Integer active;
 	protected ArrayList<ArrayList<String>> userNameList = null;
 	protected List<User> userObject = new ArrayList<>();
+	protected User current;
 	
 	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
 		userID = uid;
@@ -45,7 +49,7 @@ public class User {
 		password = uPass;
 		role = uRole;
 		token = uToken;
-		active = uAct;
+		active = uAct;		
 	}
 	
 	public void setAdditionalInfo(String email, String name, Timestamp llog) {
@@ -54,6 +58,40 @@ public class User {
 		lastLogin = llog;
 		
 	}
+
+	public Integer getUserID() {
+		return this.current.userID;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+
+	public String getEmailaddress() {
+		return this.current.emailaddress;
+	}
+
+
+	public String getFullname() {
+		return this.current.fullname;
+	}
+
+
+	public Integer getRole() {
+		return this.current.role;
+	}
+
+
+	public Timestamp getLastLogin() {
+		return this.current.lastLogin;
+	}
+
+
+	public Integer getActive() {
+		return this.current.active;
+	}
+
 
 	private String[][] convertArrayListToArray(ArrayList<ArrayList<String>> output) {
 		String[][] array = new String[output.size()][];
@@ -64,7 +102,15 @@ public class User {
 		}
 		return array;
 	}
-
+	
+	public void createCurrentUserObj(Integer _uid, String una, String ups, Integer uro, String uto, Integer _uac, String _uea, String ufn, Timestamp ull)
+	{
+		User tempUsrObj = new User();
+		tempUsrObj.setUser(_uid, una, ups, uro, uto, _uac);
+		tempUsrObj.setAdditionalInfo(_uea, ufn, ull);
+		current = tempUsrObj;
+	}
+		
 	public String[][] Devices() {
 		DataLogger.systemLog("Starting data retrieval");
 		ResultSet rs = null;
@@ -87,37 +133,39 @@ public class User {
 
 	public String[][] Users() {
 		DataLogger.systemLog("/n/n-----------------/nStarting userdata retrieval v2/n");
-		
-			ResultSet rs = null;
-			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-			try {
-				DataLogger.systemLog("Start Try");
-				rs = qb.Users();
-				while (rs.next()) {
-					ArrayList<String> row = new ArrayList<String>();
-					Integer _uid = rs.getInt("userID");
-					String _una = rs.getString("UserName");
-					String _ups = rs.getString("Password");
-					Integer _uro = rs.getInt("Role");
-					String _uto = rs.getString("Token");
-					Integer _uac = rs.getInt("Active");
-					String _uea = rs.getString("Email");
-					String _ufn = rs.getString("Name");
-					Timestamp _ull = rs.getTimestamp("lastLogin");
-					
-					row.add(_una);
-					output.add(row);
-					
-					User tempUsrObj = new User();
-					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
-					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
-					userObject.add(tempUsrObj);
-				}
-				DataLogger.systemLog(output.toString());
-			} catch (Exception e) {
-				DataLogger.errorLog(e);
+		if(userNameList == null){
+		ResultSet rs = null;
+		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		try {
+			DataLogger.systemLog("Start Try");
+			rs = qb.Users();
+			while (rs.next()) {
+				ArrayList<String> row = new ArrayList<String>();
+				Integer _uid = rs.getInt("userID");
+				String _una = rs.getString("UserName");
+				String _ups = rs.getString("Password");
+				Integer _uro = rs.getInt("Role");
+				String _uto = rs.getString("Token");
+				Integer _uac = rs.getInt("Active");
+				String _uea = rs.getString("Email");
+				String _ufn = rs.getString("Name");
+				Timestamp _ull = rs.getTimestamp("lastLogin");
+
+				row.add(_una);
+				output.add(row);
+
+				User tempUsrObj = new User();
+				tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
+				tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
+				userObject.add(tempUsrObj);
+				
 			}
-			userNameList = output;
+			DataLogger.systemLog(output.toString());
+		} catch (Exception e) {
+			DataLogger.errorLog(e);
+		}
+		userNameList = output;
+		}
 		return convertArrayListToArray(userNameList);
 	}
 	
@@ -127,7 +175,8 @@ public class User {
 	 */
 	public void createNewUser(String ufn, String uun, String uea, String uro) {
 		Integer result = 1; // Standard it will say it successfull.
-
+		//ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row = new ArrayList<String>();
 		Predicate<User> pun = e -> e.username.contains(uun);
 		Predicate<User> pea = e -> e.emailaddress.contains(uea);
 		DataLogger.systemLog("uun: " + uun + "\n");
@@ -145,16 +194,19 @@ public class User {
 		}
 		
 		if (result == 1) {
+			
 			String pass = pswa.getPeperString(25);
 			Integer role = 1;
 			String token = pswa.hash(pass.toCharArray());
 			try {
 				qb.insertUser(ufn, uun, pass, uea, role, token);
-				JOptionPane.showMessageDialog(null, "User has been Added!");
+				row.add(uun);
+				userNameList.add(row);
+				JOptionPane.showMessageDialog(null, "User " + uun + " has been Added!");
 			} catch (Exception e) {
 				DataLogger.errorLog(e);
 			}
-			
+		
 		} else {
 			DataLogger.systemLog("Error");
 		}

@@ -1,0 +1,71 @@
+2018-11-09 09.01.02 : Query builder loaded
+2018-11-09 09.01.03 : Connection successfully
+2018-11-09 09.01.03 : Query builder loaded
+2018-11-09 09.01.04 : Connection successfully
+2018-11-09 09.01.04 : Login loaded
+
+---------------------
+
+2018-11-09 09.01.04 : The user is: admin
+The password is: admin
+2018-11-09 09.01.04 : QueryBuilder: selectSaltedPassword
+2018-11-09 09.01.04 : - Query: SELECT * FROM Peper WHERE peperId=(SELECT userId FROM Users WHERE username='admin' LIMIT 1) LIMIT 1
+
+2018-11-09 09.01.04 : Salt: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin
+
+2018-11-09 09.01.05 : QueryBuilder: selectLogin
+
+2018-11-09 09.01.05 : - Query: SELECT * FROM Users WHERE username='admin' AND password='Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW' LIMIT 1
+
+2018-11-09 09.01.05 : User data:
+- userid: 1
+- role: 1
+- username: admin
+- password: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW
+- token: $31$16$LATr96YGZQm6fiHjm4L09pgLwkKGl1ij0VjdEbjQff4
+
+2018-11-09 09.01.05 : QueryBuilder: updateLogin
+
+2018-11-09 09.01.05 : - Query: UPDATE users SET lastLogin=? WHERE userId=?
+- - UserId: 1
+- - Timestamp: 2018-11-09 09:01:05.455
+
+2018-11-09 09.01.05 : Update done
+
+2018-11-09 09.01.05 : Correct credentials.
+
+2018-11-09 09.01.05 : ---------------------
+
+2018-11-09 09.01.05 : Device Enabled Status Database Loaded
+2018-11-09 09.01.05 : QueryBuilder: DevicesEnabledStatus
+
+2018-11-09 09.01.05 : - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-09 09.01.05 : - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-09 09.01.05 : # - Updating...
+2018-11-09 09.01.05 : Loading data
+2018-11-09 09.01.05 : Starting data retrieval
+2018-11-09 09.01.05 : Start Try
+2018-11-09 09.01.05 : QueryBuilder: Devices
+
+2018-11-09 09.01.05 : - Query: SELECT name FROM Devices
+
+2018-11-09 09.01.06 : [[Device 1], [Device 2], [Device 3], [Device 4]]
+2018-11-09 09.01.06 : [Device 1]
+2018-11-09 09.01.06 : [Device 2]
+2018-11-09 09.01.06 : [Device 3]
+2018-11-09 09.01.06 : [Device 4]
+2018-11-09 09.01.07 : Loading data
+2018-11-09 09.01.07 : /n/n-----------------/nStarting userdata retrieval v2/n
+2018-11-09 09.01.07 : Start Try
+2018-11-09 09.01.07 : QueryBuilder: Devices
+
+2018-11-09 09.01.07 : SELECT * FROM Users
+2018-11-09 09.01.07 : Query builder loaded
+2018-11-09 09.01.08 : Connection successfully
+2018-11-09 09.01.08 : Query builder loaded
+2018-11-09 09.01.09 : Connection successfully
+2018-11-09 09.01.09 : [[admin], [test]]
+2018-11-09 09.01.09 : [admin]
+2018-11-09 09.01.09 : [test]

@@ -22,6 +22,8 @@ import javax.swing.DefaultListSelectionModel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Map;
+
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,8 +38,8 @@ public class UserMenu extends JFrame {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JLabel lblUser = new JLabel("admin");
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtEmail;
+	private JTextField txtUsername;
 	
 	/**
 	 * Create the frame.
@@ -45,6 +47,8 @@ public class UserMenu extends JFrame {
 	public UserMenu(User _us) {
 		// Refresh van de Tabel na new User werkt niet
 		us = _us;
+		
+		System.out.println(us.getUsername());
 		
 		setTitle("User Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -181,19 +185,19 @@ public class UserMenu extends JFrame {
 		separator_4.setBounds(601, 4720, 310, 12);
 		contentPane.add(separator_4);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(601, 377, 602, 48);
-		contentPane.add(textField);
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(601, 377, 602, 48);
+		contentPane.add(txtEmail);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(601, 264, 602, 48);
-		contentPane.add(textField_1);
+		txtUsername = new JTextField();
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(601, 264, 602, 48);
+		contentPane.add(txtUsername);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(601, 479, 291, 48);
-		contentPane.add(comboBox);
+		JComboBox cbRights = new JComboBox();
+		cbRights.setBounds(601, 479, 291, 48);
+		contentPane.add(cbRights);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 10, 190, 600);
@@ -223,7 +227,6 @@ public class UserMenu extends JFrame {
 		if (model != null)
 			model.setRowCount(0);
 		String[] header = { "User Name" };
-		
 		DataLogger.systemLog("Loading data");
 		String[][] data = us.Users();
 		model = new DefaultTableModel(data, header);

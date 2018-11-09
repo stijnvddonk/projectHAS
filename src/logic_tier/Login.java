@@ -4,6 +4,7 @@ import data_tier.DataLogger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +30,9 @@ public class Login {
 	protected Integer role;
 	protected String token;
 	protected Integer active = 0;
+	protected String email;
+	protected String fullname;
+	protected Timestamp lastlogin;
 	protected User user = new User();
 
 	public Login() {
@@ -50,6 +54,9 @@ public class Login {
 				this.role = rs.getInt("Role");
 				this.token = rs.getString("Token");
 				this.active = rs.getInt("Active");
+				this.email = rs.getString("Email");
+				this.fullname  = rs.getString("Name");
+				this.lastlogin = rs.getTimestamp("lastLogin");
 			}
 		} catch (Exception e) {
 			if (debug)
@@ -65,7 +72,8 @@ public class Login {
 			// Call Next Class
 			// Create userObject
 			this.user.setUser(userid, username, password, role, token, active);
-
+			this.user.createCurrentUserObj(userid, username, password, role, token, active, email, fullname, lastlogin);
+			
 //			if (this.debug) logging.log("Call next class\n");
 			if (this.role.equals(1)) {
 				DeviceMenu dm = new DeviceMenu(this.user);

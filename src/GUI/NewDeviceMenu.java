@@ -32,15 +32,17 @@ public class NewDeviceMenu extends JFrame {
 	private JTextField txtDeviceName;
 	private JComboBox cbDeviceType = new JComboBox();
 	private User us;
+
 	/**
 	 * Create the frame.
 	 */
 	public NewDeviceMenu(User _us) {
 		us = _us;
+
 		us.getDeviceTypes(cbDeviceType);
 		setTitle("Device Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1280,720);
+		setSize(1280, 720);
 		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		this.setUndecorated(true);
@@ -48,18 +50,18 @@ public class NewDeviceMenu extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 350, 720);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JSeparator separator_5 = new JSeparator();
 		separator_5.setBounds(0, 193, 349, 12);
 		panel.add(separator_5);
-		
+
 		JButton btnNewButton = new JButton("Log Out");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,13 +75,13 @@ public class NewDeviceMenu extends JFrame {
 		});
 		btnNewButton.setBounds(77, 622, 190, 70);
 		panel.add(btnNewButton);
-		
+
 		JLabel lblDevices = new JLabel("Devices");
 		lblDevices.setForeground(Color.LIGHT_GRAY);
 		lblDevices.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblDevices.setBounds(6, 207, 190, 55);
 		panel.add(lblDevices);
-		
+
 		JLabel lblUsers = new JLabel("Users");
 		lblUsers.addMouseListener(new MouseAdapter() {
 			@Override
@@ -92,7 +94,7 @@ public class NewDeviceMenu extends JFrame {
 		lblUsers.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblUsers.setBounds(6, 267, 190, 55);
 		panel.add(lblUsers);
-		
+
 		JLabel lblSystemSettings = new JLabel("System Settings");
 		lblSystemSettings.addMouseListener(new MouseAdapter() {
 			@Override
@@ -105,7 +107,7 @@ public class NewDeviceMenu extends JFrame {
 		lblSystemSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblSystemSettings.setBounds(6, 327, 300, 55);
 		panel.add(lblSystemSettings);
-		
+
 		JButton btnAddDevice = new JButton("Create Device");
 		btnAddDevice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,70 +123,70 @@ public class NewDeviceMenu extends JFrame {
 		});
 		btnAddDevice.setBounds(993, 622, 190, 70);
 		contentPane.add(btnAddDevice);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBounds(458, 139, 725, 12);
 		contentPane.add(separator);
-		
+
 		JLabel lblNewLabel = new JLabel("New Device");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblNewLabel.setBounds(738, 47, 277, 55);
 		contentPane.add(lblNewLabel);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(652, 101, 363, 12);
 		contentPane.add(separator_1);
-		
+
 		JLabel label = new JLabel("Information");
 		label.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		label.setBounds(759, 153, 209, 55);
 		contentPane.add(label);
-		
+
 		JLabel lblType = new JLabel("Type");
 		lblType.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblType.setBounds(510, 210, 277, 55);
 		contentPane.add(lblType);
-		
+
 		JLabel lblMacAddress = new JLabel("MAC ADDRESS");
 		lblMacAddress.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblMacAddress.setBounds(510, 311, 277, 55);
 		contentPane.add(lblMacAddress);
-		
+
 		JLabel lblName = new JLabel("Name");
 		lblName.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblName.setBounds(510, 426, 277, 55);
 		contentPane.add(lblName);
-		
+
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(510, 252, 310, 12);
 		contentPane.add(separator_2);
-		
+
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(510, 361, 310, 12);
 		contentPane.add(separator_3);
-		
+
 		JSeparator separator_4 = new JSeparator();
 		separator_4.setBounds(510, 469, 310, 12);
 		contentPane.add(separator_4);
-		
+
 		txtDeviceName = new JTextField();
 		txtDeviceName.setColumns(10);
 		txtDeviceName.setBounds(510, 480, 602, 48);
 		contentPane.add(txtDeviceName);
 		cbDeviceType.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		
+
 		cbDeviceType.setBounds(510, 252, 602, 66);
 		contentPane.add(cbDeviceType);
-		
+
 		JSeparator separator_6 = new JSeparator();
 		separator_6.setBounds(652, 196, 363, 12);
 		contentPane.add(separator_6);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("WORDT GEGENEREERD DOOR CODE");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(510, 366, 602, 48);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -196,15 +198,15 @@ public class NewDeviceMenu extends JFrame {
 		btnReturn.setBounds(510, 622, 190, 70);
 		contentPane.add(btnReturn);
 	}
-	
+
 	public void newDevice() {
 		String deviceType = cbDeviceType.getSelectedItem().toString();
 		int typeID = us.getTypeID(deviceType);
 		DataLogger.systemLog(deviceType);
 		String deviceName = txtDeviceName.getText();
-		String lastIP= us.getTopIP();
-		String newIP = "192.168.10." + (Integer.parseInt(lastIP.substring(11,lastIP.length()))+1);
-	    DataLogger.systemLog(newIP);
-	    us.addNewDevice(deviceName, newIP, typeID);
+		String lastIP = us.getTopIP();
+		String newIP = "192.168.10." + (Integer.parseInt(lastIP.substring(11, lastIP.length())) + 1);
+		DataLogger.systemLog(newIP);
+		us.createNewDevice(deviceName, newIP, typeID);
 	}
 }

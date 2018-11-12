@@ -19,7 +19,6 @@ import javax.swing.SwingConstants;
 
 import data_tier.DataLogger;
 
-
 public class loginScreen {
 
 	Color DWPTColor = new Color(90, 142, 200);
@@ -189,8 +188,5 @@ public class loginScreen {
 		lblWachtwoordVergeten.setBounds(79, 308, 150, 16);
 		panel_1.add(lblWachtwoordVergeten);
 	}
-
-
-
 
 }

@@ -7,5 +7,5 @@ public class ArduinoManager {
 	private String mac;
 	private String ip;
 	private int customerNumber;
-	
+
 }

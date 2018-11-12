@@ -54,7 +54,7 @@ public class Login {
 		} catch (Exception e) {
 			if (debug)
 				DataLogger.errorLog(e);
-//			logging.errorLog(e);
+			// logging.errorLog(e);
 		}
 
 		if (debug)
@@ -66,7 +66,7 @@ public class Login {
 			// Create userObject
 			this.user.setUser(userid, username, password, role, token, active);
 
-//			if (this.debug) logging.log("Call next class\n");
+			// if (this.debug) logging.log("Call next class\n");
 			if (this.role.equals(1)) {
 				DeviceMenu dm = new DeviceMenu(this.user);
 				dm.setVisible(true);

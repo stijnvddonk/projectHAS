@@ -1,4 +1,4 @@
- package data_tier;
+package data_tier;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,14 +12,14 @@ import java.time.format.DateTimeFormatter;
 
 public class DataLogger {
 
-	//static String sessionName = Company.sessionString();
+	// static String sessionName = Company.sessionString();
 	private static final String filename = logName() + ".txt";
-	
+
 	public static String timeStamp() {
 		LocalDateTime ldt = LocalDateTime.now().plusDays(1);
 		DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH.mm.ss", Locale.ENGLISH);
 		String formatter = formmat1.format(ldt);
-		return formatter;		
+		return formatter;
 	}
 
 	public static String logName() {
@@ -38,7 +38,7 @@ public class DataLogger {
 		try {
 			file = new File("log/system/" + name);
 			file.createNewFile();
-			if(file.exists()) {
+			if (file.exists()) {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
@@ -61,7 +61,7 @@ public class DataLogger {
 		try {
 			file = new File("log/device/" + name);
 			file.createNewFile();
-			if(file.exists()) {
+			if (file.exists()) {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
@@ -83,7 +83,7 @@ public class DataLogger {
 		try {
 			file = new File("log/user/" + name);
 			file.createNewFile();
-			if(file.exists()) {
+			if (file.exists()) {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
@@ -105,7 +105,7 @@ public class DataLogger {
 		try {
 			file = new File("log/api/" + name);
 			file.createNewFile();
-			if(file.exists()) {
+			if (file.exists()) {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
@@ -128,7 +128,7 @@ public class DataLogger {
 		try {
 			file = new File("log/server/" + name);
 			file.createNewFile();
-			if(file.exists()) {
+			if (file.exists()) {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);
@@ -151,7 +151,7 @@ public class DataLogger {
 		try {
 			file = new File("log/error/" + name);
 			file.createNewFile();
-			if(file.exists()) {
+			if (file.exists()) {
 				fw = new FileWriter(file, true);
 				bw = new BufferedWriter(fw);
 				out = new PrintWriter(bw);

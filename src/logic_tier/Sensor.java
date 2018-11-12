@@ -6,5 +6,5 @@ public class Sensor {
 	private String name;
 	private int versionNumber;
 	private int type;
-	
+
 }

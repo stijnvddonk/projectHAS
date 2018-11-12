@@ -4,5 +4,5 @@ public class Adruino {
 
 	private int arduinoID;
 	private String name;
-	
+
 }

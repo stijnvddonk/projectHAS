@@ -12,14 +12,15 @@ public class Config {
 
 		configFile = new java.util.Properties();
 		try {
-
-			InputStream is = new FileInputStream("config/main.properties");
+			// InputStream is = new FileInputStream("main.properties");
+			// configFile.load(is);
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			InputStream is = classloader.getResourceAsStream("resource/main.properties");
 			configFile.load(is);
-			// configFile.list(System.out);
 
-		} catch(Exception e) {
-			System.out.print("Config file won't load!\n");
-			e.printStackTrace();
+		} catch (Exception e) {
+			DataLogger.systemLog("Config file won't load!\n");
+			DataLogger.errorLog(e);
 		}
 	}
 

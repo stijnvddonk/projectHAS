@@ -87,47 +87,49 @@ public class User {
 
 	public String[][] Users() {
 		DataLogger.systemLog("/n/n-----------------/nStarting userdata retrieval v2/n");
-		
-			ResultSet rs = null;
-			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-			try {
-				DataLogger.systemLog("Start Try");
-				rs = qb.Users();
-				while (rs.next()) {
-					ArrayList<String> row = new ArrayList<String>();
-					Integer _uid = rs.getInt("userID");
-					String _una = rs.getString("UserName");
-					String _ups = rs.getString("Password");
-					Integer _uro = rs.getInt("Role");
-					String _uto = rs.getString("Token");
-					Integer _uac = rs.getInt("Active");
-					String _uea = rs.getString("Email");
-					String _ufn = rs.getString("Name");
-					Timestamp _ull = rs.getTimestamp("lastLogin");
-					
-					row.add(_una);
-					output.add(row);
-					
-					User tempUsrObj = new User();
-					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
-					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
-					userObject.add(tempUsrObj);
-				}
-				DataLogger.systemLog(output.toString());
-			} catch (Exception e) {
-				DataLogger.errorLog(e);
+		if(userNameList == null){
+		ResultSet rs = null;
+		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		try {
+			DataLogger.systemLog("Start Try");
+			rs = qb.Users();
+			while (rs.next()) {
+				ArrayList<String> row = new ArrayList<String>();
+				Integer _uid = rs.getInt("userID");
+				String _una = rs.getString("UserName");
+				String _ups = rs.getString("Password");
+				Integer _uro = rs.getInt("Role");
+				String _uto = rs.getString("Token");
+				Integer _uac = rs.getInt("Active");
+				String _uea = rs.getString("Email");
+				String _ufn = rs.getString("Name");
+				Timestamp _ull = rs.getTimestamp("lastLogin");
+
+				row.add(_una);
+				output.add(row);
+
+				User tempUsrObj = new User();
+				tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
+				tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
+				userObject.add(tempUsrObj);
+				
 			}
-			userNameList = output;
+			DataLogger.systemLog(output.toString());
+		} catch (Exception e) {
+			DataLogger.errorLog(e);
+		}
+		userNameList = output;
+		}
 		return convertArrayListToArray(userNameList);
 	}
-	
+
 	/* 
 	 * Method: createNewUser
 	 * Return: Integer, success (1) / Failed (0)
 	 */
 	public void createNewUser(String ufn, String uun, String uea, String uro) {
 		Integer result = 1; // Standard it will say it successfull.
-
+		ArrayList<String> row = new ArrayList<String>();
 		Predicate<User> pun = e -> e.username.contains(uun);
 		Predicate<User> pea = e -> e.emailaddress.contains(uea);
 		DataLogger.systemLog("uun: " + uun + "\n");
@@ -150,6 +152,8 @@ public class User {
 			String token = pswa.hash(pass.toCharArray());
 			try {
 				qb.insertUser(ufn, uun, pass, uea, role, token);
+				row.add(uun);
+				userNameList.add(row);
 				JOptionPane.showMessageDialog(null, "User has been Added!");
 			} catch (Exception e) {
 				DataLogger.errorLog(e);

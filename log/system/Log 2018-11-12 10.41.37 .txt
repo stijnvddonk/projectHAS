@@ -1,0 +1,98 @@
+2018-11-12 10.41.37 : Query builder loaded
+2018-11-12 10.41.39 : Connection successfully
+2018-11-12 10.41.39 : Query builder loaded
+2018-11-12 10.41.40 : Connection successfully
+2018-11-12 10.41.40 : Login loaded
+
+---------------------
+
+2018-11-12 10.41.40 : The user is: admin
+The password is: admin
+2018-11-12 10.41.40 : QueryBuilder: selectSaltedPassword
+2018-11-12 10.41.40 : - Query: SELECT * FROM Peper WHERE peperId=(SELECT userId FROM Users WHERE username='admin' LIMIT 1) LIMIT 1
+
+2018-11-12 10.41.40 : Salt: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin
+
+2018-11-12 10.41.40 : QueryBuilder: selectLogin
+
+2018-11-12 10.41.40 : - Query: SELECT * FROM Users WHERE username='admin' AND password='Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW' LIMIT 1
+
+2018-11-12 10.41.41 : User data:
+- userid: 1
+- role: 1
+- username: admin
+- password: Cd_}{{)5Q@9]z-TT2Z?~jh#5admin1HSHUYDSH58DB4GV3K56MW0QW
+- token: $31$16$LATr96YGZQm6fiHjm4L09pgLwkKGl1ij0VjdEbjQff4
+
+2018-11-12 10.41.41 : QueryBuilder: updateLogin
+
+2018-11-12 10.41.41 : - Query: UPDATE users SET lastLogin=? WHERE userId=?
+- - UserId: 1
+- - Timestamp: 2018-11-12 10:41:41.421
+
+2018-11-12 10.41.41 : Update done
+
+2018-11-12 10.41.41 : Correct credentials.
+
+2018-11-12 10.41.41 : ---------------------
+
+2018-11-12 10.41.41 : Query builder loaded
+2018-11-12 10.41.42 : Connection successfully
+2018-11-12 10.41.42 : Device Enabled Status Database Loaded
+2018-11-12 10.41.42 : QueryBuilder: DevicesEnabledStatus
+
+2018-11-12 10.41.42 : - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-12 10.41.42 : - Query: SELECT DeviceEnabled FROM Devices WHERE name ='Device 1'
+
+2018-11-12 10.41.42 : # - Updating...
+2018-11-12 10.41.42 : Loading data
+2018-11-12 10.41.42 : Starting data retrieval
+2018-11-12 10.41.42 : Start Try
+2018-11-12 10.41.42 : QueryBuilder: Devices
+
+2018-11-12 10.41.42 : - Query: SELECT name FROM Devices
+
+2018-11-12 10.41.42 : [[Device 1], [Device 2], [Device 3], [Device 4]]
+2018-11-12 10.41.42 : [Device 1]
+2018-11-12 10.41.42 : [Device 2]
+2018-11-12 10.41.42 : [Device 3]
+2018-11-12 10.41.43 : [Device 4]
+2018-11-12 10.41.45 : Loading data
+2018-11-12 10.41.45 : /n/n-----------------/nStarting userdata retrieval v2/n
+2018-11-12 10.41.45 : Start Try
+2018-11-12 10.41.45 : QueryBuilder: Devices
+
+2018-11-12 10.41.45 : SELECT * FROM Users
+2018-11-12 10.41.45 : Query builder loaded
+2018-11-12 10.41.46 : Connection successfully
+2018-11-12 10.41.46 : Query builder loaded
+2018-11-12 10.41.47 : Connection successfully
+2018-11-12 10.41.47 : [[admin], [test]]
+2018-11-12 10.41.47 : [admin]
+2018-11-12 10.41.47 : [test]
+2018-11-12 10.42.02 : 
+Full Name: Nieuw
+Username: nieuw
+Emailaddress: nieuw
+Role: Admin
+
+2018-11-12 10.42.02 : uun: nieuw
+
+2018-11-12 10.42.02 : QueryBuilder: insertUser
+
+2018-11-12 10.42.02 : Values:
+Fullname: Nieuw
+- username: nieuw
+- password: 1BCFHRBHP9HN81L6M5B5E2NB2
+- email: nieuw
+- Role: 1
+- token: $31$16$I3FDuaQmoB8AbVsBaggIHbN5jiQfG0plUNzlmQFlbAw
+
+2018-11-12 10.42.02 : INSERT INTO users (Name, Email, Role, userName, Password, Active, locked, attempts, lockedUntil, Token, lastLogin) VALUES ( 'Nieuw', 'nieuw', '1', 'nieuw', '1BCFHRBHP9HN81L6M5B5E2NB2', '1', '0', '0', NULL, '$31$16$I3FDuaQmoB8AbVsBaggIHbN5jiQfG0plUNzlmQFlbAw', NULL)
+
+2018-11-12 10.42.03 : Loading data
+2018-11-12 10.42.03 : /n/n-----------------/nStarting userdata retrieval v2/n
+2018-11-12 10.42.03 : [admin]
+2018-11-12 10.42.03 : [test]
+2018-11-12 10.42.03 : [nieuw]

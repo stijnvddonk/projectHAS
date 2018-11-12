@@ -8,8 +8,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import GUI.DeviceMenu;
 import GUI.loginScreen;
+import GUI.mainScreen;
 import data_tier.Config;
 import data_tier.QueryBuilder;
 import data_tier.passwordAuthentication;
@@ -67,13 +67,10 @@ public class Login {
 			this.user.setUser(userid, username, password, role, token, active);
 
 			// if (this.debug) logging.log("Call next class\n");
-			if (this.role.equals(1)) {
-				DeviceMenu dm = new DeviceMenu(this.user);
-				dm.setVisible(true);
-			} else if (this.role.equals(2) || this.role.equals(3)) {
-				DeviceMenu dm = new DeviceMenu(this.user);
-				dm.setVisible(true);
-			} else {
+			if (this.role.equals(1) || this.role.equals(2) || this.role.equals(3)) {
+				mainScreen ms = new mainScreen(this.user);
+				ms.setVisible(true);
+			}  else {
 				// We will do nothing here
 			}
 		}

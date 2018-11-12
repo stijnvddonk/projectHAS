@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cf290dc-ce1d-49fe-a093-b6b89b21bccf" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/logic_tier/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic_tier/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="1cf290dc-ce1d-49fe-a093-b6b89b21bccf" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/src/logic_tier/User.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="698">
-              <caret line="158" column="16" lean-forward="true" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
+              <caret line="209" column="16" selection-start-line="209" selection-start-column="16" selection-end-line="209" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -209,7 +207,7 @@
     <entry file="file://$PROJECT_DIR$/src/logic_tier/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="698">
-          <caret line="158" column="16" lean-forward="true" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
+          <caret line="209" column="16" selection-start-line="209" selection-start-column="16" selection-end-line="209" selection-end-column="16" />
         </state>
       </provider>
     </entry>

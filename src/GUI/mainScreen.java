@@ -50,7 +50,7 @@ public class mainScreen extends JFrame {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private JTable table;
-	DateFormat df = new SimpleDateFormat("HH:mm");
+	private DateFormat df = new SimpleDateFormat("HH:mm");
 	private JButton btnSaveSettings = new JButton("Save Settings");
 	private JToggleButton deviceEnableButton = new JToggleButton("On");
 	private JToggleButton deviceTimerStatus = new JToggleButton("On");
@@ -63,7 +63,9 @@ public class mainScreen extends JFrame {
 	private Color activeMenu = Color.decode("#43B7BA");
 	private Color hoverMenu = Color.decode("#ba8243");
 	private Color notActiveMenu = Color.decode("#cfa77a");
-	DateFormat sdf = new SimpleDateFormat("hh:mm");
+	private DateFormat sdf = new SimpleDateFormat("hh:mm");
+	private JPanel panel;
+	private JPanel panel_1;
 
 	// New Device
 	private JTextField txtDeviceName;
@@ -83,32 +85,35 @@ public class mainScreen extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setUndecorated(true);
 		
-		resetContentPane();
-		
-		devices();
-	}
-	
-	public void resetContentPane() {
-		if (contentPane != null) contentPane.removeAll();
 		contentPane = null;
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		
+		devices();
+	}
+	
+	public void resetContentPane() {
+		
+		contentPane.removeAll();
+		contentPane.revalidate();
+		contentPane.repaint();
 	}
 	
 	public void devices() {
 		setTitle("Device Menu");
-
-		JPanel panel = new JPanel();
+		resetContentPane();
+		
+		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 350, 720);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(349, 0, 203, 720);
@@ -163,7 +168,7 @@ public class mainScreen extends JFrame {
 		JButton btnNewDevice = new JButton("New Device");
 		btnNewDevice.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {				
 				newDevices();
 			}
 		});
@@ -325,18 +330,9 @@ public class mainScreen extends JFrame {
 
 	public void newDevices() {
 		us.getDeviceTypes(cbDeviceType);
-//		setTitle("Device Menu");
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setSize(1280, 720);
-//		this.setLocationRelativeTo(null);
-//		contentPane = new JPanel();
-//		this.setUndecorated(true);
-//		contentPane.setBackground(Color.WHITE);
-//		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-//		setContentPane(contentPane);
-//		contentPane.setLayout(null);
 
-		JPanel panel = new JPanel();
+		resetContentPane();
+		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 350, 720);
@@ -473,9 +469,7 @@ public class mainScreen extends JFrame {
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DeviceMenu dm = new DeviceMenu(us);
-				dm.setVisible(true);
-				dispose();
+				devices();
 			}
 		});
 		btnReturn.setBounds(510, 622, 190, 70);

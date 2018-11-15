@@ -128,8 +128,27 @@ public class UserMenu extends JFrame {
 		});
 		btnNewDecicw.setBounds(6, 622, 190, 70);
 		panel_1.add(btnNewDecicw);
-
-		JButton btnRemoveDevice = new JButton("Remove User");
+		
+		JButton btnRemoveDevice = new JButton("Disable User");
+		btnRemoveDevice.addMouseListener(new MouseAdapter() {
+			
+			
+			
+			@Override
+		
+			public void mouseClicked(MouseEvent e) {
+				if(us.getUserStatus(lblUser.getText())==0)
+				{
+				us.disableEnableUser(lblUser.getText(), 1);
+				createTable();
+				}
+				else
+				{
+					us.disableEnableUser(lblUser.getText(), 0);
+					createTable();
+				}
+			}
+		});
 		btnRemoveDevice.setBounds(1084, 622, 190, 70);
 		contentPane.add(btnRemoveDevice);
 

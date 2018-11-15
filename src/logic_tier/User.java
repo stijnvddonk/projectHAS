@@ -336,6 +336,24 @@ public class User {
 		}
 		return typeID;
 	}
+	
+	public void disableEnableUser(String uName, int id)
+	{
+		userNameList.remove(uName);
+		qb.enableDisableUser(id, uName);
+		
+	}
+	
+	public int getUserStatus(String uName)
+	{
+		for (User u : userObject) {
+	        if (u.username.equals(uName)) {
+	            return u.active;
+	        }
+		}
+		return 0;
+	}
+	
 
 	public void createNewDevice(String dName, String dIP, int dType) {
 		Integer result = 1; // Standard it will say it successfull.

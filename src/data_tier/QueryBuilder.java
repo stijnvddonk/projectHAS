@@ -220,5 +220,54 @@ public class QueryBuilder {
 			DataLogger.systemLog("- Query: " + query + "\n");
 		dbm.update(query);
 	}
+	
+	public void editUserEmail(int userID, String email) {
+		// Edit user email
+		String query = "UPDATE Users SET email = "+email+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+		
+	public void editUserPassword(int userID, String password) {
+		// Edit user password
+		String query = "UPDATE Users SET password = "+password+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+	
+	public void editUserName(String Uname, String Email, String rights) {
+		// Edit user name
+		String query = "UPDATE Users SET name = "+Uname+ ", email="+Email+" WHERE userName = '" + Uname + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+	
+	public void disableUser(String uName) {
+		// Edit user name
+		String query = "UPDATE Users SET active = 0 WHERE Name = '" + uName + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+	
+	public void enableUser(String uName) {
+		// Edit user name
+		String query = "UPDATE Users SET active = 1 WHERE Name = '" + uName + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+	
+	public ResultSet checkemail(String email) {
+		// Edit user name
+		String query = "select FROM Users WHERE email='" + email + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.execute(query);
+	}
+	public ResultSet getUserID() {
+		if (debug) System.out.print("QueryBuilder: get UseriD\n");
+		String query = "SELECT id FROM Users";
+		System.out.print("- Query: " + query + "\n");
+		return dbm.execute(query);
+	}
+
 
 }

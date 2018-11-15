@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
@@ -36,8 +38,8 @@ public class UserMenu extends JFrame {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JLabel lblUser = new JLabel("admin");
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tbEmail;
+	private JTextField tbName;
 
 	/**
 	 * Create the frame.
@@ -131,16 +133,12 @@ public class UserMenu extends JFrame {
 		
 		JButton btnRemoveDevice = new JButton("Disable User");
 		btnRemoveDevice.addMouseListener(new MouseAdapter() {
-			
-			
-			
 			@Override
-		
 			public void mouseClicked(MouseEvent e) {
 				if(us.getUserStatus(lblUser.getText())==0)
 				{
-				us.disableEnableUser(lblUser.getText(), 1);
-				createTable();
+					us.disableEnableUser(lblUser.getText(), 1);
+					createTable();
 				}
 				else
 				{
@@ -178,10 +176,10 @@ public class UserMenu extends JFrame {
 		label.setBounds(601, 209, 277, 55);
 		contentPane.add(label);
 
-		JLabel label_1 = new JLabel("E-mail");
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_1.setBounds(601, 324, 277, 55);
-		contentPane.add(label_1);
+		JLabel lblEmail = new JLabel("E-mail");
+		lblEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblEmail.setBounds(601, 324, 277, 55);
+		contentPane.add(lblEmail);
 
 		JLabel label_2 = new JLabel("Rights");
 		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
@@ -200,15 +198,15 @@ public class UserMenu extends JFrame {
 		separator_4.setBounds(601, 4720, 310, 12);
 		contentPane.add(separator_4);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(601, 377, 602, 48);
-		contentPane.add(textField);
+		tbEmail = new JTextField();
+		tbEmail.setColumns(10);
+		tbEmail.setBounds(601, 377, 602, 48);
+		contentPane.add(tbEmail);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(601, 264, 602, 48);
-		contentPane.add(textField_1);
+		tbName = new JTextField();
+		tbName.setColumns(10);
+		tbName.setBounds(601, 264, 602, 48);
+		contentPane.add(tbName);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(601, 479, 291, 48);
@@ -217,8 +215,22 @@ public class UserMenu extends JFrame {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 10, 190, 600);
 		panel_1.add(scrollPane);
+		
+		JButton btnSaveChanges = new JButton("Save changes");
+		btnSaveChanges.setBounds(865, 622, 190, 70);
+		contentPane.add(btnSaveChanges);
 
 		createTable();
+		
+		btnSaveChanges.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String uName = lblUser.getText();
+				us.updateUser(tbName.getText(), tbEmail.getText(), comboBox.getSelectedItem().toString());
+					JOptionPane.showMessageDialog(null, "Settings have been Saved ", "Settings Saved",
+						JOptionPane.INFORMATION_MESSAGE);
+					createTable();
+			}
+		});
 
 	}
 
@@ -271,5 +283,4 @@ public class UserMenu extends JFrame {
 		});
 		scrollPane.setViewportView(table);
 	}
-
 }

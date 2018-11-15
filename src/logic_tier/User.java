@@ -339,8 +339,14 @@ public class User {
 	
 	public void disableEnableUser(String uName, int id)
 	{
-		userNameList.remove(uName);
+		
+		for (User u : userObject) {
+	        if (u.username.equals(uName)) {
+	        	u.active = id;	   
+	        }
+		}
 		qb.enableDisableUser(id, uName);
+		
 		
 	}
 	
@@ -348,10 +354,17 @@ public class User {
 	{
 		for (User u : userObject) {
 	        if (u.username.equals(uName)) {
+	        	
 	            return u.active;
 	        }
 		}
 		return 0;
+	}
+	
+	public void updateUser(String name, String email, String rights)
+	{
+		qb.editUser(name, email, rights);
+		
 	}
 	
 

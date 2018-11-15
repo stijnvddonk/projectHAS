@@ -235,26 +235,26 @@ public class QueryBuilder {
 		dbm.update(query);
 	}
 	
-	public void editUserName(String Uname, String Email, String rights) {
+	public void editUser(String Uname, String Email, String rights) {
 		// Edit user name
 		String query = "UPDATE Users SET name = "+Uname+ ", email="+Email+" WHERE userName = '" + Uname + "'";
 		if (this.debug) System.out.print(query);
 		dbm.update(query);
 	}
 	
-	public void disableUser(String uName) {
-		// Edit user name
-		String query = "UPDATE Users SET active = 0 WHERE Name = '" + uName + "'";
-		if (this.debug) System.out.print(query);
-		dbm.update(query);
-	}
+//	public void disableUser(String uName) {
+//		// Edit user name
+//		String query = "UPDATE Users SET active = 0 WHERE Name = '" + uName + "'";
+//	/	if (this.debug) System.out.print(query);
+//		dbm.update(query);
+//	}
 	
-	public void enableUser(String uName) {
+//	public void enableUser(String uName) {
 		// Edit user name
-		String query = "UPDATE Users SET active = 1 WHERE Name = '" + uName + "'";
-		if (this.debug) System.out.print(query);
-		dbm.update(query);
-	}
+//		String query = "UPDATE Users SET active = 1 WHERE Name = '" + uName + "'";
+//		if (this.debug) System.out.print(query);
+//		dbm.update(query);
+//	}
 	
 	public ResultSet checkemail(String email) {
 		// Edit user name

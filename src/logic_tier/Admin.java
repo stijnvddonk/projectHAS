@@ -1,6 +1,7 @@
 package logic_tier;
 
 import data_tier.DataLogger;
+import data_tier.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,12 @@ import java.sql.PreparedStatement;
 
 public class Admin extends User{
 
-  // add device
+  public Admin(QueryBuilder _qb) {
+		super(_qb);
+		// TODO Auto-generated constructor stub
+	}
+
+	// add device
 	public void createNewDevice(String dName, String dIP, int dType) {
 		Integer result = 1; // Standard it will say it successfull.
 		ArrayList<String> row = new ArrayList<String>();

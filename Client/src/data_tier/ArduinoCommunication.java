@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JButton;
 import com.fazecast.jSerialComm.SerialPort;
-import data_tier.Log;
 import java.awt.event.MouseEvent;
 
 public class ArduinoCommunication {
@@ -155,7 +154,7 @@ public class ArduinoCommunication {
 	public void sendLampNumber(int lamp, MouseEvent e, JButton button1, JButton button2) {
 
 		if (e.getComponent() == button1) {
-			Log.debug("Button 1 released");
+			DataLogger.deviceLog("Button 1 released");
 			try {
 				serialOut.write("lamp1".getBytes());
 			} catch (IOException e1) {
@@ -163,7 +162,7 @@ public class ArduinoCommunication {
 			}
 		}
 		if (e.getComponent() == button2) {
-			Log.debug("Button 2 released");
+			DataLogger.deviceLog("Button 2 released");
 			try {
 				serialOut.write("lamp2".getBytes());
 			} catch (IOException e1) {
@@ -173,10 +172,10 @@ public class ArduinoCommunication {
 	}
 	
 	public void serialEvent() {
-		//Log.debug("serialEvent: " + e.toString());
+		//DataLogger.deviceLog("serialEvent: " + e.toString());
 		try {
 			String line = serialReader.readLine();
-			Log.debug("READ from serial: " + line);
+			DataLogger.deviceLog("READ from serial: " + line);
 			if (line.startsWith("SS:") && line.length() == 14) {
 				visualization(line);
 			}
@@ -201,7 +200,7 @@ public class ArduinoCommunication {
 		//buttonsinPanel.setValue(buttons);
 		//buttonsinPanel.repaint();
 
-		Log.debug("LIGHT=" + light + "  POTENTIOMETER=" + potentiometer + " BUTTONS=" + buttons);
+		DataLogger.deviceLog("LIGHT=" + light + "  POTENTIOMETER=" + potentiometer + " BUTTONS=" + buttons);
 
 	}
 }

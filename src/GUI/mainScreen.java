@@ -35,7 +35,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import GUI.UserMenu.ForcedListSelectionModel;
 import data_tier.DataLogger;
 import logic_tier.Device;
 import logic_tier.User;
@@ -387,9 +386,7 @@ public class mainScreen extends JFrame {
 		lblSystemSettings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SystemSettings ss = new SystemSettings(us);
-				ss.setVisible(true);
-				dispose();
+				system();
 			}
 		});
 		lblSystemSettings.setFont(new Font("Lucida Grande", Font.PLAIN, 35));

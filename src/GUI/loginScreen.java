@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,6 +25,7 @@ public class loginScreen {
 	Color DWPTColor = new Color(90, 142, 200);
 
 	private JFrame frame;
+	static Login ltl;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JLabel lblSubmit;
@@ -37,6 +39,7 @@ public class loginScreen {
 				try {
 					loginScreen window = new loginScreen();
 					window.frame.setVisible(true);
+					ltl = new Login(window);
 				} catch (Exception e) {
 					DataLogger.errorLog(e);
 				}
@@ -108,8 +111,14 @@ public class loginScreen {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					new Login().login(txtUsername.getText(), new String(txtPassword.getPassword()));
-					frame.dispose();
+					if(txtUsername.getText().equals("")) {
+						JOptionPane.showMessageDialog(txtUsername, "Please enter a Username and or Password!");
+					}else if(txtPassword.getText().equals("")) {
+						JOptionPane.showMessageDialog(txtPassword, "Please enter a Username and or Password!");
+					}else {
+						ltl.login(txtUsername.getText(), new String(txtPassword.getPassword()));
+						frame.dispose();
+					}
 				}
 			}
 		});
@@ -168,8 +177,7 @@ public class loginScreen {
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new Login().login(txtUsername.getText(), new String(txtPassword.getPassword()));
-				frame.dispose();
+					ltl.login(txtUsername.getText(), new String(txtPassword.getPassword()));
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);
@@ -189,4 +197,7 @@ public class loginScreen {
 		panel_1.add(lblWachtwoordVergeten);
 	}
 
+	public void disposeFrame() {
+		frame.dispose();
+	}
 }

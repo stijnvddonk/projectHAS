@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 
 public class User {
 	;
-	protected QueryBuilder qb = new QueryBuilder();
+	protected QueryBuilder qb;
 	protected passwordAuthentication pswa = new passwordAuthentication();
 
 	protected Integer userID;
@@ -39,6 +39,10 @@ public class User {
 	protected List<User> userObject = new ArrayList<>();
 	protected ArrayList<ArrayList<String>> deviceNameList = null;
 	protected List<Device> deviceObject = new ArrayList<>();
+	
+	public User(QueryBuilder _qb) {
+		qb = _qb;
+	}
 
 	public void setUser(Integer uid, String uName, String uPass, Integer uRole, String uToken, Integer uAct) {
 		userID = uid;
@@ -127,7 +131,7 @@ public class User {
 					row.add(_una);
 					output.add(row);
 
-					User tempUsrObj = new User();
+					User tempUsrObj = new User(qb);
 					tempUsrObj.setUser(_uid, _una, _ups, _uro, _uto, _uac);
 					tempUsrObj.setAdditionalInfo(_uea, _ufn, _ull);
 					userObject.add(tempUsrObj);

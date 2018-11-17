@@ -13,6 +13,9 @@ import java.time.format.DateTimeFormatter;
 public class DataLogger {
 
 	// static String sessionName = Company.sessionString();
+	private static String writer = "cli";	// CLI for console or log for write to log.
+	
+	
 	private static final String filename = logName() + ".txt";
 
 	public static String timeStamp() {
@@ -35,19 +38,22 @@ public class DataLogger {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter out = null;
-		try {
-			file = new File("log/system/" + name);
-			file.createNewFile();
-			if (file.exists()) {
-				fw = new FileWriter(file, true);
-				bw = new BufferedWriter(fw);
-				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + msg + "\n");
-				out.close();
+		if (writer.equals("cli")) {
+			System.out.print(timeStamp + ": " + msg + "\n");
+		} else if (writer.equals("log")) {
+			try {
+				file = new File("log/system/" + name);
+				file.createNewFile();
+				if (file.exists()) {
+					fw = new FileWriter(file, true);
+					bw = new BufferedWriter(fw);
+					out = new PrintWriter(bw);
+					out.write(timeStamp + ": " + msg + "\n");
+					out.close();
+				}
+			} catch (Exception e) {
+				System.out.print(e);
 			}
-
-		} catch (Exception e) {
-			System.out.print(e);
 		}
 	}
 
@@ -58,18 +64,22 @@ public class DataLogger {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter out = null;
-		try {
-			file = new File("log/device/" + name);
-			file.createNewFile();
-			if (file.exists()) {
-				fw = new FileWriter(file, true);
-				bw = new BufferedWriter(fw);
-				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + msg + "\n");
-				out.close();
+		if (writer.equals("cli")) {
+			System.out.print(timeStamp + ": " + msg + "\n");
+		} else if (writer.equals("log")) {
+			try {
+				file = new File("log/device/" + name);
+				file.createNewFile();
+				if (file.exists()) {
+					fw = new FileWriter(file, true);
+					bw = new BufferedWriter(fw);
+					out = new PrintWriter(bw);
+					out.write(timeStamp + ": " + msg + "\n");
+					out.close();
+				}
+			} catch (Exception e) {
+				DataLogger.systemLog("error");
 			}
-		} catch (Exception e) {
-			DataLogger.systemLog("error");
 		}
 	}
 
@@ -80,18 +90,22 @@ public class DataLogger {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter out = null;
-		try {
-			file = new File("log/user/" + name);
-			file.createNewFile();
-			if (file.exists()) {
-				fw = new FileWriter(file, true);
-				bw = new BufferedWriter(fw);
-				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + msg + "\n");
-				out.close();
+		if (writer.equals("cli")) {
+			System.out.print(timeStamp + ": " + msg + "\n");
+		} else if (writer.equals("log")) {
+			try {
+				file = new File("log/user/" + name);
+				file.createNewFile();
+				if (file.exists()) {
+					fw = new FileWriter(file, true);
+					bw = new BufferedWriter(fw);
+					out = new PrintWriter(bw);
+					out.write(timeStamp + ": " + msg + "\n");
+					out.close();
+				}
+			} catch (Exception e) {
+				DataLogger.systemLog("error");
 			}
-		} catch (Exception e) {
-			DataLogger.systemLog("error");
 		}
 	}
 
@@ -102,19 +116,23 @@ public class DataLogger {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter out = null;
-		try {
-			file = new File("log/api/" + name);
-			file.createNewFile();
-			if (file.exists()) {
-				fw = new FileWriter(file, true);
-				bw = new BufferedWriter(fw);
-				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + msg + "\n");
-				out.close();
+		if (writer.equals("cli")) {
+			System.out.print(timeStamp + ": " + msg + "\n");
+		} else if (writer.equals("log")) {
+			try {
+				file = new File("log/api/" + name);
+				file.createNewFile();
+				if (file.exists()) {
+					fw = new FileWriter(file, true);
+					bw = new BufferedWriter(fw);
+					out = new PrintWriter(bw);
+					out.write(timeStamp + ": " + msg + "\n");
+					out.close();
+				}
+	
+			} catch (Exception e) {
+				System.out.print(e);
 			}
-
-		} catch (Exception e) {
-			System.out.print(e);
 		}
 	}
 
@@ -125,19 +143,23 @@ public class DataLogger {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter out = null;
-		try {
-			file = new File("log/server/" + name);
-			file.createNewFile();
-			if (file.exists()) {
-				fw = new FileWriter(file, true);
-				bw = new BufferedWriter(fw);
-				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + msg + "\n");
-				out.close();
+		if (writer.equals("cli")) {
+			System.out.print(timeStamp + ": " + msg + "\n");
+		} else if (writer.equals("log")) {
+			try {
+				file = new File("log/server/" + name);
+				file.createNewFile();
+				if (file.exists()) {
+					fw = new FileWriter(file, true);
+					bw = new BufferedWriter(fw);
+					out = new PrintWriter(bw);
+					out.write(timeStamp + ": " + msg + "\n");
+					out.close();
+				}
+	
+			} catch (Exception e) {
+				System.out.print(e);
 			}
-
-		} catch (Exception e) {
-			System.out.print(e);
 		}
 	}
 
@@ -148,18 +170,22 @@ public class DataLogger {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		PrintWriter out = null;
-		try {
-			file = new File("log/error/" + name);
-			file.createNewFile();
-			if (file.exists()) {
-				fw = new FileWriter(file, true);
-				bw = new BufferedWriter(fw);
-				out = new PrintWriter(bw);
-				out.write(timeStamp + ": " + error + "\n");
-				out.close();
+		if (writer.equals("cli")) {
+			System.out.print(timeStamp + ": " + error + "\n");
+		} else if (writer.equals("log")) {
+			try {
+				file = new File("log/error/" + name);
+				file.createNewFile();
+				if (file.exists()) {
+					fw = new FileWriter(file, true);
+					bw = new BufferedWriter(fw);
+					out = new PrintWriter(bw);
+					out.write(timeStamp + ": " + error + "\n");
+					out.close();
+				}
+			} catch (Exception e) {
+				DataLogger.systemLog("error");
 			}
-		} catch (Exception e) {
-			DataLogger.systemLog("error");
 		}
 	}
 }

@@ -30,8 +30,10 @@ public class Login {
 	protected String token;
 	protected Integer active = 0;
 	protected User user = new User(qb);
+	protected loginScreen ls;
 
-	public Login() {
+	public Login(loginScreen _ls) {
+		ls=_ls;
 		if (debug)
 			DataLogger.systemLog("Login loaded\n\n---------------------\n");
 	}

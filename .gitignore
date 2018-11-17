@@ -3,6 +3,8 @@ bin/
 bin/*
 /bin/
 /bin/*
+/log/*/.txt
+/log/*/*.txt
 
 # Compiled source #
 ###################

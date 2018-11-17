@@ -29,7 +29,7 @@ public class Login {
 	protected Integer role;
 	protected String token;
 	protected Integer active = 0;
-	protected User user = new User();
+	protected User user = new User(qb);
 
 	public Login() {
 		if (debug)

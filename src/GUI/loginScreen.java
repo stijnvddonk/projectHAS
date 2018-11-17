@@ -177,14 +177,7 @@ public class loginScreen {
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(txtUsername.getText().equals("")) {
-					JOptionPane.showMessageDialog(txtUsername, "Please enter a Username or Password!");
-				}else if(txtPassword.getText().equals("")) {
-					JOptionPane.showMessageDialog(txtPassword, "Please enter a Username or Password!");
-				}else {
 					ltl.login(txtUsername.getText(), new String(txtPassword.getPassword()));
-					frame.dispose();
-				}
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);
@@ -204,4 +197,7 @@ public class loginScreen {
 		panel_1.add(lblWachtwoordVergeten);
 	}
 
+	public void disposeFrame() {
+		frame.dispose();
+	}
 }

@@ -2,11 +2,18 @@ package logic_tier;
 
 import data_tier.DataLogger;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import GUI.loginScreen;
 import GUI.mainScreen;
@@ -31,14 +38,27 @@ public class Login {
 	protected Integer active = 0;
 	protected User user = new User(qb);
 	protected loginScreen ls;
+	private JFrame f;
+	private Icon icon;
+	private JLabel label;
 
 	public Login(loginScreen _ls) {
-		ls=_ls;
+		ls = _ls;
 		if (debug)
 			DataLogger.systemLog("Login loaded\n\n---------------------\n");
 	}
 
 	public void login(String user, String pass) {
+      Icon icon = new ImageIcon(Login.class.getResource("/logic_tier/gif.gif"));
+      JLabel label = new JLabel(icon);
+
+      f = new JFrame();
+      f.getContentPane().add(label);
+      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      f.setUndecorated(true);
+      f.setBackground(new Color(0,0,0,0));
+      f.pack();
+      f.setLocationRelativeTo(null);
 		ResultSet rs = null;
 		if (debug)
 			DataLogger.systemLog("The user is: " + user + "\nThe password is: " + pass);
@@ -70,9 +90,13 @@ public class Login {
 
 			// if (this.debug) logging.log("Call next class\n");
 			if (this.role.equals(1) || this.role.equals(2) || this.role.equals(3)) {
+				ls.disposeFrame();
+				// GIF VENSTER TOEVOEGEN
+				f.setVisible(true);
 				mainScreen ms = new mainScreen(this.user);
+				f.dispose();
 				ms.setVisible(true);
-			}  else {
+			} else {
 				// We will do nothing here
 			}
 		}
@@ -84,13 +108,16 @@ public class Login {
 
 		if (user.isEmpty() || pass.isEmpty()) {
 			if (this.debug)
-				DataLogger.systemLog("Incorrect not all field filled in.\n");
+				JOptionPane.showMessageDialog(null, "Please enter a Username and or Password!");
+			DataLogger.systemLog("Incorrect not all field filled in.\n");
 		} else if (this.active != 1) {
 			if (this.debug)
-				DataLogger.systemLog("User is deactivated.\n");
+				JOptionPane.showMessageDialog(null, "This user is deactivated!");
+			DataLogger.systemLog("User is deactivated.\n");
 		} else if (!user.equals(this.username) || !saltedPass.equals(this.password)) {
 			if (this.debug)
-				DataLogger.systemLog("Incorrect username or password.\n");
+				JOptionPane.showMessageDialog(null, "Incorrect username or password!");
+			DataLogger.systemLog("Incorrect username or password.\n");
 		} else if (user.equals(this.username) && pswa.authenticate(pass.toCharArray(), this.token)) {
 			Calendar calendar = Calendar.getInstance();
 			java.sql.Timestamp currentTimeStamp = new java.sql.Timestamp(calendar.getTime().getTime());
@@ -104,6 +131,26 @@ public class Login {
 			DataLogger.systemLog("---------------------\n");
 
 		return valid;
+	}
+
+	public void gifLoader() {
+	      Icon icon = new ImageIcon(Login.class.getResource("/logic_tier/gif.gif"));
+//	      JLabel label = new JLabel(icon);
+//	      
+//		f = new JFrame();
+//		f.getContentPane().add(label);
+//		f.setUndecorated(true);
+//		f.setSize(128,128);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.getContentPane().setLayout(null);		
+//		f.setLocationRelativeTo(null);
+//		f.setBackground(new Color(0, 0, 0, 50));
+//		
+//		f.setVisible(true);
+	}
+
+	public void disposeGIF() {
+		f.dispose();
 	}
 
 }

@@ -22,13 +22,13 @@ public class MainScreen extends JFrame {
 	private JPanel contentPane;
 	protected JTextPane serverFeedback;
 	protected String feedback = null;
-	protected SocketServer ss = null;
+	protected SocketServer ss = new SocketServer(this);
 
 	/**
 	 * Create the frame.
 	 */
 	public MainScreen() {		
-		this.ss = new SocketServer(this);
+		ss.start();
 		
 		setTitle("Home Automation System - HAS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,7 +64,7 @@ public class MainScreen extends JFrame {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
+				closeAll();
 			}
 		});
 		button.setBounds(1200, 10, 70, 22);
@@ -81,13 +81,18 @@ public class MainScreen extends JFrame {
 		} else {
 			this.feedback = _fb + "\n";
 		}
-		System.out.print(feedback);
-//		updateTxt();
+//		System.out.print(feedback);
+		updateTxt();
 	}
 	
 	public void updateTxt()
 	{
 		this.serverFeedback.setText(this.feedback);
 	}
-	
+
+	public void closeAll()
+	{
+		this.ss.closeConnection();
+		System.exit(0);
+	}
 }

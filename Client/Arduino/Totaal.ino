@@ -63,5 +63,24 @@ int ReadAnalog(int pinNr){
   delay(1);
 }
 
+void recvOneChar() {
+ if (Serial.available() > 0) {
+ receivedChar = Serial.read();
+ newData = true;
+ }
+}
 
+void showNewData() {
+ if (newData == true) {
+ Serial.print("This just in ... ");
+ Serial.println(receivedChar);
+ newData = false;
+ }
+}
 
+void door(doorSensor){
+  int state;
+  pinMode(doorSensor, INPUT_PULLUP);
+  state = digitalRead(doorSensor);
+  Serial.println(state);
+}

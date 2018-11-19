@@ -67,12 +67,12 @@ public class mainScreen extends JFrame {
 	private DateFormat sdf = new SimpleDateFormat("hh:mm");
 	private JPanel panel;
 	private JPanel panel_1;
-	
+
 	// Users
 	private JLabel lblUser = new JLabel("admin");
-	private JTextField textField;
-	private JTextField textField_1;
-	
+	private JTextField tbEmail;
+	private JTextField tbName;
+
 	// new users
 	private JTextField txtUsername;
 	private JTextField txtFullName;
@@ -83,6 +83,8 @@ public class mainScreen extends JFrame {
 	private JTextField txtDeviceName;
 	private JComboBox cbDeviceType = new JComboBox();
 
+	// System
+	private JTextField textField_1;
 
 	/**
 	 * Create the frame.
@@ -93,31 +95,31 @@ public class mainScreen extends JFrame {
 		setTitle("Home Automation System - HAS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1280, 720);
-		
+
 		this.setLocationRelativeTo(null);
 		this.setUndecorated(true);
-		
+
 		contentPane = null;
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
-		
+
 		devices();
 	}
-	
+
 	public void resetContentPane() {
-		
+
 		contentPane.removeAll();
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
-	
+
 	public void devices() {
 		setTitle("Device Menu");
 		resetContentPane();
-		
+
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
@@ -176,7 +178,7 @@ public class mainScreen extends JFrame {
 		JButton btnNewDevice = new JButton("New Device");
 		btnNewDevice.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
+			public void mouseClicked(MouseEvent e) {
 				newDevices();
 			}
 		});
@@ -479,7 +481,7 @@ public class mainScreen extends JFrame {
 		btnReturn.setBounds(510, 622, 190, 70);
 		contentPane.add(btnReturn);
 	}
-	
+
 	public void users() {
 		resetContentPane();
 		
@@ -539,19 +541,32 @@ public class mainScreen extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		JButton btnNewDecicw = new JButton("New User");
-		btnNewDecicw.addMouseListener(new MouseAdapter() {
+		JButton btnNewUser = new JButton("New User");
+		btnNewUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				newUsers();
 			}
 		});
-		btnNewDecicw.setBounds(6, 622, 190, 70);
-		panel_1.add(btnNewDecicw);
+		btnNewUser.setBounds(6, 622, 190, 70);
+		panel_1.add(btnNewUser);
 
-		JButton btnRemoveDevice = new JButton("Remove User");
-		btnRemoveDevice.setBounds(1084, 622, 190, 70);
-		contentPane.add(btnRemoveDevice);
+		JButton btnDisableUser = new JButton("Disable User");
+		btnDisableUser.addMouseListener(new MouseAdapter() {
+			@Override
+		public void mouseClicked(MouseEvent e) {
+			if(us.getUserStatus(lblUser.getText())==0)
+			{
+			us.disableEnableUser(lblUser.getText(), 1);
+			createTable();
+				us.disableEnableUser(lblUser.getText(), 1);
+				createTable();
+			}else{
+			}
+			}
+		});
+		btnDisableUser.setBounds(1084, 622, 190, 70);
+		contentPane.add(btnDisableUser);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(549, 139, 725, 12);
@@ -574,15 +589,15 @@ public class mainScreen extends JFrame {
 		separator_6.setBounds(743, 195, 363, 12);
 		contentPane.add(separator_6);
 
-		JLabel label = new JLabel("Name");
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label.setBounds(601, 209, 277, 55);
-		contentPane.add(label);
+		JLabel lblName = new JLabel("Name");
+		lblName.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblName.setBounds(601, 209, 277, 55);
+		contentPane.add(lblName);
 
-		JLabel label_1 = new JLabel("E-mail");
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
-		label_1.setBounds(601, 324, 277, 55);
-		contentPane.add(label_1);
+		JLabel lblEmail = new JLabel("E-mail");
+		lblEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
+		lblEmail.setBounds(601, 324, 277, 55);
+		contentPane.add(lblEmail);
 
 		JLabel label_2 = new JLabel("Rights");
 		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
@@ -601,15 +616,15 @@ public class mainScreen extends JFrame {
 		separator_4.setBounds(601, 4720, 310, 12);
 		contentPane.add(separator_4);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(601, 377, 602, 48);
-		contentPane.add(textField);
+		tbEmail = new JTextField();
+		tbEmail.setColumns(10);
+		tbEmail.setBounds(601, 377, 602, 48);
+		contentPane.add(tbEmail);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(601, 264, 602, 48);
-		contentPane.add(textField_1);
+		tbName = new JTextField();
+		tbName.setColumns(10);
+		tbName.setBounds(601, 264, 602, 48);
+		contentPane.add(tbName);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(601, 479, 291, 48);
@@ -618,14 +633,29 @@ public class mainScreen extends JFrame {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 10, 190, 600);
 		panel_1.add(scrollPane);
+		
+		JButton btnSaveChanges = new JButton("Save changes");
+		btnSaveChanges.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String uName = lblUser.getText();
+				//Aanpassen
+				us.updateUser(uName, tbEmail.getText(), "Onzinnig");
+					JOptionPane.showMessageDialog(null, "Settings have been Saved ", "Settings Saved",
+						JOptionPane.INFORMATION_MESSAGE);
+					createTable();
+			}
+		});
+
+		btnSaveChanges.setBounds(865, 622, 190, 70);
+		contentPane.add(btnSaveChanges);
 
 		createTableUser();
 
 	}
-	
+
 	public void newUsers() {
 		resetContentPane();
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
@@ -789,10 +819,10 @@ public class mainScreen extends JFrame {
 		button.setBounds(395, 622, 190, 70);
 		contentPane.add(button);
 	}
-	
+
 	public void system() {
 		resetContentPane();
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(Color.WHITE);
@@ -936,7 +966,7 @@ public class mainScreen extends JFrame {
 		btnCheckForUpdates.setBounds(601, 622, 190, 70);
 		contentPane.add(btnCheckForUpdates);
 	}
-	
+
 	private void createTableUser() {
 		if (model != null)
 			model.setRowCount(0);
@@ -970,7 +1000,7 @@ public class mainScreen extends JFrame {
 		});
 		scrollPane.setViewportView(table);
 	}
-	
+
 	public void setOnOffTime(JComboBox comboBoxTimeOn, JComboBox comboBoxTimeOff, String deviceName) {
 		String timeOn = comboBoxTimeOn.getSelectedItem().toString();
 		System.out.println(timeOn);
@@ -1156,7 +1186,7 @@ public class mainScreen extends JFrame {
 				"\nFull Name: " + ufn + "\nUsername: " + uun + "\nEmailaddress: " + uea + "\nRole: " + uro + "\n");
 		us.createNewUser(ufn, uun, uea, uro);
 	}
-	
+
 	public class ForcedListSelectionModelUser extends DefaultListSelectionModel {
 
 		public ForcedListSelectionModelUser() {

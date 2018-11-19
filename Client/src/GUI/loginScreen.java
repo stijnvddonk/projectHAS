@@ -3,6 +3,8 @@ package GUI;
 import logic_tier.Login;
 
 import java.awt.EventQueue;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -19,6 +21,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 
 import data_tier.DataLogger;
+import data_tier.GIFLoader;
 
 public class loginScreen {
 
@@ -29,6 +32,7 @@ public class loginScreen {
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JLabel lblSubmit;
+	
 
 	/**
 	 * Launch the application.
@@ -111,11 +115,11 @@ public class loginScreen {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if(txtUsername.getText().equals("")) {
+					if (txtUsername.getText().equals("")) {
 						JOptionPane.showMessageDialog(txtUsername, "Please enter a Username and or Password!");
-					}else if(txtPassword.getText().equals("")) {
+					} else if (txtPassword.getText().equals("")) {
 						JOptionPane.showMessageDialog(txtPassword, "Please enter a Username and or Password!");
-					}else {
+					} else {
 						ltl.login(txtUsername.getText(), new String(txtPassword.getPassword()));
 						frame.dispose();
 					}
@@ -177,7 +181,7 @@ public class loginScreen {
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					ltl.login(txtUsername.getText(), new String(txtPassword.getPassword()));
+				ltl.login(txtUsername.getText(), new String(txtPassword.getPassword()));
 			}
 		});
 		panel_3.setBounds(24, 336, 103, 36);

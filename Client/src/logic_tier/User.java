@@ -39,7 +39,7 @@ public class User {
 	protected List<User> userObject = new ArrayList<>();
 	protected ArrayList<ArrayList<String>> deviceNameList = null;
 	protected List<Device> deviceObject = new ArrayList<>();
-	
+
 	public User(QueryBuilder _qb) {
 		qb = _qb;
 	}
@@ -373,6 +373,29 @@ public class User {
 				DataLogger.errorLog(e);
 			}
 		}
+	}
+
+	public void disableEnableUser(String uName, int id) {
+
+		for (User u : userObject) {
+			if (u.username.equals(uName)) {
+				u.active = id;
+			}
+		}
+		qb.enableDisableUser(id, uName);
+	}
+
+	public int getUserStatus(String uName) {
+		for (User u : userObject) {
+			if (u.username.equals(uName)) {
+				return u.active;
+			}
+		}
+		return 0;
+	}
+
+	public void updateUser(String name, String email, String rights) {
+		qb.editUser(name, email, rights);
 	}
 
 }

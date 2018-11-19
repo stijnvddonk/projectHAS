@@ -3,6 +3,7 @@ package logic_tier;
 import data_tier.DataLogger;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 
 import GUI.loginScreen;
 import GUI.mainScreen;
+import data_tier.GIFLoader;
 import data_tier.Config;
 import data_tier.QueryBuilder;
 import data_tier.passwordAuthentication;
@@ -38,9 +40,6 @@ public class Login {
 	protected Integer active = 0;
 	protected User user = new User(qb);
 	protected loginScreen ls;
-	private JFrame f;
-	private Icon icon;
-	private JLabel label;
 
 	public Login(loginScreen _ls) {
 		ls = _ls;
@@ -49,16 +48,9 @@ public class Login {
 	}
 
 	public void login(String user, String pass) {
-      Icon icon = new ImageIcon(Login.class.getResource("/logic_tier/gif.gif"));
-      JLabel label = new JLabel(icon);
+		
+		new GIFLoader().setVisible(true);
 
-      f = new JFrame();
-      f.getContentPane().add(label);
-      f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      f.setUndecorated(true);
-      f.setBackground(new Color(0,0,0,0));
-      f.pack();
-      f.setLocationRelativeTo(null);
 		ResultSet rs = null;
 		if (debug)
 			DataLogger.systemLog("The user is: " + user + "\nThe password is: " + pass);
@@ -92,15 +84,16 @@ public class Login {
 			if (this.role.equals(1) || this.role.equals(2) || this.role.equals(3)) {
 				ls.disposeFrame();
 				// GIF VENSTER TOEVOEGEN
-				f.setVisible(true);
+				
 				mainScreen ms = new mainScreen(this.user);
-				f.dispose();
+				
 				ms.setVisible(true);
+				//
 			} else {
 				// We will do nothing here
 			}
 		}
-
+		//gl.dispose();
 	}
 
 	public boolean validateUser(String user, String saltedPass, String pass) {
@@ -131,26 +124,6 @@ public class Login {
 			DataLogger.systemLog("---------------------\n");
 
 		return valid;
-	}
-
-	public void gifLoader() {
-	      Icon icon = new ImageIcon(Login.class.getResource("/logic_tier/gif.gif"));
-//	      JLabel label = new JLabel(icon);
-//	      
-//		f = new JFrame();
-//		f.getContentPane().add(label);
-//		f.setUndecorated(true);
-//		f.setSize(128,128);
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.getContentPane().setLayout(null);		
-//		f.setLocationRelativeTo(null);
-//		f.setBackground(new Color(0, 0, 0, 50));
-//		
-//		f.setVisible(true);
-	}
-
-	public void disposeGIF() {
-		f.dispose();
 	}
 
 }

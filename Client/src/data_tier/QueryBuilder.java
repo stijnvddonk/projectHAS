@@ -164,6 +164,7 @@ public class QueryBuilder {
 		return dbm.execute(query);
 	}
 
+	// List Device TypesID's
 	public ResultSet getDeviceTypesID(String omschrijving) {
 		if (debug)
 			DataLogger.systemLog("QueryBuilder: getDeviceTypesID\n");
@@ -172,6 +173,7 @@ public class QueryBuilder {
 		return dbm.execute(query);
 	}
 
+	// Select Salted Pass
 	public String selectSaltedPassword(String user, String pass) {
 		if (this.debug)
 			DataLogger.systemLog("QueryBuilder: selectSaltedPassword");
@@ -184,6 +186,7 @@ public class QueryBuilder {
 		return cfg.getProperty("salt") + pass + dbm.getPassPeper(query);
 	}
 
+	//Select Login
 	public ResultSet selectLogin(String user, String peperredPass) {
 		if (this.debug)
 			DataLogger.systemLog("QueryBuilder: selectLogin\n");
@@ -192,6 +195,7 @@ public class QueryBuilder {
 		return dbm.execute(query);
 	}
 
+	//Update Login
 	public void updateLogin(Integer userid, Timestamp currentTimeStamp) {
 		if (debug)
 			DataLogger.systemLog("QueryBuilder: updateLogin\n");
@@ -199,6 +203,7 @@ public class QueryBuilder {
 		dbm.updateLogin(query, userid, currentTimeStamp);
 	}
 
+	// Insert New User
 	public Integer insertUser(String fullname, String username, String pass, String email, Integer role, String token) {
 		DataLogger.systemLog("QueryBuilder: insertUser\n");
 		DataLogger.systemLog("Values:\nFullname: " + fullname + "\n- username: " + username + "\n- password: " + pass
@@ -219,6 +224,46 @@ public class QueryBuilder {
 		if (this.debug)
 			DataLogger.systemLog("- Query: " + query + "\n");
 		dbm.update(query);
+	}
+
+	// Edit user email
+	// @Robin gebeurd dit niet ook al bij de method EditUser?
+	public void editUserEmail(int userID, String email) {		
+		String query = "UPDATE users SET email = "+email+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+	
+	// Edit user password
+	public void editUserPassword(int userID, String password) {		
+		String query = "UPDATE users SET password = "+password+" WHERE userID = '" + userID + "'";
+		if (this.debug) System.out.print(query);
+		dbm.update(query);
+	}
+	
+	// Edit User
+	// @Robin Why zit hier Rights bij??	
+	// En ik neem aan dat we de UserName niet veranderen? 
+	public void editUser(String uName, String email, String rights) {		
+		//String query = "UPDATE Users SET name = "+uName+ ", email="+email+" WHERE userName = '" + uName + "'";	
+		String query = "UPDATE Users SET email='"+email+"' WHERE userName = '" + uName + "'";	
+		if (this.debug) System.out.print(query);	
+		dbm.update(query);	
+	}
+
+	// Check Email
+	public ResultSet checkemail(String email) {
+		String query = "select FROM Users WHERE email='" + email + "'";
+		if (this.debug) System.out.print(query);
+		return dbm.execute(query);
+	}
+	
+	// Get UserID
+	public ResultSet getUserID() {
+		if (debug) System.out.print("QueryBuilder: get UseriD\n");
+		String query = "SELECT id FROM Users";
+		System.out.print("- Query: " + query + "\n");
+		return dbm.execute(query);
 	}
 
 }
